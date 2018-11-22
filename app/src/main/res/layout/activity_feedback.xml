@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+
+    <EditText
+        android:id="@+id/sosMsg"
+        style="@style/inputStyle"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_200"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="@dimen/widget_size_16"
+        android:gravity="left|top"
+        android:hint="深圳酷达通讯有限公司是一家智能家居公司。"
+        android:maxLength="70"
+        android:padding="@dimen/widget_size_6" />
+
+    <RelativeLayout
+        android:layout_width="@dimen/widget_size_90"
+        android:layout_height="@dimen/widget_size_90"
+        android:layout_marginLeft="@dimen/widget_size_10">
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/feedback_img"
+            android:layout_width="@dimen/widget_size_75"
+            android:layout_height="@dimen/widget_size_75"
+            android:layout_centerInParent="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            app:srcCompat="@mipmap/btn_addimage" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/del_img"
+            android:layout_width="@dimen/widget_size_20"
+            android:layout_height="@dimen/widget_size_20"
+            android:layout_alignParentRight="true"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:visibility="invisible"
+            app:srcCompat="@mipmap/btn_delete_float" />
+    </RelativeLayout>
+
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/commit_btn"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/widget_size_27"
+        android:layout_marginRight="@dimen/widget_size_27"
+        android:layout_marginTop="@dimen/widget_size_27"
+        android:text="提交" />
+</LinearLayout>

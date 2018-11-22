@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <solid android:color="@color/white" />
+    <corners android:radius="@dimen/widget_size_18" />
+<!--    <padding
+        android:bottom="2dp"
+        android:left="10dp"
+        android:right="10dp"
+        android:top="2dp" />-->
+
+    <stroke android:color="@color/splite_line"  android:width="@dimen/widget_min_size_1"/>
+</shape>

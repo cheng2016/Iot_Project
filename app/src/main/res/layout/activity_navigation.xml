@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_42"
+            android:layout_margin="@dimen/widget_size_8"
+            android:background="@drawable/shape_input"
+            android:visibility="visible">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/keyWord"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:completionThreshold="1"
+                android:dropDownVerticalOffset="1.0dip"
+                android:hint="请输入关键字"
+                android:imeOptions="actionDone"
+                android:inputType="text|textAutoComplete"
+                android:maxLength="20"
+                android:paddingLeft="@dimen/widget_size_12"
+                android:paddingRight="@dimen/widget_size_36"
+                android:singleLine="true"
+                android:text=""
+                android:textColor="#999999"
+                android:textColorHint="@color/darkgrey"
+                android:textSize="@dimen/font_size_16" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/widget_size_8"
+                android:src="@mipmap/search_map" />
+
+        </FrameLayout>
+
+        <ListView
+            android:visibility="gone"
+            android:id="@+id/listview"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:layout_marginRight="@dimen/widget_size_8"
+            android:layout_marginTop="@dimen/widget_size_60"></ListView>
+    </FrameLayout>
+</LinearLayout>

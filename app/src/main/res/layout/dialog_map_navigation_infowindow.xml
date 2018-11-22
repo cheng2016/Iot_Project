@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/bg_detailbubble"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/widget_size_240"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/widget_size_5"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:text="导航目的地"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_16"
+            android:visibility="visible" />
+
+        <View
+            style="@style/splite_line"
+            android:layout_width="@dimen/widget_size_128"
+            android:layout_marginTop="@dimen/widget_size_10"
+            android:layout_marginBottom="@dimen/widget_size_10" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="@dimen/widget_size_16"
+            android:layout_marginRight="@dimen/widget_size_16"
+            android:layout_marginBottom="@dimen/widget_size_8"
+            android:gravity="center_vertical"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="@dimen/widget_size_6"
+            android:text="广州省深圳市南山区西丽街道龙珠大道106号珠光花半里"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/update_text_color"
+            android:textSize="@dimen/font_size_16"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="@dimen/widget_size_5"
+        android:layout_marginRight="@dimen/widget_size_5"
+        android:background="@color/splite_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_36"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:text="@string/cancel"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_15" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="@dimen/widget_size_20"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="@dimen/widget_size_3"
+            android:background="@color/item_line" />
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/transparent"
+            android:text="@string/confirm"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_15" />
+    </LinearLayout>
+</LinearLayout>

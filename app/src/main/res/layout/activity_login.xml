@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg"
+    tools:context=".module.login.LoginActivity">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/bg_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/frame_login_bg_anim" />
+
+    <!--<ImageView
+        android:id="@+id/bg_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/frame_login_bg_anim" />-->
+
+    <!--    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/widget_size_20"
+            android:layout_marginRight="@dimen/widget_size_20"
+            android:layout_marginTop="@dimen/widget_size_66"
+            android:layout_marginBottom="@dimen/widget_size_66"
+            android:background="@drawable/login_form_bg"
+            android:orientation="vertical"/>-->
+
+    <!--    <android.support.v7.widget.CardView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            app:cardBackgroundColor="#00ffffff"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="10dp"
+            app:contentPadding="16dp">-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:background="@drawable/bg_loginwindow"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/email_login_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/logo_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_40"
+                android:src="@mipmap/kudalogo_login" />
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/account"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_45"
+                android:layout_marginLeft="@dimen/widget_size_25"
+                android:layout_marginTop="@dimen/widget_size_30"
+                android:layout_marginRight="@dimen/widget_size_25"
+                android:background="@drawable/login_edit_shape"
+                android:digits="0123456789"
+                android:ems="13"
+                android:maxLength="18"
+                android:gravity="center_vertical|left"
+                android:hint="@string/prompt_account"
+                android:inputType="phone"
+                android:maxLines="1"
+                android:paddingLeft="@dimen/widget_size_5"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_45"
+                android:layout_marginLeft="@dimen/widget_size_25"
+                android:layout_marginTop="@dimen/widget_size_25"
+                android:layout_marginRight="@dimen/widget_size_25"
+                android:background="@drawable/login_edit_shape">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/password"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/widget_size_45"
+                    android:gravity="center_vertical|left"
+                    android:hint="@string/prompt_password"
+                    android:imeActionId="6"
+                    android:background="@color/transparent"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textPassword"
+                    android:maxLength="30"
+                    android:maxLines="1"
+                    android:ems="30"
+                    android:paddingLeft="@dimen/widget_size_5"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/show_password_checkbox"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/widget_size_10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/password_white_show_selector"
+                    android:button="@null"
+                    android:text="" />
+            </RelativeLayout>
+
+
+            <Button
+                android:id="@+id/email_sign_in_button"
+                style="@style/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="@dimen/widget_size_25"
+                android:layout_marginTop="@dimen/widget_size_30"
+                android:layout_marginRight="@dimen/widget_size_25"
+                android:text="登录" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_size_30"
+                android:layout_marginTop="@dimen/widget_size_30"
+                android:layout_marginRight="@dimen/widget_size_30">
+
+                <TextView
+                    android:id="@+id/register_btn"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/register"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_15"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/modify_password_button"
+                    style="?android:textAppearanceSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="@string/forget_password"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_15"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/bottom_title_rly"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_size_30"
+                android:layout_marginTop="@dimen/widget_size_16"
+                android:layout_marginRight="@dimen/widget_size_30"
+                android:alpha="0.6"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <View
+                    android:layout_width="@dimen/widget_size_70"
+                    android:layout_height="@dimen/widget_min_size_3"
+                    android:layout_weight="1"
+                    android:background="@color/splite_line" />
+
+                <TextView
+                    android:layout_width="1dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dip"
+                    android:layout_marginRight="5dip"
+                    android:layout_weight="8"
+                    android:gravity="center"
+                    android:text="@string/login_three"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/font_size_14" />
+
+                <View
+                    android:layout_width="@dimen/widget_size_70"
+                    android:layout_height="@dimen/widget_min_size_3"
+                    android:layout_weight="1"
+                    android:background="@color/splite_line" />
+            </LinearLayout>
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/weixin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_16"
+                android:layout_marginBottom="@dimen/widget_size_27"
+                android:src="@mipmap/btn_wechat_login" />
+        </LinearLayout>
+    </LinearLayout>
+    <!--    </android.support.v7.widget.CardView>-->
+
+</FrameLayout>

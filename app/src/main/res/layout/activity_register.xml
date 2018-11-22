@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/phone"
+        style="@style/inputStyle"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:ems="13"
+        android:maxLength="13"
+        android:maxLines="1"
+        android:digits="0123456789"
+        android:inputType="phone"
+        android:hint="请输入手机号" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password"
+            style="@style/inputStyle"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:ems="30"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:hint="6-20位数字和字母的组合" />
+
+        <CheckBox
+            android:id="@+id/show_password_checkbox"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/password_show_selector"
+            android:button="@null"
+            android:text="" />
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_20">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/code"
+            style="@style/inputStyle"
+            android:digits="0123456789"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:ems="6"
+            android:maxLength="6"
+            android:hint="请输入验证码" />
+
+        <View
+            android:layout_width="@dimen/widget_size_1"
+            android:layout_height="@dimen/widget_size_25"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:layout_toLeftOf="@+id/getcode"
+            android:background="@color/lightgrey" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/getcode"
+            android:layout_width="@dimen/widget_size_120"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:enabled="true"
+            android:textColor="@drawable/countdown_color"
+            android:textSize="@dimen/font_size_14" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/register_btn"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:text="注册" />
+
+
+</LinearLayout>

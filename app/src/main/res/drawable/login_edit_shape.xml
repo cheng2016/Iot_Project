@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:bottomLeftRadius="@dimen/widget_size_5"
+        android:bottomRightRadius="@dimen/widget_size_5"
+        android:topLeftRadius="@dimen/widget_size_5"
+        android:topRightRadius="@dimen/widget_size_5" />
+<!--    <solid android:color="@color/white"/>-->
+
+    <stroke android:width="1dip" android:color="@color/white"/>
+</shape>

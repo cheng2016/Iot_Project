@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_horizontal_ntb"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:visibility="visible" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_1"
+        android:background="@color/enable_color" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_55"
+        android:background="#00000000"
+        app:layout_scrollFlags="scroll|enterAlways">
+
+
+        <!--        <devlight.io.library.ntb.NavigationTabBar
+                    android:id="@+id/ntb_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:visibility="invisible"
+                    app:ntb_badge_bg_color="#ffff0000"
+                    app:ntb_badge_gravity="top"
+                    app:ntb_badge_position="left"
+                    app:ntb_badge_title_color="#ffffffff"
+                    app:ntb_badge_use_typeface="true"
+                    app:ntb_badged="true"
+                    app:ntb_bg_color="#ffffff"
+                    app:ntb_scaled="false"
+                    app:ntb_title_mode="active"
+                    app:ntb_title_size="12sp"
+                    app:ntb_titled="true" />-->
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:padding="@dimen/widget_size_5"
+            android:visibility="visible">
+
+            <RadioButton
+                android:id="@+id/device"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/main_device_selector"
+                android:gravity="center"
+                android:text="设备"
+                android:textColor="@drawable/radiobutton_color_selector"
+                android:textSize="@dimen/font_size_13" />
+
+            <RadioButton
+                android:id="@+id/message"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/main_message_selector"
+                android:gravity="center"
+                android:text="消息"
+                android:textColor="@drawable/radiobutton_color_selector"
+                android:textSize="@dimen/font_size_13" />
+
+            <RadioButton
+                android:id="@+id/me"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:button="@null"
+                android:drawableTop="@drawable/main_user_selector"
+                android:gravity="center"
+                android:text="我的"
+                android:textColor="@drawable/radiobutton_color_selector"
+                android:textSize="@dimen/font_size_13" />
+        </RadioGroup>
+
+        <View
+            android:id="@+id/message_tip"
+            android:layout_width="@dimen/widget_size_8"
+            android:layout_height="@dimen/widget_size_8"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/widget_size_18"
+            android:layout_marginTop="@dimen/widget_size_3"
+            android:background="@drawable/shape_circle_tip_red"
+            android:visibility="invisible" />
+    </FrameLayout>
+</LinearLayout>

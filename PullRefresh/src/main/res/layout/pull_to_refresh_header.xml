@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="bottom|center_horizontal"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/pull_to_refresh_header_content"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/widget_size_55"
+        android:gravity="center_horizontal"
+        android:visibility="visible"
+        android:paddingBottom="@dimen/widget_size_8" >
+
+        <RelativeLayout
+            android:id="@+id/pull_to_refresh_header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" >
+
+            <TextView
+                android:id="@+id/pull_to_refresh_header_hint_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/pull_to_refresh_header_hint_normal"
+                android:textColor="#999999"
+                android:textSize="@dimen/font_size_14" />
+
+            <TextView
+                android:id="@+id/pull_to_refresh_last_update_time_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pull_to_refresh_header_hint_textview"
+                android:layout_marginTop="@dimen/picture_pull_to_refresh_last_update_time_top_margin"
+                android:text="@string/pull_to_refresh_header_last_time"
+                android:textColor="#999999"
+                android:textSize="@dimen/picture_pull_to_refresh_last_update_time_text_size"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/pull_to_refresh_header_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/pull_to_refresh_header_hint_textview"
+                android:layout_marginLeft="2dp"
+                android:layout_marginTop="@dimen/picture_pull_to_refresh_last_update_time_top_margin"
+                android:layout_toRightOf="@id/pull_to_refresh_last_update_time_text"
+                android:minWidth="50dp"
+                android:textColor="#999999"
+                android:textSize="@dimen/picture_pull_to_refresh_last_update_time_text_size"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/pull_to_refresh_header_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_25"
+            android:layout_toLeftOf="@id/pull_to_refresh_header_text"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/pull_icon_big"
+            android:visibility="visible" />
+
+<!--        <ProgressBar
+            android:id="@+id/pull_to_refresh_header_progressbar"
+            android:layout_width="@dimen/widget_size_35"
+            android:layout_height="@dimen/widget_size_35"
+            android:indeterminateDrawable="@drawable/frame_loading"
+            android:indeterminate="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/widget_size_27"
+            android:layout_toLeftOf="@id/pull_to_refresh_header_text"
+            android:gravity="center"
+            android:visibility="visible" />-->
+        <ImageView
+            android:id="@+id/pull_to_refresh_header_progressbar"
+            android:layout_width="@dimen/widget_size_35"
+            android:layout_height="@dimen/widget_size_35"
+            android:src="@drawable/frame_loading_new"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginRight="@dimen/widget_size_25"
+            android:layout_toLeftOf="@id/pull_to_refresh_header_text"
+            android:gravity="center"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+</LinearLayout>

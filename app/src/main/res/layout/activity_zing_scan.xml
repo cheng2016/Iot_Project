@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <cn.bingoogolapple.qrcode.zxing.ZXingView
+            android:id="@+id/zxingview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:qrcv_animTime="1000"
+            app:qrcv_barCodeTipText="将条码放入框内，即可自动扫描"
+            app:qrcv_barcodeRectHeight="120dp"
+            app:qrcv_borderColor="@android:color/white"
+            app:qrcv_borderSize="0dp"
+            app:qrcv_cornerColor="@color/white"
+            app:qrcv_cornerDisplayType="center"
+            app:qrcv_cornerLength="0dp"
+            app:qrcv_cornerSize="3dp"
+            app:qrcv_customScanLineDrawable="@mipmap/scan_line"
+            app:qrcv_isBarcode="false"
+            app:qrcv_isOnlyDecodeScanBoxArea="false"
+            app:qrcv_isScanLineReverse="true"
+            app:qrcv_isShowDefaultGridScanLineDrawable="false"
+            app:qrcv_isShowDefaultScanLineDrawable="true"
+            app:qrcv_isShowLocationPoint="false"
+            app:qrcv_isShowTipBackground="false"
+            app:qrcv_isShowTipTextAsSingleLine="false"
+            app:qrcv_isTipTextBelowRect="true"
+            app:qrcv_maskColor="#33000000"
+            app:qrcv_qrCodeTipText="请扫描机身二维码"
+            app:qrcv_rectWidth="@dimen/widget_size_220"
+            app:qrcv_scanLineColor="@color/colorPrimaryDark"
+            app:qrcv_scanLineMargin="0dp"
+            app:qrcv_scanLineSize="0.5dp"
+            app:qrcv_tipTextColor="@android:color/white"
+            app:qrcv_tipTextSize="@dimen/font_size_16"
+            app:qrcv_toolbarHeight="56dp"
+            app:qrcv_topOffset="@dimen/widget_size_90"
+            app:qrcv_verticalBias="-1">
+
+            <View
+                android:layout_width="@dimen/widget_size_180"
+                android:layout_height="@dimen/widget_size_180"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/widget_size_170"
+                android:background="@mipmap/scan_frame" />
+
+            <TextView
+                android:id="@+id/light_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/widget_size_270"
+                android:drawablePadding="@dimen/widget_size_8"
+                android:drawableTop="@mipmap/scan_torch_off"
+                android:text="轻触照亮"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_12" />
+
+        </cn.bingoogolapple.qrcode.zxing.ZXingView>
+    </FrameLayout>
+</LinearLayout>

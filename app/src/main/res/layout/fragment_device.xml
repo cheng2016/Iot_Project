@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <!--    <include layout="@layout/action_bar" />-->
+
+    <!--    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Device" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_140"
+        android:background="@mipmap/bg_mainpage">
+
+
+        <TextView
+            android:id="@+id/location_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_13"
+            android:layout_marginTop="@dimen/widget_size_13"
+            android:drawableLeft="@mipmap/icn_currentlocation"
+            android:drawablePadding="@dimen/widget_size_5"
+            android:text="深圳"
+            android:textSize="@dimen/widget_size_16" />
+
+
+        <TextView
+            android:id="@+id/wether_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/widget_size_13"
+            android:textColor="@color/disable_text"
+            android:text="28/32℃"
+            android:textSize="@dimen/widget_size_16" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/add_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/widget_size_13"
+            android:layout_marginTop="@dimen/widget_size_13"
+            app:srcCompat="@mipmap/btn_adddevice" />
+
+        <TextView
+            android:id="@+id/wether_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/location_tv"
+            android:layout_centerHorizontal="true"
+            android:textColor="@color/disable_text"
+            android:layout_marginLeft="@dimen/widget_size_13"
+            android:layout_marginTop="@dimen/widget_size_13"
+            android:text="室内空气：优 周边水质：不可直接饮用 环境湿度：潮湿"
+            android:textSize="@dimen/font_size_12" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="@dimen/widget_size_55"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/often_layout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_55"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/menu_often_selector" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/widget_min_size_1"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="@dimen/widget_size_5"
+                    android:layout_marginRight="@dimen/widget_size_5"
+                    android:background="@color/splite_line"
+                    android:visibility="visible" />
+            </RelativeLayout>
+
+
+            <ListView
+                android:id="@+id/menu_listview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/widget_size_56"
+                android:layout_marginTop="@dimen/widget_size_56"
+                android:divider="@null"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:visibility="visible">
+
+            </ListView>
+
+            <RelativeLayout
+                android:layout_width="@dimen/widget_size_55"
+                android:layout_height="@dimen/widget_size_55"
+                android:layout_alignParentBottom="true"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/widget_min_size_1"
+                    android:layout_marginLeft="@dimen/widget_size_5"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginRight="@dimen/widget_size_5"
+                    android:background="@color/splite_line" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/add_scenes_img"
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@mipmap/btn_left_set" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="@dimen/widget_min_size_1"
+            android:layout_height="match_parent"
+            android:background="@color/splite_line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_55">
+
+                <TextView
+                    android:id="@+id/device_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/widget_size_20"
+                    android:text="所有设备"
+                    android:textColor="@color/update_text_color"
+                    android:textSize="@dimen/widget_size_16" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/edit_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:visibility="invisible"
+                    android:layout_marginRight="@dimen/widget_size_20"
+                    android:src="@mipmap/btn_editorstage" />
+
+                <TextView
+                    android:id="@+id/bind_manage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="绑定管理"
+                    android:textColor="@color/disable_text"
+                    android:visibility="visible"
+                    android:layout_marginRight="@dimen/widget_size_20"
+                    android:drawablePadding="@dimen/widget_size_5"
+                    android:drawableRight="@mipmap/icn_goto_small"/>
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_min_size_1"
+                android:background="@color/splite_line" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/emptyview"
+                    style="@style/hintNullStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center"
+                    android:drawablePadding="@dimen/widget_size_20"
+                    android:drawableTop="@mipmap/image_nobinding"
+                    android:gravity="center"
+                    android:text="当前未绑定任何设备"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/text_enable_color"
+                    android:visibility="invisible" />
+
+                <GridView
+                    android:id="@+id/device_gridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="@dimen/widget_size_8"
+                    android:horizontalSpacing="@dimen/widget_size_8"
+                    android:numColumns="2"
+                    android:scrollbars="none"
+                    android:verticalSpacing="@dimen/widget_size_8"></GridView>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

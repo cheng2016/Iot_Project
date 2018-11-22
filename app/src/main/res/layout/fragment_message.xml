@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+<!--    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@null"
+        android:listSelector="@android:color/transparent"
+        android:visibility="gone" />-->
+
+    <com.cheng.refresh.library.PullToRefreshListView
+        android:id="@+id/refresh_listView"
+        android:layout_width="match_parent"
+        android:divider="@null"
+        android:paddingTop="@dimen/widget_size_10"
+        android:listSelector="@android:color/transparent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:id="@+id/empty_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:drawablePadding="@dimen/widget_size_16"
+            android:drawableTop="@mipmap/image_nomessage"
+            android:gravity="center_horizontal"
+            android:text="当前暂无任何设备消息"
+            android:textColor="#999999" />
+    </RelativeLayout>
+
+</LinearLayout>

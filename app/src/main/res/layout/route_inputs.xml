@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/online_user_list_item_textview"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/widget_size_20"
+    android:layout_marginTop="@dimen/widget_size_20"
+    android:paddingLeft="@dimen/widget_size_12"
+    android:paddingTop="@dimen/widget_size_6"
+    android:paddingBottom="@dimen/widget_size_6"
+    android:textColor="@color/gary"
+    android:text=""
+    android:textSize="15sp" >
+
+</TextView>

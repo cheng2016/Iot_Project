@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:background="@drawable/line_selector">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_min_size_1"
+            android:background="@color/item_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="新消息通知"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/message_switchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/checkbox__onoff_bg_selector"
+            android:checked="false" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:background="@drawable/line_selector">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_min_size_1"
+            android:background="@color/item_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="声音"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <CheckBox
+            android:id="@+id/voice_switchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/checkbox__onoff_bg_selector"
+            android:checked="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:background="@drawable/line_selector">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="震动"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+
+        <CheckBox
+            android:id="@+id/vibrate_switchbtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:button="@drawable/checkbox__onoff_bg_selector"
+            android:checked="true" />
+
+    </RelativeLayout>
+
+</LinearLayout>

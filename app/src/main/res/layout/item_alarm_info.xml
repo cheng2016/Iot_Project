@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_166"
+        android:layout_marginLeft="@dimen/widget_size_8"
+        android:layout_marginTop="@dimen/widget_size_8"
+        android:layout_marginRight="@dimen/widget_size_8"
+        android:background="@drawable/plan_shape"
+        android:descendantFocusability="blocksDescendants"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_16"
+            android:layout_marginTop="@dimen/widget_size_12"
+            android:drawableLeft="@mipmap/icn_timingtitle"
+            android:drawablePadding="@dimen/widget_size_5"
+            android:gravity="center"
+            android:text="六点半记得吃晚饭"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_16" />
+
+        <View
+            style="@style/splite_line"
+            android:layout_width="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="@dimen/widget_size_16"
+            android:layout_marginTop="@dimen/widget_size_9"
+            android:layout_marginRight="@dimen/widget_size_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_size_12">
+
+            <TextView
+                android:id="@+id/time_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/widget_size_16"
+                android:text="18:30"
+                android:textColor="@color/update_text_color"
+                android:textSize="@dimen/font_size_24" />
+
+            <TextView
+                android:id="@+id/state_tv"
+                android:layout_width="@dimen/widget_size_58"
+                android:layout_height="@dimen/widget_size_24"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/widget_size_90"
+                android:gravity="center"
+                android:text="未同步"
+                android:textColor="@color/hint_color"
+                android:textSize="@dimen/font_size_16" />
+
+            <CheckBox
+                android:id="@+id/switch_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/widget_size_10"
+                android:button="@drawable/checkbox_alarm_selector"
+                android:checked="false"
+                android:focusable="false" />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/day_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_18"
+            android:layout_marginTop="@dimen/widget_size_10"
+            android:text="周一 周二 周三"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_16" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_size_10">
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/voice_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_size_16"
+                android:background="@mipmap/btn_timingsound3" />
+
+            <TextView
+                android:id="@+id/length_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/widget_size_50"
+                android:text="10″"
+                android:textColor="@color/hint_color"
+                android:textSize="@dimen/font_size_16" />
+
+            <TextView
+                android:id="@+id/delete_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/widget_size_16"
+                android:drawableLeft="@mipmap/btn_deleteitem"
+                android:drawablePadding="@dimen/widget_size_5"
+                android:gravity="center_vertical"
+                android:text="删除"
+                android:textColor="@color/hint_color"
+                android:textSize="@dimen/font_size_16" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

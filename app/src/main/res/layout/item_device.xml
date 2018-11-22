@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_76"
+        android:background="@drawable/shape_input"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toLeftOf="@+id/right"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:layout_marginRight="@dimen/widget_size_5"
+            android:layout_alignParentLeft="true"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_5"
+                android:maxLines="2"
+                android:text="兰博基尼"
+                android:textSize="@dimen/font_size_15" />
+
+            <TextView
+                android:id="@+id/device_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_5"
+                android:drawableLeft="@mipmap/icn_offline"
+                android:drawablePadding="@dimen/widget_size_5"
+                android:textColor="@color/hint_color"
+                android:text="离线"
+                android:textSize="@dimen/font_size_12" />
+        </LinearLayout>
+
+
+        <FrameLayout
+            android:id="@+id/right"
+            android:layout_width="@dimen/widget_size_66"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/widget_size_3"
+            android:layout_marginBottom="@dimen/widget_size_3"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_8"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/device_img"
+                android:layout_width="@dimen/widget_size_60"
+                android:layout_height="@dimen/widget_size_60"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                app:srcCompat="@mipmap/main_icn_fenxiyi" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/device_state"
+                android:layout_width="@dimen/widget_size_18"
+                android:layout_height="@dimen/widget_size_18"
+                android:layout_gravity="top|right"
+                android:visibility="gone"
+                app:srcCompat="@mipmap/icn_devicewait_yellow" />
+        </FrameLayout>
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:background="@drawable/shape_input"
+            android:layout_margin="@dimen/widget_size_8"
+            android:visibility="visible"
+            android:layout_height="@dimen/widget_size_42" >
+
+            <android.support.v7.widget.AppCompatAutoCompleteTextView
+                android:id="@+id/keyWord"
+                android:layout_width="match_parent"
+                android:paddingLeft="@dimen/widget_size_12"
+                android:layout_height="match_parent"
+                android:completionThreshold="1"
+                android:dropDownVerticalOffset="1.0dip"
+                android:textColorHint="@color/darkgrey"
+                android:imeOptions="actionDone"
+                android:inputType="text|textAutoComplete"
+                android:hint="请输入关键字"
+                android:text=""
+                android:maxLength="20"
+                android:paddingRight="@dimen/widget_size_36"
+                android:singleLine="true"
+                android:textColor="#999999"
+                android:textSize="@dimen/font_size_16"
+                android:background="@color/transparent"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="@dimen/widget_size_8"
+                android:src="@mipmap/search_map"/>
+
+        </FrameLayout>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/localtionBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/widget_size_178"
+            android:layout_marginRight="@dimen/widget_size_16"
+            android:layout_gravity="bottom|right"
+            android:src="@mipmap/btn_location_origin"/>
+
+        <RelativeLayout
+            android:visibility="visible"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_input"
+            android:layout_gravity="bottom">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/place_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@mipmap/icn_home_circular"
+                android:drawablePadding="@dimen/widget_size_8"
+                android:layout_marginTop="@dimen/widget_size_13"
+                android:layout_marginLeft="@dimen/widget_size_16"
+                android:drawableRight="@mipmap/btn_stage_modification"
+                android:background="@color/transparent"
+                android:textSize="@dimen/font_size_15"
+                android:textColor="@color/update_text_color"
+                android:text="家"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/place_range"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/widget_size_13"
+                android:layout_marginRight="@dimen/widget_size_16"
+                android:textSize="@dimen/font_size_15"
+                android:textColor="@color/update_text_color"
+                android:text="长500M 宽500M"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/place_detail"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_50"
+                android:layout_below="@+id/place_name"
+                android:layout_marginTop="@dimen/widget_size_10"
+                android:layout_marginLeft="@dimen/widget_size_16"
+                android:layout_marginRight="@dimen/widget_size_16"
+                android:textSize="@dimen/font_size_15"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="@dimen/widget_size_8"
+                android:textColor="@color/text_enable_color"
+                android:text="深圳市西乡步行街桃园新村深圳市西乡步行街桃园深圳市西乡步行街桃园"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/time_button"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_42"
+                android:layout_below="@+id/place_detail"
+                android:background="@drawable/shape_map_button"
+                android:layout_marginTop="@dimen/widget_size_16"
+                android:layout_marginLeft="@dimen/widget_size_16"
+                android:layout_marginRight="@dimen/widget_size_16"
+                android:layout_marginBottom="@dimen/widget_size_16"
+                android:textSize="@dimen/font_size_15"
+                android:includeFontPadding="false"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/widget_size_8"
+                android:textColor="@color/theme_color"
+                android:text="监控时间"/>
+
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

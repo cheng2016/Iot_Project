@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/device_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/widget_size_32"
+            android:layout_marginBottom="@dimen/widget_size_20"
+            android:src="@mipmap/informationimage_houshijing" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/user_info_cell_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/widget_size_24"
+                android:gravity="center_vertical"
+                android:text="设备昵称"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/disable_text" />
+
+            <EditText
+                android:id="@+id/nick_name"
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/widget_size_24"
+                android:ellipsize="middle"
+                android:drawablePadding="@dimen/widget_size_8"
+                android:drawableRight="@mipmap/btn_editname"
+                android:gravity="center_vertical|right"
+                android:singleLine="true"
+                android:text=""
+                android:maxLength="30"
+                android:background="@color/transparent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/update_text_color" />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/splite_line"
+            android:layout_marginLeft="@dimen/widget_size_20"
+            android:layout_marginRight="@dimen/widget_size_20" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/user_info_cell_height">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/widget_size_24"
+                android:gravity="center_vertical"
+                android:text="设备型号"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/disable_text" />
+
+            <TextView
+                android:id="@+id/device_model"
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/widget_size_24"
+                android:ellipsize="middle"
+                android:gravity="center_vertical|right"
+                android:singleLine="true"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/update_text_color" />
+
+        </RelativeLayout>
+
+        <View
+            style="@style/splite_line"
+            android:layout_marginLeft="@dimen/widget_size_20"
+            android:layout_marginRight="@dimen/widget_size_20" />
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="@dimen/user_info_cell_height"
+            android:background="@drawable/line_shape">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="@dimen/widget_size_24"
+                android:gravity="center_vertical"
+                android:text="序列号"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/disable_text" />
+
+            <TextView
+                android:id="@+id/serial_number"
+                android:layout_width="fill_parent"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/widget_size_24"
+                android:ellipsize="middle"
+                android:gravity="center_vertical|right"
+                android:singleLine="true"
+                android:text=""
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/update_text_color" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</LinearLayout>

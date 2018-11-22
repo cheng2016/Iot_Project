@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="场景名："
+            android:textColor="@color/disable_text"
+            android:textSize="@dimen/font_size_16" />
+
+        <EditText
+            android:id="@+id/scenes_name_edit"
+            android:layout_width="@dimen/widget_size_100"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:drawableRight="@mipmap/btn_modification_mine"
+            android:ems="10"
+            android:maxLines="1"
+            android:maxLength="18"
+            android:singleLine="true"
+            android:text="奶奶的卧室"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_size_16" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="@dimen/widget_size_160"
+        android:layout_height="@dimen/widget_min_size_1"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/widget_size_10"
+        android:background="@color/splite_line" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/scene_img"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_220"
+        android:layout_marginTop="@dimen/widget_size_27"
+        android:scaleType="fitCenter"
+        app:srcCompat="@mipmap/stage_loading" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/device_type_listview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_180"
+            android:layout_margin="@dimen/widget_size_24"
+            android:background="@null"
+            android:divider="@null"
+            android:fadingEdge="none"
+            android:listSelector="@android:color/transparent"
+            android:scrollbars="none"
+            android:visibility="visible"></ListView>
+
+        <RelativeLayout
+            android:id="@+id/del_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_stage_delete"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/widget_size_30"
+                android:drawableLeft="@mipmap/icn_stage_delete"
+                android:drawablePadding="@dimen/widget_size_8"
+                android:gravity="center"
+                android:text="删除" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

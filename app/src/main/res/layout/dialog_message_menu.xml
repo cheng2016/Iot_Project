@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_pop_message"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/all_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/widget_size_10"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/all_message_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="全部消息"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_15" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_min_size_1"
+        android:layout_marginLeft="@dimen/widget_size_8"
+        android:layout_marginRight="@dimen/widget_size_8"
+        android:layout_marginTop="@dimen/widget_size_10"
+        android:background="@color/splite_line"
+        android:visibility="visible" />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/splite_line"
+        android:dividerHeight="@dimen/widget_min_size_1">
+
+    </ListView>
+
+<!--    <LinearLayout
+        android:id="@+id/ll_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/widget_size_10"
+        android:layout_marginTop="@dimen/widget_size_10"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="儿童手表"
+            android:textSize="@dimen/font_size_15" />
+    </LinearLayout>-->
+
+</LinearLayout>

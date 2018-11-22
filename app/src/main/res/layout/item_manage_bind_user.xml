@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/widget_size_3">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:layout_width="@dimen/widget_size_60"
+            android:layout_height="@dimen/widget_size_60"
+            android:layout_marginTop="@dimen/widget_size_16">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/head"
+                android:layout_gravity="center"
+                android:layout_width="@dimen/widget_size_48"
+                android:layout_height="@dimen/widget_size_48"
+                android:src="@mipmap/btn_male_big" />
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/is_admin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                app:srcCompat="@mipmap/icn_device_admin2" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="@dimen/widget_size_90"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/user_img"
+            android:layout_marginBottom="@dimen/widget_size_8"
+            android:layout_marginTop="@dimen/widget_size_8"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:text="兰博基尼"
+            android:textColor="@color/update_text_color"
+            android:textSize="@dimen/font_size_12" />
+    </LinearLayout>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/delete"
+        android:layout_width="@dimen/widget_size_18"
+        android:layout_height="@dimen/widget_size_18"
+        android:layout_marginLeft="@dimen/widget_size_66"
+        android:layout_marginTop="@dimen/widget_size_8"
+        android:src="@mipmap/btn_delete_float" />
+
+</FrameLayout>

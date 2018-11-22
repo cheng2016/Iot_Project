@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/portalLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widget_size_60"
+    android:background="@color/white"
+    android:orientation="horizontal">
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:src="@mipmap/icn_triangle2"/>
+
+    <TextView
+        android:id="@+id/menu_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/widget_size_56"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:maxLines="1"
+        android:text="分析仪"
+        android:textColor="@drawable/radiobutton_color_selector"
+        android:textSize="@dimen/font_size_16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_min_size_2"
+        android:background="@color/splite_line"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>

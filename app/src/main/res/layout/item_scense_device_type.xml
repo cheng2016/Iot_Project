@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_66">
+
+        <TextView
+            android:id="@+id/device_type_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/widget_size_20"
+            android:text="TextView"
+            android:textSize="@dimen/font_size_16"
+            android:textColor="@color/update_text_color"/>
+
+        <GridView
+            android:id="@+id/device_horizontal_listview"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_66"
+            android:layout_alignParentTop="true"
+            android:numColumns="4"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:background="@null"
+            android:layout_toRightOf="@+id/device_type_name"/>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_below="@id/device_horizontal_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:includeFontPadding="false"
+        android:text="- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - "
+        android:maxLines="1"
+        android:textColor="@color/splite_line"
+        android:textSize="@dimen/font_size_16"
+        android:enabled="false"/>
+</LinearLayout>

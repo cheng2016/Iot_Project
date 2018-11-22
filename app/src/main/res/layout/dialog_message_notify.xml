@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/widget_size_90"
+    android:background="@drawable/plan_shape">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_8"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_cds_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_6"
+            android:text="酷达物联"
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_12" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_33"
+        android:includeFontPadding="false"
+        android:text="远程拍照"
+        android:textSize="@dimen/font_size_14" />
+
+    <TextView
+        android:id="@+id/content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_10"
+        android:includeFontPadding="false"
+        android:text="点击查看详情"
+        android:textSize="@dimen/font_size_13" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/widget_size_16"
+        android:layout_marginBottom="@dimen/widget_size_16"
+        android:src="@mipmap/ic_cds_launcher" />
+</RelativeLayout>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_240"
+
+            android:background="@drawable/message_head_bg"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/head_img"
+                android:layout_width="@dimen/widget_size_82"
+                android:layout_height="@dimen/widget_size_82"
+                android:layout_marginTop="@dimen/widget_size_30"
+                android:src="@mipmap/btn_male_big" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/name_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_6"
+                android:textColor="@color/update_text_color"
+                android:textSize="@dimen/font_size_16" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/phone_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/widget_size_6"
+                android:gravity="center"
+                android:textColor="@color/update_text_color"
+                android:textSize="@dimen/font_size_16" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/widget_size_10"
+            android:layout_marginTop="@dimen/widget_size_190"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:background="@drawable/shape_user_history"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_size_96"
+                android:background="@drawable/shape_user_history">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/device_img"
+                    android:layout_width="@dimen/widget_size_60"
+                    android:layout_height="@dimen/widget_size_60"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/widget_size_36"
+                    app:srcCompat="@mipmap/main_icn_fenxiyi" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/device_id_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/widget_size_8"
+                    android:layout_marginTop="@dimen/widget_size_25"
+                    android:layout_toRightOf="@+id/device_img"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/widget_size_6"
+                    android:maxLines="1"
+                    android:text="设备ID："
+                    android:textColor="@color/disable_text"
+                    android:textSize="@dimen/font_size_16" />
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/device_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/device_id_tv"
+                    android:layout_marginLeft="@dimen/widget_size_8"
+                    android:layout_marginTop="@dimen/widget_size_10"
+                    android:layout_toRightOf="@+id/device_img"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:text="设备昵称："
+                    android:textColor="@color/disable_text"
+                    android:textSize="@dimen/font_size_16" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_min_size_2"
+                android:layout_marginLeft="@dimen/widget_size_10"
+                android:layout_marginRight="@dimen/widget_size_10"
+                android:background="@color/splite_line" />
+
+            <ListView
+                android:id="@+id/list_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_24"
+                android:divider="@null"
+                android:fadeScrollbars="true"
+                android:fadingEdge="none"
+                android:listSelector="#00000000"
+                android:scrollbars="none"></ListView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/revoke"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_50"
+            android:layout_gravity="bottom"
+            android:clickable="true"
+            android:background="@drawable/button_float_red_selector">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="bottom"
+                android:drawableLeft="@mipmap/icn_withdrawtheclaim"
+                android:drawablePadding="@dimen/widget_size_4"
+                android:gravity="center_vertical"
+                android:text="撤销申请"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_18"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </FrameLayout>
+</LinearLayout>

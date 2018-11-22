@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/widget_size_68"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/head_img"
+        android:layout_width="@dimen/widget_size_48"
+        android:layout_height="@dimen/widget_size_48"
+        android:layout_marginLeft="@dimen/widget_size_10"
+        android:layout_centerVertical="true"
+        app:srcCompat="@mipmap/btn_female_small" />
+
+    <TextView
+        android:id="@+id/nick_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_68"
+        android:layout_centerVertical="true"
+        android:text="TextView"
+        android:textColor="@color/update_text_color"
+        android:textSize="@dimen/font_size_16" />
+
+
+    <ImageView
+        android:id="@+id/select_img"
+        android:layout_width="@dimen/widget_size_24"
+        android:layout_height="@dimen/widget_size_24"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/widget_size_24"
+        android:visibility="gone"
+        app:srcCompat="@mipmap/icn_currentaddress_map" />
+</RelativeLayout>

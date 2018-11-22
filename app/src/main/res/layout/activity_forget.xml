@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/phone_edit"
+        style="@style/inputStyle"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:digits="0123456789"
+        android:ems="13"
+        android:hint="请输入手机号"
+        android:inputType="phone"
+        android:maxLength="18"
+        android:maxLines="1" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:layout_marginRight="@dimen/widget_size_20">
+
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password_edit"
+            style="@style/inputStyle"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:ems="30"
+            android:hint="6-20位数字和字母的组合"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/widget_size_80"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="@dimen/widget_size_80"
+            android:layout_height="@dimen/widget_size_45"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/widget_size_10"
+            android:text="新密码："
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_16" />
+
+        <CheckBox
+            android:id="@+id/show_password_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:background="@drawable/password_show_selector"
+            android:button="@null"
+            android:text="" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/password_edit2"
+            style="@style/inputStyle"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:ems="30"
+            android:hint="请确认新密码"
+            android:imeOptions="actionUnspecified"
+            android:inputType="textPassword"
+            android:maxLength="30"
+            android:maxLines="1"
+            android:paddingLeft="@dimen/widget_size_90"
+            android:singleLine="true" />
+
+        <TextView
+            android:layout_width="@dimen/widget_size_90"
+            android:layout_height="@dimen/widget_size_45"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/widget_size_10"
+            android:text="确认密码："
+            android:textColor="@color/hint_color"
+            android:textSize="@dimen/font_size_16" />
+
+        <CheckBox
+            android:id="@+id/show_password_checkbox2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:background="@drawable/password_show_selector"
+            android:button="@null"
+            android:text="" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/code_edit"
+            style="@style/inputStyle"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:digits="0123456789"
+            android:ems="6"
+            android:hint="请输入验证码"
+            android:inputType="number"
+            android:maxLength="6" />
+
+        <View
+            android:layout_width="@dimen/widget_size_1"
+            android:layout_height="@dimen/widget_size_25"
+            android:layout_alignParentTop="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:layout_toLeftOf="@+id/getcode_tv"
+            android:background="@color/lightgrey" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/getcode_tv"
+            android:layout_width="@dimen/widget_size_120"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/widget_size_10"
+            android:gravity="center"
+            android:text="获取验证码"
+            android:textColor="@drawable/countdown_color"
+            android:textSize="@dimen/font_size_14" />
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/reset_btn"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:layout_marginRight="@dimen/widget_size_20"
+        android:text="确认" />
+
+
+</LinearLayout>

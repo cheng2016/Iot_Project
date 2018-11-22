@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/widget_size_10"
+        android:layout_marginRight="@dimen/widget_size_10"
+        android:layout_marginBottom="@dimen/widget_size_10"
+        android:background="@drawable/plan_shape">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/device_img"
+            android:layout_width="@dimen/widget_size_60"
+            android:layout_height="@dimen/widget_size_60"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/widget_size_16"
+            android:layout_marginTop="@dimen/widget_size_16"
+            app:srcCompat="@mipmap/main_icn_fenxiyi" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/widget_size_12"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="2018-06-27 17:50"
+            android:textColor="@color/disable_text"
+            android:textSize="@dimen/font_size_14" />
+
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="@dimen/widget_size_140"
+            android:layout_height="@dimen/widget_min_size_2"
+            android:layout_below="@+id/time"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/widget_size_10"
+            android:background="@color/app_content_bg" />
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/view1"
+            android:layout_toRightOf="@+id/device_img"
+            android:layout_marginBottom="@dimen/widget_size_30"
+            android:layout_marginLeft="@dimen/widget_size_12"
+            android:layout_marginRight="@dimen/widget_size_12"
+            android:layout_marginTop="@dimen/widget_size_10"
+            android:orientation="vertical">-->
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/view1"
+                android:layout_toRightOf="@+id/device_img"
+                android:layout_marginTop="@dimen/widget_size_10"
+                android:layout_marginLeft="@dimen/widget_size_12"
+                android:layout_marginRight="@dimen/widget_size_12"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:gravity="left"
+                android:maxLines="1"
+                android:text="大熊手表"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_marginLeft="@dimen/widget_size_12"
+                android:layout_marginRight="@dimen/widget_size_12"
+                android:layout_marginTop="@dimen/widget_size_8"
+                android:layout_toRightOf="@+id/device_img"
+                android:maxLines="2"
+                android:gravity="left"
+                android:ellipsize="end"
+                android:lineSpacingExtra="@dimen/widget_size_6"
+                android:text="内容"
+                android:layout_marginBottom="@dimen/widget_size_12"
+                android:textColor="@color/message_text_narmal"
+                android:textSize="@dimen/font_size_14" />
+<!--        </LinearLayout>-->
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/more"
+            android:layout_width="wrap_content"
+            android:layout_below="@+id/content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/widget_size_12"
+            android:layout_marginRight="@dimen/widget_size_16"
+            android:enabled="true"
+            android:gravity="center"
+            android:drawablePadding="@dimen/widget_size_5"
+            android:lineSpacingExtra="@dimen/widget_size_6"
+            android:visibility="visible"
+            android:drawableRight="@mipmap/icn_goto_small"
+            android:text="点击查看更多"
+            android:textColor="@color/disable_text"
+            android:textSize="@dimen/font_size_13" />
+
+    </RelativeLayout>
+</RelativeLayout>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/qr_img"
+            android:layout_width="@dimen/widget_size_150"
+            android:layout_height="@dimen/widget_size_150"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher_round"/>
+
+
+        <TextView
+            style="@style/hintNullStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_size_20"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/widget_size_10"
+            android:text="长按保存图片\r\n或者直接扫一扫关注我们"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color" />
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="30"
+            android:background="@color/app_content_bg"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/menus"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:fastScrollEnabled="false"
+                android:listSelector="@null"
+                android:scrollbars="none"
+                android:visibility="visible"></ListView>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="70"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/devices"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:listSelector="@null"
+                android:visibility="visible">
+
+            </ListView>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_360"
+        android:layout_margin="@dimen/widget_size_10"
+        android:background="@drawable/plan_shape"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/widget_size_32"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/main_icn_zuoji" />
+
+            <EditText
+                android:id="@+id/name_edit"
+                android:layout_width="@dimen/widget_size_100"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_size_8"
+                android:background="@null"
+                android:drawableRight="@mipmap/btn_editname"
+                android:drawablePadding="@dimen/widget_size_2"
+                android:inputType="textPersonName"
+                android:maxLength="30"
+                android:maxLines="1"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_size_16" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_margin="@dimen/widget_size_32"
+            style="@style/splite_line" />
+
+
+        <ImageView
+            android:id="@+id/zxing_img"
+            android:adjustViewBounds="true"
+            android:layout_width="@dimen/widget_size_140"
+            android:layout_height="@dimen/widget_size_140" />
+
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/device_id_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/hint_color"
+            android:singleLine="true"
+            android:text="设备ID："
+            android:layout_marginTop="@dimen/widget_size_24"
+            android:textSize="@dimen/font_size_16"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

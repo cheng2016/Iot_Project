@@ -1,0 +1,231 @@
+apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
+
+greendao {
+    //数据库的schema版本，也可以理解为数据库版本号
+    schemaVersion 8
+    //设置DaoMaster、DaoSession、Dao包名，也就是要放置这些类的包的全路径。
+    daoPackage 'com.cds.iot.data.source.local.greendao'
+    //设置DaoMaster、DaoSession、Dao目录
+    targetGenDir 'src/main/java'
+}
+
+def getTime() {
+    return new java.text.SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
+    defaultConfig {
+        applicationId "com.cds.iot"
+        minSdkVersion 17
+        targetSdkVersion 28
+        versionCode 4
+        versionName "3.0.${getTime()}"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+            keyAlias 'wecare'
+            keyPassword '123456'
+            storeFile file('wecare.jks')
+            storePassword '123456'
+        }
+
+        old {
+            keyAlias 'coodays'
+            keyPassword 'coodays5665911111'
+            storeFile file('coodays.keystore')
+            storePassword 'coodays5665911111'
+        }
+
+        kuda {
+            keyAlias 'kuda'
+            keyPassword 'kuda20180808'
+            storeFile file('kuda.jks')
+            storePassword 'kuda20180808'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.kuda
+
+            applicationVariants.all {
+//                variant ->
+//                variant.outputs.each { output ->
+//                    def outputFile = output.outputFile
+//                    if (variant.buildType.name.equalsIgnoreCase("release") && outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        def fileName = "Kuda_v${versionName}.apk"
+//                        output.outputFile = new File(outputFile.parent, fileName)
+//                    }
+//                }
+
+                variant ->
+                variant.outputs.all {
+                    output ->
+                        def outputFile = output.outputFile
+                        if (outputFile.name.contains("release")) {
+                            outputFileName = new File("../release/","Kuda_v${versionName}.apk")
+                        }
+                }
+            }
+        }
+
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.kuda
+        }
+    }
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+    google()
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    androidTestimplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
+    final SUPPORT_VERSION = '28.0.0'
+    implementation "com.android.support:support-v4:$SUPPORT_VERSION"
+    implementation "com.android.support:support-v13:$SUPPORT_VERSION"
+    implementation "com.android.support:appcompat-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:design:$SUPPORT_VERSION"
+    implementation "com.android.support:recyclerview-v7:$SUPPORT_VERSION"
+    implementation "com.android.support:cardview-v7:$SUPPORT_VERSION"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+//    testCompile 'junit:junit:4.12'
+
+    //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+
+    //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+
+    //    compile 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+
+    //工具库utils
+    implementation 'com.blankj:utilcode:1.7.1'
+
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+
+    //支持Gson 及 rxjava
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //rxjava rxandroid
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.13'
+    implementation 'com.squareup.okhttp3:okhttp:3.10.0'
+    implementation 'com.squareup.okio:okio:2.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+
+    //butterknife
+    implementation 'com.jakewharton:butterknife:7.0.1'
+
+    //RxTools
+    //    compile 'com.github.vondear:RxTools:v1.7.6.8'
+
+    //eventbus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+    //UI圆角图库
+//    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    //导航栏库
+//    compile 'devlight.io:navigationtabbar:1.2.5'
+
+    //图片加载库
+    implementation 'com.squareup.picasso:picasso:2.5.2+'
+    implementation 'com.squareup.okhttp:okhttp:2.4.0'
+
+//    implementation 'com.github.bumptech.glide:glide:3.7.0'
+
+    //Zxing核心包
+    //    compile 'com.google.zxing:core:3.3.0'
+
+    //数据库类库
+    implementation 'org.greenrobot:greendao:3.2.2+'
+    implementation 'org.greenrobot:greendao-generator:3.2.2+'
+    implementation 'com.github.yuweiguocn:GreenDaoUpgradeHelper:v2.0.3+'
+
+    //有时间选择器和选项选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.3'
+
+    //微信包
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
+
+    //    compile 'cn.bingoogolapple:bga-qrcode-zbar:1.2.5'
+    implementation 'cn.bingoogolapple:bga-qrcode-zxing:1.2.5'
+
+    //tcp包
+    implementation 'io.netty:netty-all:4.1.25.Final'
+
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+    implementation 'joda-time:joda-time:2.9.9'
+    //    compile 'com.google.android.exoplayer:exoplayer-core:2.8.4'
+
+    //    compile 'com.google.android.exoplayer:exoplayer-dash:2.8.1'
+
+    //    compile 'com.google.android.exoplayer:exoplayer-ui:r2.4.2'
+
+    //exoplayer播放器
+
+//    compile 'com.google.android.exoplayer:exoplayer:2.8.4'
+
+//    compile 'com.devbrackets.android:exomedia:4.2.3'
+
+    //精简版（没有smoothstreaming,dash,hls,只有常规点播功能）
+    implementation 'com.ycjiang:VideoPlayModule-Lite:2.3.0'
+
+    implementation 'com.google.android.exoplayer:extension-okhttp:2.9.0'
+
+//    compile 'com.ycjiang:VideoPlayModule:2.3.0'
+
+//    compile(name: 'VideoPlayModule-Lite_V1.0.0', ext: 'aar')
+//    compile(name: 'VideoPlayModule_V1.0.0', ext: 'aar')
+//    compile(name: 'VideoUi_V1.0.0', ext: 'aar')
+
+    //    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
+    //日历组件
+    implementation(name: 'DatePicker_V1.0.0', ext: 'aar')
+
+    //    compile project(':DatePicker')
+
+    //刷新组件
+    implementation(name: 'PullToRefresh_V1.0.0', ext: 'aar')
+
+//        compile project(':PullRefresh')
+
+    //流布局
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+    //通用的Android的Loading页面
+    compile 'com.github.czy1121:loadinglayout:1.0.1'
+}
+

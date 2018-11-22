@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <!--    <include layout="@layout/action_bar" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_220">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/bg_myinfo"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/head_img"
+                android:layout_width="@dimen/widget_size_80"
+                android:layout_height="@dimen/widget_size_80"
+                android:scaleType="centerCrop"
+                android:layout_centerInParent="true"
+                app:srcCompat="@mipmap/btn_male_big" />
+
+            <EditText
+                android:id="@+id/nickname"
+                android:layout_width="@dimen/widget_size_120"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="@dimen/widget_size_16"
+                android:gravity="center"
+                android:background="@null"
+                android:drawablePadding="@dimen/widget_size_10"
+                android:drawableRight="@mipmap/btn_modification_mine"
+                android:text=""
+                android:singleLine="true"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:ems="10"
+                android:textColor="#404040" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/back_button"
+            android:layout_width="@dimen/widget_size_48"
+            android:layout_height="@dimen/widget_size_48"
+            android:visibility="visible">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/widget_size_8"
+                app:srcCompat="@mipmap/btn_back_main" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/sex_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:background="@drawable/line_selector">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_min_size_1"
+            android:background="@color/item_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawableLeft="@mipmap/icn_sexual"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="性别"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/sex_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:drawableRight="@mipmap/icn_goto_big"
+            android:ellipsize="middle"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text="男"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/birthday_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:background="@drawable/line_selector">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawableLeft="@mipmap/icn_gift"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="生日"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/birthday_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:drawableRight="@mipmap/icn_goto_big"
+            android:ellipsize="middle"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text="1994.5.8"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/phone_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:layout_marginTop="@dimen/widget_size_30"
+        android:background="@drawable/line_selector">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_min_size_1"
+            android:background="@color/item_line" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawableLeft="@mipmap/icn_phone"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="手机号"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/phone"
+            android:layout_width="fill_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:drawableRight="@mipmap/icn_goto_big"
+            android:ellipsize="middle"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/wx_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/user_info_cell_height"
+        android:background="@drawable/line_selector">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:drawableLeft="@mipmap/icn_wechat"
+            android:drawablePadding="@dimen/widget_size_6"
+            android:gravity="center_vertical"
+            android:text="微信"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/wx_isbind_tv"
+            android:layout_width="fill_parent"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:drawableRight="@mipmap/icn_goto_big"
+            android:ellipsize="middle"
+            android:gravity="center_vertical|right"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:text="未绑定"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/gray" />
+
+    </RelativeLayout>
+
+</LinearLayout>

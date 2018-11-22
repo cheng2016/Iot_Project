@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/device_img"
+            android:layout_width="@dimen/widget_size_36"
+            android:layout_height="@dimen/widget_size_36"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            android:layout_marginTop="@dimen/widget_size_12"
+            android:src="@mipmap/icn_adddevice" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/del_img"
+            android:layout_width="@dimen/widget_size_16"
+            android:layout_height="@dimen/widget_size_16"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/device_img"
+            android:visibility="visible"
+            android:src="@mipmap/btn_delete_float" />
+</RelativeLayout>

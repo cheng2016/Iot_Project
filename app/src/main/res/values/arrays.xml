@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="default_preview">
+        <item>#30D6DC</item>
+        <item>#30D6DC</item>
+        <item>#30D6DC</item>
+        <item>#303F9F</item>
+        <item>#303F9F</item>
+    </string-array>
+
+    <string-array name="user_state">
+        <item>已解绑</item>
+        <item>审核中</item>
+        <item>已拒绝</item>
+        <item>已解除</item>
+        <item>已同意</item>
+    </string-array>
+</resources>

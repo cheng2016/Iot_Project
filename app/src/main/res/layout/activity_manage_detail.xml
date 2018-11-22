@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_content_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/action_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="27"
+        android:background="@color/white"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/head"
+                android:layout_width="@dimen/widget_size_60"
+                android:layout_height="@dimen/widget_size_60"
+                android:layout_marginLeft="@dimen/widget_size_45">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/device_img"
+                    android:layout_width="@dimen/widget_size_60"
+                    android:layout_height="@dimen/widget_size_60"
+                    app:srcCompat="@mipmap/main_icn_fenxiyi" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/is_admin_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|right"
+                    android:visibility="invisible"
+                    app:srcCompat="@mipmap/icn_device_admin1" />
+            </FrameLayout>
+
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/device_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/widget_size_8"
+                android:layout_marginTop="@dimen/widget_size_8"
+                android:layout_toRightOf="@+id/head"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/widget_size_6"
+                android:maxLines="1"
+                android:text="设备ID：545485464654"
+                android:textColor="@color/disable_text" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/device_id"
+                android:layout_marginLeft="@dimen/widget_size_8"
+                android:layout_marginTop="@dimen/widget_size_10"
+                android:layout_toRightOf="@+id/head"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="设备昵称：别克后视镜"
+                android:textColor="@color/disable_text" />
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_6"
+        android:background="@color/app_content_bg" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_weight="63"
+        android:background="@color/white">
+
+        <GridView
+            android:id="@+id/devices"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_100"
+            android:layout_marginTop="@dimen/widget_size_16"
+            android:numColumns="4"></GridView>
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/release"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_45"
+            android:layout_margin="@dimen/font_size_24"
+            android:background="@drawable/button_red_selector"
+            android:text="解除设备"
+            android:textColor="@color/white"
+            android:visibility="visible"
+            android:textSize="@dimen/font_size_16" />
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/transfer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_45"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/widget_size_24"
+            android:layout_marginLeft="@dimen/widget_size_24"
+            android:layout_marginBottom="@dimen/widget_size_24"
+            android:background="@drawable/shape_red_button"
+            android:text="转移管理员权限"
+            android:textColor="@color/confirm_text_color"
+            android:visibility="gone"
+            android:textSize="@dimen/font_size_16" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

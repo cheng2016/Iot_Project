@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/widget_size_66">
+
+        <com.amap.api.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/car_location"
+            android:layout_width="@dimen/widget_size_42"
+            android:layout_height="@dimen/widget_size_42"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/widget_size_24"
+            android:layout_marginBottom="@dimen/widget_size_72"
+            android:src="@mipmap/btn_location_car" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/location"
+            android:layout_width="@dimen/widget_size_42"
+            android:layout_height="@dimen/widget_size_42"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/widget_size_24"
+            android:layout_marginBottom="@dimen/widget_size_18"
+            android:src="@mipmap/btn_location_current" />
+
+        <LinearLayout
+            android:layout_width="@dimen/widget_size_80"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="@dimen/widget_size_18"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/menu_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible">
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/wechat_access"
+                    android:layout_width="@dimen/widget_size_54"
+                    android:layout_height="@dimen/widget_size_54"
+                    android:src="@mipmap/btn_wechatpickup" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/booking_navigation"
+                    android:layout_width="@dimen/widget_size_54"
+                    android:layout_height="@dimen/widget_size_54"
+                    android:layout_marginTop="@dimen/widget_size_16"
+                    android:src="@mipmap/btn_reservationnav" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/device"
+                    android:layout_width="@dimen/widget_size_54"
+                    android:layout_height="@dimen/widget_size_54"
+                    android:layout_marginTop="@dimen/widget_size_16"
+                    android:src="@mipmap/btn_deviceinfo" />
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/more"
+                android:layout_width="@dimen/widget_size_42"
+                android:layout_height="@dimen/widget_size_42"
+                android:layout_marginTop="@dimen/widget_size_16"
+                android:src="@mipmap/btn_more_unfold" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <!--    <ExpandableListView
+            android:id="@+id/list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></ExpandableListView>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_66"
+        android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/remote_recording"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bottombtn_camera" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_3"
+                android:text="远程摄像"
+                android:textColor="@color/disable_text"
+                android:textSize="@dimen/font_size_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/remote_photography"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bottombtn_photo" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_3"
+                android:text="远程拍照"
+                android:textColor="@color/disable_text"
+                android:textSize="@dimen/font_size_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/driving_video"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bottombtn_trace" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_3"
+                android:text="行车记录"
+                android:textColor="@color/disable_text"
+                android:textSize="@dimen/font_size_12" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/driving_track"
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/bottombtn_video" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widget_size_3"
+                android:text="行车轨迹"
+                android:textColor="@color/disable_text"
+                android:textSize="@dimen/font_size_12" />
+
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/action_bar_height"
+    android:id="@+id/action_bar_container"
+    android:background="@color/white">
+    <RelativeLayout
+        android:id="@+id/back_button"
+        android:layout_width="@dimen/widget_size_48"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:visibility="invisible">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/back_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/widget_size_8"
+            app:srcCompat="@mipmap/btn_back_main" />
+
+    </RelativeLayout>
+
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="标题"
+        android:textColor="@color/black"
+        android:textSize="@dimen/font_size_18" />
+
+    <FrameLayout
+        android:id="@+id/right_button"
+        android:layout_width="@dimen/widget_size_48"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="invisible">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/right_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:srcCompat="@mipmap/btn_filter" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/right_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="相册"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:visibility="gone"
+            android:textSize="@dimen/font_size_16" />
+    </FrameLayout>
+
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_min_size_2"
+        android:layout_alignParentBottom="true"
+        android:background="@color/lightsteelblue" />
+</RelativeLayout>

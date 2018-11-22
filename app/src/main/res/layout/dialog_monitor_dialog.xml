@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/plan_shape"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_50"
+        android:background="@drawable/shape_monitor_title"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="监控时间设置"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_18"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_16"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <GridView
+            android:id="@+id/week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:numColumns="4" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_min_size_1"
+        android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginRight="@dimen/widget_size_16"
+        android:background="@color/splite_line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_21"
+        android:layout_marginRight="@dimen/widget_size_21"
+        android:layout_marginTop="@dimen/widget_size_16"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text="监控时间段："
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color"
+            android:textSize="@dimen/font_size_14"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text="09 : 00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_16"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text=" - "
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/text_enable_color"
+            android:textSize="@dimen/font_size_16"
+            android:textStyle="bold"
+            android:visibility="visible" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="2dp"
+            android:text="12 : 00"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_16"
+            android:visibility="visible" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/time_length"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/widget_size_21"
+        android:layout_marginRight="@dimen/widget_size_21"
+        android:layout_marginTop="@dimen/widget_size_16"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:text="监控时长：9小时"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/enable_color"
+        android:textSize="@dimen/font_size_14"
+        android:visibility="visible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_40"
+        android:layout_marginBottom="@dimen/widget_size_24"
+        android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginRight="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_24"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_monitor_button"
+            android:text="@string/cancel"
+            android:textColor="@color/cancel_text_color"
+            android:textSize="@dimen/font_size_15" />
+
+        <View
+            android:layout_width="@dimen/widget_size_30"
+            android:layout_height="?android:attr/listPreferredItemHeight"
+            android:background="@color/transparent" />
+
+        <Button
+            android:id="@+id/confirm"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/shape_monitor_button"
+            android:text="@string/confirm"
+            android:textColor="@color/confirm_text_color"
+            android:textSize="@dimen/font_size_15" />
+    </LinearLayout>
+</LinearLayout>
