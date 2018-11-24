@@ -72,8 +72,15 @@ public class AlarmListPresenter implements AlarmListContract.Presenter{
                         if ("200".equals(response.getInfo().getCode())) {
                             view.getAlarmListSuccess(response.getData());
                         } else {
+                            view.getAlarmListFailed();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.getAlarmListFailed();
                     }
 
                     @Override
@@ -94,7 +101,6 @@ public class AlarmListPresenter implements AlarmListContract.Presenter{
 //                        userInfo.setUser_id(userId);
                         String filePath="";
                         File file = new File(filePath);
-
                         if (!TextUtils.isEmpty(filePath) && file.exists()) {
 
                             RequestBody requestFile = RequestBody.create(MediaType.parse("audio/wav"), file);
@@ -129,8 +135,15 @@ public class AlarmListPresenter implements AlarmListContract.Presenter{
                         if ("200".equals(response.getInfo().getCode())) {
                             view.updateAlarmSuccess();
                         } else {
+                            view.sendAlarmFailed();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.sendAlarmFailed();
+                        super.onError(e);
                     }
 
                     @Override

@@ -12,6 +12,8 @@ import com.cds.iot.module.BaseView;
 public interface AlarmContract {
     interface View extends BaseView<Presenter> {
         void saveAlarmInfoSuccess();
+
+        void saveAlarmInfoFailed();
     }
 
     interface Presenter extends BasePresenter {

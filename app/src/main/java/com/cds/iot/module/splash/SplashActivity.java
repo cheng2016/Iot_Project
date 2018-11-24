@@ -13,6 +13,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.KeyEvent;
+import android.view.WindowManager;
 
 import com.cds.iot.App;
 import com.cds.iot.R;
@@ -217,6 +218,8 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected int getLayoutId() {
 //        RxBarTool.hideStatusBar(this);//隐藏状态栏 并 全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         return R.layout.activity_splash;
     }
 

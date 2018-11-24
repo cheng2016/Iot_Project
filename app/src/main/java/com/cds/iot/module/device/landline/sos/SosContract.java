@@ -4,7 +4,6 @@ import com.cds.iot.data.entity.SaveTelphoneReq;
 import com.cds.iot.data.entity.TelphoneInfo;
 import com.cds.iot.module.BasePresenter;
 import com.cds.iot.module.BaseView;
-import com.cds.iot.module.device.landline.wireless.TelephoneContract;
 
 /**
  * Created by Administrator Chengzj
@@ -14,6 +13,8 @@ import com.cds.iot.module.device.landline.wireless.TelephoneContract;
 public interface SosContract {
     interface View extends BaseView<Presenter> {
         void getTelphoneInfoSuccess(TelphoneInfo resp);
+
+        void getTelphoneInfoFailed();
 
         void saveTelphoneInfoSuccess();
 

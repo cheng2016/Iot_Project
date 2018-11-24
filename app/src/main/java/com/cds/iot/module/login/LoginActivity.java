@@ -203,7 +203,6 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     protected void onDestroy() {
         super.onDestroy();
         mThreadFlag = false;//结束线程
-//        animationDrawable.stop();
         mPresenter.unsubscribe();
     }
 

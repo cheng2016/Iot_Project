@@ -47,8 +47,7 @@ public class TrackPresenter implements TrackContract.Presenter{
     @Override
     public void getTrack(String deviceId, String dateStr) {
         String userId = PreferenceUtils.getPrefString(App.getInstance(),PreferenceConstants.USER_ID,"");
-//        TrackReq req = new TrackReq(userId,deviceId,dateStr);
-        TrackReq req = new TrackReq("31","2",dateStr);
+        TrackReq req = new TrackReq(userId,deviceId,dateStr);
         mHttpApi.getTrack(new Gson().toJson(req))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

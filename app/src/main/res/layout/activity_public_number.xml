@@ -29,7 +29,7 @@
             android:layout_marginTop="@dimen/widget_size_20"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/widget_size_10"
-            android:text="长按保存图片\r\n或者直接扫一扫关注我们"
+            android:text="长按保存图片\n或者直接扫一扫关注我们"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/text_enable_color" />
     </LinearLayout>

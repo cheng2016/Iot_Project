@@ -32,7 +32,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onError(Throwable e) {
-        Logger.e(TAG, "onError", e);
+        Logger.e(TAG, "onError  Thread: " + Thread.currentThread().getName(), e);
         if (e instanceof HttpException) {
             HttpException httpException = (HttpException) e;
             String message = "";

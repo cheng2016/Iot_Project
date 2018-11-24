@@ -11,8 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <com.cheng.refresh.library.ReboundScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fadingEdge="none"
@@ -26,7 +25,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 android:visibility="visible">
-
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -59,16 +57,10 @@
                         android:textSize="@dimen/font_size_13" />
                 </RelativeLayout>
 
-                <!--                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="@dimen/widget_size_10"
-                                    android:layout_marginRight="@dimen/widget_size_10">-->
-
                 <ListView
                     android:id="@+id/listview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/widget_size_55"
                     android:layout_marginLeft="@dimen/widget_size_10"
                     android:layout_marginRight="@dimen/widget_size_10"
                     android:divider="@null"
@@ -76,15 +68,12 @@
                     android:fadingEdge="none"
                     android:listSelector="#00000000"
                     android:scrollbars="none"></ListView>
-                <!--</LinearLayout>-->
-
 
                 <RelativeLayout
                     android:id="@+id/rescue_call"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/widget_size_45"
                     android:layout_marginLeft="@dimen/widget_size_10"
-                    android:layout_marginTop="@dimen/widget_size_10"
                     android:layout_marginRight="@dimen/widget_size_10"
                     android:background="@drawable/edit_main_border"
                     android:padding="@dimen/widget_size_10">
@@ -184,21 +173,35 @@
                     android:layout_marginBottom="@dimen/widget_size_60"
                     android:background="@drawable/edit_main_border">
 
-                    <TextView
-                        android:id="@+id/voice_record_btn"
+
+                    <LinearLayout
+                        android:id="@+id/voice_empty_layout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/widget_size_32"
                         android:layout_marginBottom="@dimen/widget_size_32"
-                        android:drawableTop="@mipmap/btn_sosrecord"
-                        android:drawablePadding="@dimen/widget_size_8"
-                        android:includeFontPadding="false"
-                        android:text="电话接通后自动播放三遍"
-                        android:textColor="@color/disable_text"
-                        android:textSize="@dimen/font_size_12"
-                        android:visibility="gone" />
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+
+                        <com.cds.iot.view.AudioRecordButton
+                            android:id="@+id/voice_record_btn"
+                            android:layout_width="@dimen/widget_size_50"
+                            android:layout_height="@dimen/widget_size_50"
+                            android:background="@mipmap/btn_sosrecord" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:layout_marginTop="@dimen/widget_size_8"
+                            android:includeFontPadding="false"
+                            android:text="电话接通后自动播放两遍"
+                            android:textColor="@color/disable_text"
+                            android:textSize="@dimen/font_size_12"
+                            android:visibility="visible" />
+                    </LinearLayout>
 
                     <RelativeLayout
                         android:id="@+id/voice_layout"
@@ -208,7 +211,7 @@
                         android:layout_marginTop="@dimen/widget_size_28"
                         android:layout_marginBottom="@dimen/widget_size_28"
                         android:orientation="horizontal"
-                        android:visibility="visible">
+                        android:visibility="invisible">
 
                         <FrameLayout
                             android:id="@+id/voice_container"
@@ -261,19 +264,18 @@
                                 android:textSize="@dimen/font_size_14" />
                         </LinearLayout>
 
-
-                        <android.support.v7.widget.AppCompatImageView
+                        <com.cds.iot.view.AudioRecordButton
                             android:id="@+id/voice_replace_btn"
                             android:layout_width="@dimen/widget_size_50"
                             android:layout_height="@dimen/widget_size_50"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
                             android:layout_marginRight="@dimen/widget_size_24"
-                            android:src="@mipmap/btn_sosrecord" />
+                            android:background="@mipmap/btn_sosrecord" />
                     </RelativeLayout>
                 </FrameLayout>
             </LinearLayout>
-        </com.cheng.refresh.library.ReboundScrollView>
+        </ScrollView>
 
 
         <RelativeLayout

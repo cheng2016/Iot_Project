@@ -101,34 +101,7 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
 
     List<Marker> markers;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        mMapView.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mMapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mMapView.onDestroy();
-        mPresenter.unsubscribe();
-        if (null != mLocationClient) {
-            mLocationClient.onDestroy();
-            mLocationClient = null;
-            mLocationOption = null;
-        }
-        if (null != smoothMarker) {
-            smoothMarker.stopMove();
-            smoothMarker.destroy();
-            smoothMarker = null;
-        }
-    }
+    CustomDialog mCustomDialog;
 
     @Override
     protected int getLayoutId() {
@@ -165,6 +138,12 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
         }
         initLocation();
         startLocation();
+        Date date = new Date();
+        DateTime dateTime = new DateTime(date);
+        year = dateTime.getYear();
+        month = dateTime.getMonthOfYear();
+        dayOfMonth = dateTime.getDayOfMonth();
+        selectDay.setText(DATE_FORMAT.format(date));
     }
 
     /**
@@ -254,6 +233,35 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        mMapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mMapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mMapView.onDestroy();
+        mPresenter.unsubscribe();
+        if (null != mLocationClient) {
+            mLocationClient.onDestroy();
+            mLocationClient = null;
+            mLocationOption = null;
+        }
+        if (null != smoothMarker) {
+            smoothMarker.stopMove();
+            smoothMarker.destroy();
+            smoothMarker = null;
+        }
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.back_button:
@@ -302,20 +310,6 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
                 break;
             case R.id.date_layout:
                 Logger.i(TAG, "date_layout year：" + year + " month：" + month + " dayOfMonth：" + dayOfMonth);
-/*                DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int y, int m, int d) {
-                        Logger.i(TAG, "onDateSet year：" + y + " month：" + m + " dayOfMonth：" + d);
-                        year = y;
-                        month = ++m;
-                        dayOfMonth = d;
-                        LocalDate localDate = new LocalDate(year, month, dayOfMonth);
-                        selectDay.setText(DATE_FORMAT.format(localDate.toDate()));
-                        mPresenter.getTrack(deviceId, DATE_FORMAT_STR.format(localDate.toDate()));
-                    }
-                }, year, month - 1, dayOfMonth);
-                datePickerDialog.show();*/
-
                 datePickerDialog = new MyDatePickerDialog(this).setDatePickerListener(new MyDatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(cn.aigestudio.datepicker.views.DatePicker view, String dateStr) {
@@ -361,7 +355,6 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
         aMap.clear();
         mMapView.invalidate();
     }
-
 
     @Override
     public void getTrackSuccess(TrackResp resp) {
@@ -441,15 +434,20 @@ public class TrackActivity extends BaseActivity implements View.OnClickListener,
             //seekBar设置滑动事件
             seekBar.setOnSeekBarChangeListener(this);
         } else {
-            new CustomDialog(this)
-                    .setTitle("暂无轨迹信息")
-                    .setMessage("该段时间内无任何轨迹信息")
-                    .setCompleteButton("确定", new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
+            if (mCustomDialog == null) {
+                mCustomDialog = new CustomDialog(this)
+                        .setTitle("暂无轨迹信息")
+                        .setMessage("该段时间内无任何轨迹信息")
+                        .setCompleteButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
 
-                        }
-                    }).showDialog();
+                            }
+                        });
+            }
+            if (!mCustomDialog.isShowing()) {
+                mCustomDialog.show();
+            }
         }
     }
 

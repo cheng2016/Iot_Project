@@ -1,5 +1,7 @@
 package com.cds.iot.module.manage;
 
+import android.os.Looper;
+
 import com.cds.iot.App;
 import com.cds.iot.data.BaseResp;
 import com.cds.iot.data.entity.DeviceListResp;
@@ -11,6 +13,7 @@ import com.cds.iot.util.ToastUtils;
 import com.google.gson.Gson;
 
 import java.util.List;
+import java.util.logging.Handler;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -65,6 +68,17 @@ public class ManageBindPresenter implements ManageBindContract.Presenter {
                             view.getDeviceListFailed();
                             ToastUtils.showShort(App.getInstance(), baseResp.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        new android.os.Handler(Looper.getMainLooper()).post(new Runnable() {
+                            @Override
+                            public void run() {
+                                view.getDeviceListFailed();
+                            }
+                        });
                     }
 
                     @Override

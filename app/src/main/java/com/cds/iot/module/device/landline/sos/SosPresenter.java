@@ -10,7 +10,6 @@ import com.cds.iot.data.entity.TelphoneInfoReq;
 import com.cds.iot.data.source.remote.BaseObserver;
 import com.cds.iot.data.source.remote.HttpApi;
 import com.cds.iot.data.source.remote.HttpFactory;
-import com.cds.iot.module.device.landline.wireless.TelephoneContract;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
 import com.cds.iot.util.ToastUtils;
@@ -76,8 +75,15 @@ public class SosPresenter implements SosContract.Presenter {
                         if ("200".equals(response.getInfo().getCode())) {
                             view.getTelphoneInfoSuccess(response.getData());
                         } else {
+                            view.getTelphoneInfoFailed();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.getTelphoneInfoFailed();
+                        super.onError(e);
                     }
 
                     @Override
@@ -135,6 +141,12 @@ public class SosPresenter implements SosContract.Presenter {
                             view.saveTelphoneInfoFail();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.saveTelphoneInfoFail();
                     }
 
                     @Override

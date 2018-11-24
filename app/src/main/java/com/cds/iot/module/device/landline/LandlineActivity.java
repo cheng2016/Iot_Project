@@ -48,7 +48,7 @@ public class LandlineActivity extends BaseActivity implements View.OnClickListen
     protected void initView(Bundle savedInstanceState) {
         StatusBarUtils.setWindowStatusBarColor(this, getResources().getColor(R.color.theme_color));
         findViewById(R.id.action_bar_container).setBackgroundColor(getResources().getColor(R.color.theme_color));
-        titleTv.setText("一连座机");
+        titleTv.setText("无线座机");
         backImg.setImageResource(R.mipmap.btn_back_main_white);
         findViewById(R.id.line).setVisibility(View.GONE);
         titleTv.setTextColor(getResources().getColor(R.color.white));

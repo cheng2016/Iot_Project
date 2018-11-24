@@ -1,4 +1,4 @@
-package com.cds.iot.module.device.landline.record;
+package com.cds.iot.util.record;
 
 /**
  * Created by 键盘 on 2016/5/24.

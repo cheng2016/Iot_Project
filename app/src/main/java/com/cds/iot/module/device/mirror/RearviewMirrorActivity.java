@@ -24,7 +24,7 @@ public class RearviewMirrorActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        ((TextView) findViewById(R.id.title)).setText("车载后视镜");
+        ((TextView) findViewById(R.id.title)).setText("智能后视镜");
         findViewById(R.id.back_button).setVisibility(View.VISIBLE);
         findViewById(R.id.back_button).setOnClickListener(this);
     }

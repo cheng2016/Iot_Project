@@ -54,6 +54,7 @@ public class UserFragment extends BaseFragment implements UserContract.View, Vie
         view.findViewById(R.id.product_description_layout).setOnClickListener(this);
         view.findViewById(R.id.about_us_layout).setOnClickListener(this);
         view.findViewById(R.id.feedback_layout).setOnClickListener(this);
+        view.findViewById(R.id.wx_public_number_layout).setVisibility(View.GONE);
         view.findViewById(R.id.wx_public_number_layout).setOnClickListener(this);
         view.findViewById(R.id.user_detail_layout).setOnClickListener(this);
         ((TextView) view.findViewById(R.id.title)).setText("我的");

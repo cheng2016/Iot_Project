@@ -1,4 +1,4 @@
-package com.cds.iot.module.device.landline.record;
+package com.cds.iot.util.record;
 
 import android.media.AudioFormat;
 import android.media.MediaRecorder;

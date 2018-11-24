@@ -22,6 +22,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,10 +37,11 @@ import com.cds.iot.data.entity.SaveTelphoneReq;
 import com.cds.iot.data.entity.TelphoneInfo;
 import com.cds.iot.module.adapter.ContactAdapter;
 import com.cds.iot.util.Logger;
+import com.cds.iot.util.PermissionHelper;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
 import com.cds.iot.util.ToastUtils;
-import com.cds.iot.util.Utils;
+import com.cds.iot.view.AudioRecordButton;
 import com.cds.iot.view.EditTextDialog;
 import com.cds.iot.view.MyAlertDialog;
 import com.cds.iot.view.PhoneAlertDialog;
@@ -63,28 +65,36 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
     private static final int DELETE_CONTACT = 200;
 
     private static final int SOS_MAX_LENGTH = 70;
+
     @Bind(R.id.contact_title)
     TextView contactTitle;
     @Bind(R.id.listview)
     ListView listView;
-    @Bind(R.id.sosMsg)
-    EditText sosMsgEdit;
     @Bind(R.id.rescue_call_tv)
     TextView rescueCallTv;
+    @Bind(R.id.sosMsg)
+    EditText sosMsgEdit;
     @Bind(R.id.edit_status)
     TextView editStatus;
-    @Bind(R.id.voice_tip)
-    AppCompatImageView voiceTip;
+
     @Bind(R.id.voice_anim)
     AppCompatImageView voiceAnim;
+    @Bind(R.id.voice_tip)
+    AppCompatImageView voiceTip;
     @Bind(R.id.length_tv)
     TextView lengthTv;
+
     @Bind(R.id.voice_record_btn)
-    TextView voiceRecordBtn;
+    AudioRecordButton voiceRecordBtn;
     @Bind(R.id.voice_replace_btn)
-    AppCompatImageView voiceReplaceBtn;
+    AudioRecordButton voiceReplaceBtn;
+
     @Bind(R.id.voice_layout)
     RelativeLayout voiceLayout;
+    @Bind(R.id.voice_empty_layout)
+    LinearLayout voiceEmptyLayout;
+
+
     @Bind(R.id.synchronization_btn)
     RelativeLayout synchronizationBtn;
     @Bind(R.id.synchronization_tv)
@@ -101,17 +111,22 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
     private String deviceId;
     private String userId;
 
+    private int isModify = 0;
     private boolean hasLocalVoice = false;
     private boolean isPlay = false;
     private MediaPlayer player;
     private AnimationDrawable animationDrawable;
     //录音地址
-    private String tempFilePath = App.getInstance().getAppCacheDir() + "temp_media.wav";
-    private String filePath = App.getInstance().getAppCacheDir() + "telephone_media.wav";
+    private String filePath;
     //网络录音地址
     private String file_url;
 
     private boolean isAdmin;
+
+    /**
+     * 授权处理
+     */
+    private PermissionHelper mHelper;
 
     @Override
     public int getLayoutId() {
@@ -143,11 +158,19 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
                         + SOS_MAX_LENGTH);
             }
         });
+        voiceLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                showDeleteDialog("确认删除此段录音吗？", DELETE_RECORD, 0);
+                return false;
+            }
+        });
     }
 
     @Override
     protected void initData() {
         new SosPresenter(this);
+        mHelper = new PermissionHelper(this);
         mAdapter = new ContactAdapter(this);
         mAdapter.setAddOnClickListener(new ContactAdapter.AddOnClickListener() {
             @Override
@@ -168,6 +191,49 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
             deviceId = getIntent().getStringExtra("deviceId");
             mPresenter.getTelphoneInfo(deviceId);
         }
+        mLoadingView.showLoading();
+        mLoadingView.setRetryListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getTelphoneInfo(deviceId);
+            }
+        });
+        mHelper.requestPermissions("请授予[录音]，[读写]权限，否则无法录音",
+                new PermissionHelper.PermissionListener() {
+                    @Override
+                    public void doAfterGrand(String... permission) {
+                        voiceRecordBtn.setHasRecordPromission(true);
+                        voiceRecordBtn.setAudioFinishRecorderListener(new AudioRecordButton.AudioFinishRecorderListener() {
+                            @Override
+                            public void onFinished(float seconds, String path) {
+                                loadRecordData(seconds,path);
+                            }
+                        });
+                        voiceReplaceBtn.setHasRecordPromission(true);
+                        voiceReplaceBtn.setAudioFinishRecorderListener(new AudioRecordButton.AudioFinishRecorderListener() {
+                            @Override
+                            public void onFinished(float seconds, String path) {
+                                loadRecordData(seconds,path);
+                            }
+                        });
+                    }
+                    @Override
+                    public void doAfterDenied(String... permission) {
+                        voiceRecordBtn.setHasRecordPromission(false);
+                        voiceReplaceBtn.setHasRecordPromission(false);
+                        Toast.makeText(SoSActivity.this, "请授权,否则无法录音", Toast.LENGTH_SHORT).show();
+                    }
+                }, Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+    }
+
+    void loadRecordData(float seconds, String path){
+        hasLocalVoice = true;
+        isModify = 1;
+        filePath = path;
+        voiceTip.setVisibility(View.VISIBLE);
+        lengthTv.setText((int)seconds + "''");
+        voiceEmptyLayout.setVisibility(View.GONE);
+        voiceLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -206,7 +272,7 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
                         }
                     }
                     listItems.add(new ContactBean(mEditTextDialog.getNameText(), mEditTextDialog.getPhoneText()));
-                    mAdapter.setDataList(listItems);
+                    mAdapter.setDataListAndCalHeight(listItems,listView);
                     contactTitle.setText(String.format(getString(R.string.contact_size), listItems.size()));
                 } else {
                     if (!listItems.get(index).getPhone().equals(mEditTextDialog.getPhoneText().trim())) {
@@ -219,7 +285,7 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
                     }
                     listItems.get(index).setName(mEditTextDialog.getNameText());
                     listItems.get(index).setPhone(mEditTextDialog.getPhoneText().trim());
-                    mAdapter.setDataList(listItems);
+                    mAdapter.setDataListAndCalHeight(listItems,listView);
                     contactTitle.setText(String.format(getString(R.string.contact_size), listItems.size()));
                 }
                 mEditTextDialog.dismiss();
@@ -239,12 +305,14 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
                     @Override
                     public void onClick(View view) {
                         if (type == DELETE_RECORD) {
-                            voiceRecordBtn.setVisibility(View.VISIBLE);
-
+                            filePath = null;
+                            hasLocalVoice =false;
+                            isModify = 1;
+                            voiceLayout.setVisibility(View.GONE);
+                            voiceEmptyLayout.setVisibility(View.VISIBLE);
                         } else if (type == DELETE_CONTACT) {
                             mAdapter.getDataList().remove(position);
-                            mAdapter.setDataList(mAdapter.getDataList());
-                            Utils.setListViewHeightBasedOnChildren(listView);
+                            mAdapter.setDataListAndCalHeight(mAdapter.getDataList(),listView);
                             contactTitle.setText(String.format(getString(R.string.contact_size), mAdapter.getDataList().size()));
                         }
                     }
@@ -286,6 +354,7 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
                 .setPositiveButton("确定", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        showProgressDilog();
                         mPresenter.saveTelphoneInfo(req, filePath);
                     }
                 }).showDialog();
@@ -306,10 +375,11 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
         req.setUser_id(userId);
         req.setMessage(sosMsgEdit.getText().toString());
         req.setAlarm_type(rescueCallTv.getText().toString());
-        req.setRecord_is_modify(hasLocalVoice ? 1 : 0);
+        req.setRecord_is_modify(isModify);
         req.setContact(mAdapter.getDataList());
         if (hasLocalVoice) {
             if (TextUtils.isEmpty(file_url)) {
+                showProgressDilog();
                 mPresenter.saveTelphoneInfo(req, filePath);
             } else {
                 showReplaceDialog(req);
@@ -321,21 +391,23 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
 
     @Override
     public void getTelphoneInfoSuccess(TelphoneInfo resp) {
+        mLoadingView.showContent();
         rescueCallTv.setText(resp.getAlarm_type());
         if (TextUtils.isEmpty(resp.getFile_url())) {
             file_url = null;
-            voiceRecordBtn.setVisibility(View.VISIBLE);
+            voiceEmptyLayout.setVisibility(View.VISIBLE);
             voiceLayout.setVisibility(View.GONE);
         } else {
             file_url = resp.getFile_url();
-            voiceRecordBtn.setVisibility(View.GONE);
+            voiceEmptyLayout.setVisibility(View.GONE);
             voiceLayout.setVisibility(View.VISIBLE);
             voiceTip.setVisibility(View.GONE);
         }
         sosMsgEdit.setText(resp.getMessage());
         lengthTv.setText(resp.getRecord_duration());
         if (resp.getContact() != null && resp.getContact().size() > 0) {
-            mAdapter.setDataList(resp.getContact());
+            mAdapter.setDataListAndCalHeight(resp.getContact(),listView);
+            contactTitle.setText(String.format(getString(R.string.contact_size), resp.getContact().size()));
         }
         isAdmin = Constant.ALARM_ADMIN.equals(resp.getIs_admin()) ? true : false;
         if (isAdmin) {
@@ -354,8 +426,15 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
     }
 
     @Override
+    public void getTelphoneInfoFailed() {
+        mLoadingView.showError();
+    }
+
+    @Override
     public void saveTelphoneInfoSuccess() {
+        hideProgressDilog();
         ToastUtils.showShort(this,"数据提交成功，请五分钟后检查您的座机！");
+        isModify = 0;
         hasLocalVoice = false;
         voiceTip.setVisibility(View.GONE);
         sosMsgEdit.setCursorVisible(false);// 内容清空后将编辑框1的光标隐藏，提升用户的体验度
@@ -364,7 +443,7 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
 
     @Override
     public void saveTelphoneInfoFail() {
-
+        hideProgressDilog();
     }
 
     void startPlay(){
@@ -436,42 +515,21 @@ public class SoSActivity extends BaseActivity implements View.OnClickListener, V
     //  按钮的点击事件： 打开系统联系人。
     private void openContact() {
         //检查是否有读取联系人权限
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this,
-                    Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
-                    || ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_CONTACTS)) {
-                ToastUtils.showShort(this, "请检查是否有读取联系人权限！");
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 666);
-                return;
-            }
-        }
-        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-        intent.addCategory("android.intent.category.DEFAULT");
-        intent.setType("vnd.android.cursor.dir/phone_v2");
-        startActivityForResult(intent, 1);
-    }
+        mHelper.requestPermissions("请授予[录音]，[读写]权限，否则无法录音",
+                new PermissionHelper.PermissionListener() {
+                    @Override
+                    public void doAfterGrand(String... permission) {
+                        Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
+                        intent.addCategory("android.intent.category.DEFAULT");
+                        intent.setType("vnd.android.cursor.dir/phone_v2");
+                        startActivityForResult(intent, 1);
+                    }
 
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 666) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Logger.i(TAG, "申请读取联系人权限成功");
-                Intent intent = new Intent(Intent.ACTION_PICK, ContactsContract.CommonDataKinds.Phone.CONTENT_URI);
-                intent.addCategory("android.intent.category.DEFAULT");
-                intent.setType("vnd.android.cursor.dir/phone_v2");
-                startActivityForResult(intent, 1);
-            } else {
-                Logger.i(TAG, "申请读取联系人权限失败");
-                ToastUtils.showShort(SoSActivity.this, "请检查是否有读取联系人权限！");
-            }
-        }
-        if (requestCode == 888) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                initRecord();
-                Logger.i(TAG, "申请录音权限成功");
-            } else {
-                Logger.i(TAG, "申请录音权限权限失败");
-            }
-        }
+                    @Override
+                    public void doAfterDenied(String... permission) {
+                        Toast.makeText(SoSActivity.this, "请授权,否则将无法打开通讯录", Toast.LENGTH_SHORT).show();
+                    }
+                }, Manifest.permission.RECORD_AUDIO, Manifest.permission.READ_CONTACTS);
     }
 
     @Override

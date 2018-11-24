@@ -5,11 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.cds.iot.R;
 import com.cds.iot.data.entity.ContactBean;
+import com.cds.iot.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +36,12 @@ public class ContactAdapter extends BaseAdapter {
     public void setDataList(List<ContactBean> listItems) {
         this.mDataList = listItems;
         this.notifyDataSetChanged();
+    }
+
+    public void setDataListAndCalHeight(List<ContactBean> listItems, ListView listView) {
+        this.mDataList = listItems;
+        this.notifyDataSetChanged();
+        Utils.calListViewWidthAndHeight(listView);
     }
 
     public List<ContactBean> getDataList() {

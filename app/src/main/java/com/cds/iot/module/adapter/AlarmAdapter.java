@@ -119,11 +119,11 @@ public class AlarmAdapter extends BaseAdapter {
             holder.lengthTv.setText(bean.getRecord_duration());
         }
 
-        holder.switchBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        holder.switchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 if (listener != null) {
-                    listener.onCheckBoxChange(index, isChecked);
+                    listener.onCheckBoxChange(index, holder.switchBtn.isChecked());
                 }
             }
         });

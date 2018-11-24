@@ -69,6 +69,12 @@ public class UserApplyForPresenter implements UserApplyForContract.Presenter{
                     }
 
                     @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.getManageInfoFailed();
+                    }
+
+                    @Override
                     public void onComplete() {
 
                     }

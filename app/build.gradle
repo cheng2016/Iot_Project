@@ -123,11 +123,9 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 //    testCompile 'junit:junit:4.12'
 
-    //    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.6.1'
-
-    //    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
-
-    //    compile 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
+//    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.6.1'
+//    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.6.1'
+//    implementation 'com.squareup.leakcanary:leakcanary-support-fragment:1.6.1'
 
     //工具库utils
     implementation 'com.blankj:utilcode:1.7.1'
@@ -154,9 +152,6 @@ dependencies {
 
     //eventbus
     implementation 'org.greenrobot:eventbus:3.0.0'
-
-    //UI圆角图库
-//    implementation 'de.hdodenhof:circleimageview:2.2.0'
 
     //导航栏库
 //    compile 'devlight.io:navigationtabbar:1.2.5'
@@ -226,6 +221,6 @@ dependencies {
     //流布局
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     //通用的Android的Loading页面
-    compile 'com.github.czy1121:loadinglayout:1.0.1'
+    implementation 'com.github.czy1121:loadinglayout:1.0.1'
 }
 

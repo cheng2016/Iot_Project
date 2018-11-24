@@ -97,8 +97,15 @@ public class AlarmPresenter implements AlarmContract.Presenter{
                         if ("200".equals(response.getInfo().getCode())) {
                             view.saveAlarmInfoSuccess();
                         } else {
+                            view.saveAlarmInfoFailed();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.saveAlarmInfoFailed();
                     }
 
                     @Override

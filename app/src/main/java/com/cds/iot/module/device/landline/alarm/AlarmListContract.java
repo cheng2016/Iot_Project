@@ -14,11 +14,15 @@ public interface AlarmListContract {
     interface View extends BaseView<Presenter> {
         void getAlarmListSuccess(AlarmInfoResp resp);
 
+        void getAlarmListFailed();
+
         void updateAlarmSuccess();
 
         void deleteAlarmSuccess();
 
         void sendAlarmSuccess();
+
+        void sendAlarmFailed();
     }
 
     interface Presenter extends BasePresenter {

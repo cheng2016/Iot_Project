@@ -41,7 +41,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/widget_size_12">
+            android:layout_marginTop="@dimen/widget_size_10">
 
             <TextView
                 android:id="@+id/time_tv"

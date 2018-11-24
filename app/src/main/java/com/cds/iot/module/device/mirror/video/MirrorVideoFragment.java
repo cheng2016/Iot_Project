@@ -15,6 +15,7 @@ import com.cds.iot.R;
 import com.cds.iot.base.BaseFragment;
 import com.cds.iot.data.entity.VideoEntity;
 import com.cds.iot.module.adapter.VideoAdapter;
+import com.cds.iot.module.review.ExoPlayActivity;
 import com.cds.iot.module.review.ImagePagerActivity;
 import com.cds.iot.module.review.YjPlayerActvity;
 import com.cds.iot.util.DimenUtils;
@@ -222,7 +223,11 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
     @Override
     public void onPlayClick(String name, String videoPath) {
         Intent intent = new Intent();
-        intent.setClass(getActivity(), YjPlayerActvity.class);
+        if(videoPath.startsWith("http")){
+            intent.setClass(getActivity(), YjPlayerActvity.class);
+        } else {
+            intent.setClass(getActivity(), ExoPlayActivity.class);
+        }
         intent.putExtra("url", videoPath);
         intent.putExtra("title", name);
         startActivity(intent);

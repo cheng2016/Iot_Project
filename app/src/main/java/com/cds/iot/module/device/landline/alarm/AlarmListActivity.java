@@ -19,7 +19,9 @@ import android.widget.TextView;
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
 import com.cds.iot.data.Constant;
+import com.cds.iot.data.entity.AlarmInfo;
 import com.cds.iot.data.entity.AlarmInfoResp;
+import com.cds.iot.data.entity.SaveAlarmReq;
 import com.cds.iot.module.adapter.AlarmAdapter;
 import com.cds.iot.module.device.landline.alarm.defail.AlarmActivity;
 import com.cds.iot.util.Logger;
@@ -86,6 +88,13 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
             listView.setOnItemClickListener(this);
             mPresenter.getAlarmList(deviceId);
         }
+        mLoadingView.showLoading();
+        mLoadingView.setRetryListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getAlarmList(deviceId);
+            }
+        });
     }
 
     @Override
@@ -109,10 +118,14 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
             case R.id.right_button:
                 Intent intent = new Intent();
                 intent.putExtra("deviceId", deviceId);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("alarmInfo",null);
+                intent.putExtras(bundle);
                 intent.setClass(this, AlarmActivity.class);
                 startActivityForResult(intent, RESULT_FIRST_USER);
                 break;
             case R.id.synchronization_btn:
+                showProgressDilog();
                 mPresenter.sendAlarm(deviceId);
                 break;
             default:
@@ -144,6 +157,7 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void getAlarmListSuccess(AlarmInfoResp resp) {
+        mLoadingView.showContent();
         isAdmin = Constant.ALARM_ADMIN.equals(resp.getIs_admin()) ? true : false;
         if (isAdmin) {
             findViewById(R.id.right_button).setVisibility(View.VISIBLE);
@@ -171,8 +185,13 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
     }
 
     @Override
+    public void getAlarmListFailed() {
+        mLoadingView.showError();
+    }
+
+    @Override
     public void updateAlarmSuccess() {
-        ToastUtils.showShort(this, "闹钟已开启");
+        ToastUtils.showShort(this, "闹钟修改成功");
         mPresenter.getAlarmList(deviceId);
     }
 
@@ -184,8 +203,14 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void sendAlarmSuccess() {
+        hideProgressDilog();
         ToastUtils.showShort(this, "数据提交成功，请五分钟后检查您的座机！");
         mPresenter.getAlarmList(deviceId);
+    }
+
+    @Override
+    public void sendAlarmFailed() {
+        hideProgressDilog();
     }
 
     @Override
@@ -210,9 +235,19 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onCheckBoxChange(int index, boolean isCheck) {
-        if(isAdmin){
-
+        if(!isAdmin){
+            return;
         }
+        SaveAlarmReq req = new SaveAlarmReq();
+        AlarmInfo bean = adapter.getDataList().get(index);
+        req.setAlarm_id(bean.getId());
+        req.setDevice_id(deviceId);
+        req.setTitle(bean.getTitle());
+        req.setWeek(bean.getWeek());
+        req.setAlarm_time(bean.getDate());
+        req.setState(isCheck?1:0);
+        req.setRecord_is_modify(0);
+        mPresenter.updateAlarm(req);
     }
 
     @Override
