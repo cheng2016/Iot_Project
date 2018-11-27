@@ -40,6 +40,7 @@ import com.cds.iot.util.Logger;
 import com.cds.iot.util.MapUtils;
 import com.cds.iot.util.ToastUtils;
 import com.cds.iot.view.ActionSheetDialog;
+import com.cds.iot.view.CustomDialog;
 import com.cds.iot.view.MyAlertDialog;
 import com.google.gson.Gson;
 
@@ -268,6 +269,8 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
         }
     };
 
+    CustomDialog mCustomDialog;
+
 
     @OnClick({R.id.car_location, R.id.location, R.id.more, R.id.remote_recording, R.id.remote_photography, R.id.driving_video, R.id.driving_track, R.id.wechat_access, R.id.booking_navigation, R.id.device})
     public void onViewClicked(View view) {
@@ -295,10 +298,20 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
                 }
                 break;
             case R.id.remote_recording:
-                mPresenter.getRemoteVideotape(deviceId);
+                showConfirmDialog("远程摄像", "是否确认发送命令？", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.getRemoteVideotape(deviceId);
+                    }
+                });
                 break;
             case R.id.remote_photography:
-                mPresenter.getRemotePhotograph(deviceId);
+                showConfirmDialog("远程拍照", "是否确认发送命令？", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mPresenter.getRemotePhotograph(deviceId);
+                    }
+                });
                 break;
             case R.id.driving_video:
                 intent.setClass(getActivity(), MirrorVideoActivity.class);
@@ -319,6 +332,18 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
                 intent.setClass(getActivity(), DeviceInfoActivity.class);
                 startActivityForResult(intent, Activity.RESULT_FIRST_USER);
                 break;
+        }
+    }
+
+    void showConfirmDialog(String title, String message, View.OnClickListener listener){
+        if (mCustomDialog == null) {
+            mCustomDialog = new CustomDialog(getActivity())
+                    .setTitle(title)
+                    .setMessage(message);
+        }
+        if (!mCustomDialog.isShowing()) {
+            mCustomDialog.setPositiveButton("确认", getResources().getColor(R.color.theme_color),listener);
+            mCustomDialog.show();
         }
     }
 

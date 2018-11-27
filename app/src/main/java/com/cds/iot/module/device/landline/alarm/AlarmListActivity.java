@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -27,30 +27,33 @@ import com.cds.iot.module.device.landline.alarm.defail.AlarmActivity;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.ToastUtils;
 import com.cds.iot.view.MyAlertDialog;
+import com.cheng.refresh.library.PullToRefreshBase;
+import com.cheng.refresh.library.PullToRefreshListView;
 
 import java.io.IOException;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator Chengzj
  *
  * @date 2018/11/13 18:18
  */
-public class AlarmListActivity extends BaseActivity implements View.OnClickListener, AlarmListContract.View, AlarmAdapter.onAlarmChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, AdapterView.OnItemClickListener {
+public class AlarmListActivity extends BaseActivity implements View.OnClickListener, AlarmListContract.View, AlarmAdapter.onAlarmChangeListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener<ListView> {
     @Bind(R.id.right_img)
     AppCompatImageView rightImg;
     @Bind(R.id.empty_layout)
     LinearLayout emptyLayout;
     @Bind(R.id.content_layout)
-    FrameLayout contentLayout;
-    @Bind(R.id.list_view)
-    ListView listView;
+    View contentLayout;
+    @Bind(R.id.refresh_listView)
+    PullToRefreshListView refreshListView;
     @Bind(R.id.synchronization_btn)
     RelativeLayout synchronizationBtn;
     @Bind(R.id.synchronization_tv)
     AppCompatTextView synchronizationTv;
+
+    private ListView mListView;
 
     private String deviceId;
 
@@ -75,6 +78,11 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
         rightImg.setVisibility(View.VISIBLE);
         rightImg.setImageResource(R.mipmap.btn_addfence);
         synchronizationBtn.setOnClickListener(this);
+        refreshListView.setPullLoadEnabled(false);//上拉加载是否可用
+        refreshListView.setScrollLoadEnabled(false);//判断滑动到底部加载是否可用
+        refreshListView.setPullRefreshEnabled(true);//设置是否能下拉
+        refreshListView.setOnRefreshListener(this);
+        mListView = refreshListView.getRefreshableView();
     }
 
     @Override
@@ -84,8 +92,8 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
             deviceId = getIntent().getStringExtra("deviceId");
             adapter = new AlarmAdapter(this);
             adapter.setListener(this);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(this);
+            mListView.setAdapter(adapter);
+            mListView.setOnItemClickListener(this);
             mPresenter.getAlarmList(deviceId);
         }
         mLoadingView.showLoading();
@@ -95,6 +103,22 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
                 mPresenter.getAlarmList(deviceId);
             }
         });
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+        Logger.i(TAG,"onPullDownToRefresh");
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mPresenter.getAlarmList(deviceId);
+            }
+        }, 1600);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> pullToRefreshBase) {
+        Logger.i(TAG,"onPullUpToRefresh");
     }
 
     @Override
@@ -182,6 +206,7 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
             contentLayout.setVisibility(View.GONE);
             emptyLayout.setVisibility(View.VISIBLE);
         }
+        refreshListView.onPullDownRefreshComplete();
     }
 
     @Override

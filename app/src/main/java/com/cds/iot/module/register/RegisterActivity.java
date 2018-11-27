@@ -1,5 +1,6 @@
 package com.cds.iot.module.register;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
@@ -13,7 +14,9 @@ import android.widget.TextView;
 
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
+import com.cds.iot.module.web.WebActivity;
 import com.cds.iot.util.RegexUtils;
+import com.cds.iot.util.ResourceUtils;
 import com.cds.iot.util.ToastUtils;
 
 import butterknife.Bind;
@@ -43,14 +46,15 @@ public class RegisterActivity extends BaseActivity implements RegisterContact.Vi
         findViewById(R.id.back_button).setOnClickListener(this);
         findViewById(R.id.getcode).setOnClickListener(this);
         findViewById(R.id.register_btn).setOnClickListener(this);
+        findViewById(R.id.service_tv).setOnClickListener(this);
         showPasswordCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     //如果选中，显示密码
                     passwordEdit.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     passwordEdit.setSelection(passwordEdit.getText().toString().length());
-                }else{
+                } else {
                     //否则隐藏密码
                     passwordEdit.setTransformationMethod(PasswordTransformationMethod.getInstance());
                     passwordEdit.setSelection(passwordEdit.getText().toString().length());
@@ -68,9 +72,9 @@ public class RegisterActivity extends BaseActivity implements RegisterContact.Vi
 
     @Override
     public void onClick(View view) {
-        String phone = phoneEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
-        String code = codeEdit.getText().toString();
+        String phone = phoneEdit.getText().toString().trim();
+        String password = passwordEdit.getText().toString().trim();
+        String code = codeEdit.getText().toString().trim();
         switch (view.getId()) {
             case R.id.back_button:
                 finish();
@@ -78,11 +82,10 @@ public class RegisterActivity extends BaseActivity implements RegisterContact.Vi
             case R.id.getcode:
                 if (TextUtils.isEmpty(phone)) {
                     ToastUtils.showShort(this, "手机号不能为空");
-                } else if(!RegexUtils.isMobileSimple(phone)){
+                } else if (!RegexUtils.isMobileSimple(phone)) {
                     ToastUtils.showShort(this, "请输入正确的手机号码");
-                }else {
+                } else {
                     mPresenter.getCode(phone);
-
                 }
                 break;
             case R.id.register_btn:
@@ -90,15 +93,22 @@ public class RegisterActivity extends BaseActivity implements RegisterContact.Vi
                     ToastUtils.showShort(this, "手机号不能为空");
                 } else if (TextUtils.isEmpty(password)) {
                     ToastUtils.showShort(this, "密码不能为空");
-                } else if(!RegexUtils.isPwdSimple(password)){
+                } else if (!RegexUtils.isPwdSimple(password) || password.indexOf(" ") != -1) {
                     ToastUtils.showShort(this, "请输入6-20位数字和字母的组合密码");
-                }else if (TextUtils.isEmpty(code)) {
+                } else if (TextUtils.isEmpty(code)) {
                     ToastUtils.showShort(this, "验证码不能为空");
                 } else if (!RegexUtils.isMobileSimple(phone)) {
                     ToastUtils.showShort(this, "请输入正确的手机号码");
                 } else {
                     mPresenter.register(phone, password, code);
                 }
+                break;
+            case R.id.service_tv:
+                Intent intent = new Intent();
+                intent.putExtra("url", ResourceUtils.getProperties(this, "serviceUrl"));
+                intent.putExtra("title", "用户协议");
+                intent.setClass(this, WebActivity.class);
+                startActivity(intent);
                 break;
         }
     }

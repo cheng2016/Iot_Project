@@ -81,7 +81,7 @@
                     style="@style/inputNullStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:maxLength="30"
+                    android:maxLength="20"
                     android:maxLines="1"
                     android:singleLine="true" />
 

@@ -8,21 +8,13 @@
 
     <include layout="@layout/action_bar" />
 
-<!--    <ListView
-        android:id="@+id/listview"
+    <com.cheng.refresh.library.PullToRefreshListView
+        android:id="@+id/refresh_listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:divider="@null"
         android:listSelector="@android:color/transparent"
-        android:visibility="gone" />-->
-
-    <com.cheng.refresh.library.PullToRefreshListView
-        android:id="@+id/refresh_listView"
-        android:layout_width="match_parent"
-        android:divider="@null"
-        android:paddingTop="@dimen/widget_size_10"
-        android:listSelector="@android:color/transparent"
-        android:layout_height="match_parent" />
+        android:paddingTop="@dimen/widget_size_10" />
 
     <RelativeLayout
         android:id="@+id/empty_layout"
@@ -34,8 +26,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:drawablePadding="@dimen/widget_size_16"
             android:drawableTop="@mipmap/image_nomessage"
+            android:drawablePadding="@dimen/widget_size_16"
             android:gravity="center_horizontal"
             android:text="当前暂无任何设备消息"
             android:textColor="#999999" />

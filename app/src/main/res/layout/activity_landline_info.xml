@@ -37,7 +37,7 @@
                 android:drawableRight="@mipmap/btn_editname"
                 android:drawablePadding="@dimen/widget_size_2"
                 android:inputType="textPersonName"
-                android:maxLength="30"
+                android:maxLength="20"
                 android:maxLines="1"
                 android:text=""
                 android:textColor="@color/black"

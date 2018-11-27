@@ -21,6 +21,7 @@ import com.cds.iot.module.user.detail.UserDetailActivity;
 import com.cds.iot.module.wxpublic.WxPublicNumblerActivity;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
+import com.cds.iot.util.ResourceUtils;
 import com.cds.iot.util.picasso.PicassoCircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -99,6 +100,8 @@ public class UserFragment extends BaseFragment implements UserContract.View, Vie
                 break;
             case R.id.product_description_layout:
                 intent = new Intent().setClass(getActivity(), WebActivity.class);
+                intent.putExtra("url", ResourceUtils.getProperties(getActivity(), "productUrl"));
+                intent.putExtra("title", "产品说明");
                 startActivity(intent);
                 break;
             case R.id.about_us_layout:

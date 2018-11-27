@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/widget_size_20"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -23,19 +25,21 @@
 
         <EditText
             android:id="@+id/scenes_name_edit"
-            android:layout_width="@dimen/widget_size_100"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
             android:inputType="textPersonName"
-            android:maxLength="30"
+            android:maxLength="20"
             android:maxLines="1"
             android:text=""
+            android:hint="请输入场景名"
+            android:textColorHint="@color/input_stroke"
             android:textColor="@color/black"
             android:textSize="@dimen/font_size_16" />
     </LinearLayout>
 
     <View
-        android:layout_width="@dimen/widget_size_160"
+        android:layout_width="@dimen/widget_size_180"
         android:layout_height="@dimen/widget_min_size_1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/widget_size_10"

@@ -6,14 +6,6 @@
     android:background="@color/app_content_bg"
     android:orientation="vertical">
 
-    <!--    <include layout="@layout/action_bar" />-->
-
-    <!--    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Device" />-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/widget_size_140"

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_content_bg"
@@ -8,13 +9,55 @@
 
     <include layout="@layout/action_bar" />
 
+    <FrameLayout
+        android:id="@+id/content_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+
+        <com.cheng.refresh.library.PullToRefreshListView
+            android:id="@+id/refresh_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent" />
+
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/synchronization_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/widget_size_50"
+            android:layout_gravity="bottom"
+            android:background="@drawable/button_float_selector"
+            android:clickable="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/widget_min_size_2"
+                android:background="@color/splite_line" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/synchronization_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableLeft="@mipmap/icn_synctotel"
+                android:drawablePadding="@dimen/widget_size_6"
+                android:gravity="center_vertical"
+                android:text="同步至座机"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_18"
+                android:visibility="visible" />
+        </RelativeLayout>
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/empty_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/widget_size_160"
         android:orientation="vertical"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ImageView
             android:layout_width="match_parent"
@@ -46,48 +89,4 @@
             android:textSize="@dimen/font_size_16" />
     </LinearLayout>
 
-
-    <FrameLayout
-        android:id="@+id/content_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-        <ListView
-            android:id="@+id/list_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:fadeScrollbars="true"
-            android:fadingEdge="none"
-            android:listSelector="#00000000"
-            android:scrollbars="none"></ListView>
-
-        <RelativeLayout
-            android:id="@+id/synchronization_btn"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/widget_size_50"
-            android:layout_gravity="bottom"
-            android:background="@drawable/button_float_selector"
-            android:clickable="true">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/widget_min_size_2"
-                android:background="@color/splite_line" />
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/synchronization_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:drawableLeft="@mipmap/icn_synctotel"
-                android:drawablePadding="@dimen/widget_size_6"
-                android:gravity="center_vertical"
-                android:text="同步至座机"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_size_18"
-                android:visibility="visible" />
-        </RelativeLayout>
-    </FrameLayout>
 </LinearLayout>

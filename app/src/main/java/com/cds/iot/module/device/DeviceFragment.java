@@ -6,11 +6,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.cds.iot.App;
@@ -37,43 +43,48 @@ import com.cds.iot.module.scenes.add.AddScenesActivity;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
+import com.cds.iot.util.ScreenUtils;
 import com.cds.iot.util.ToastUtils;
+import com.cds.iot.util.Utils;
 import com.cds.iot.view.CustomDialog;
 import com.cds.iot.view.RefuseDialog;
+import com.cheng.refresh.library.PullToRefreshBase;
+import com.cheng.refresh.library.PullToRefreshScrollView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
 
-public class DeviceFragment extends BaseFragment implements DeviceContract.View, View.OnClickListener, AdapterView.OnItemClickListener {
+public class DeviceFragment extends BaseFragment implements DeviceContract.View, View.OnClickListener, AdapterView.OnItemClickListener, PullToRefreshBase.OnRefreshListener<ScrollView> {
     public static final int REQUEST_ADD_DEVICE = 0X11;
     public static final int REQUEST_EDIT_DEVICE = 0X12;
     public static final int REQUEST_ADD_SCENES = 0X13;
     public static final int REQUEST_EDIT_SCENES = 0X14;
 
-    @Bind(R.id.menu_listview)
+    private PullToRefreshScrollView pullToRefreshScrollView;
+
     ListView menuListview;
-    @Bind(R.id.device_gridview)
+
     GridView deviceGridview;
-    @Bind(R.id.device_title)
+
     TextView deviceTitle;
-    @Bind(R.id.edit_img)
+
     ImageView editImg;
-    @Bind(R.id.bind_manage)
+
     TextView bindManageTv;
-    @Bind(R.id.wether_title)
+
     TextView wetherTitle;
-    @Bind(R.id.wether_detail)
+
     TextView wetherDetail;
-    @Bind(R.id.location_tv)
+
     TextView locationTv;
-    @Bind(R.id.add_scenes_img)
+
     ImageView addScenesImg;
-    @Bind(R.id.emptyview)
+
     View emptyview;
 
     DeviceContract.Presenter mPresenter;
+
     /**
      * 常用按钮菜单
      */
@@ -98,11 +109,27 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_device;
+        return R.layout.fragment_device_container;
     }
 
     @Override
-    protected void initView(View view, Bundle savedInstanceState) {
+    protected void initView(View v, Bundle savedInstanceState) {
+        pullToRefreshScrollView = v.findViewById(R.id.refresh_scrollView);
+        pullToRefreshScrollView.setOnRefreshListener(this);
+        ScrollView scrollView = pullToRefreshScrollView.getRefreshableView();
+        LinearLayout view = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_device, scrollView, false);
+        scrollView.addView(view);
+        emptyview = (View) view.findViewById(R.id.emptyview);
+        addScenesImg = (ImageView) view.findViewById(R.id.add_scenes_img);
+        locationTv = (TextView) view.findViewById(R.id.location_tv);
+        wetherDetail = (TextView) view.findViewById(R.id.wether_detail);
+        wetherTitle = (TextView) view.findViewById(R.id.wether_title);
+        bindManageTv = (TextView) view.findViewById(R.id.bind_manage);
+        editImg = (ImageView) view.findViewById(R.id.edit_img);
+        deviceTitle = (TextView) view.findViewById(R.id.device_title);
+        deviceGridview = (GridView) view.findViewById(R.id.device_gridview);
+        menuListview = (ListView) view.findViewById(R.id.menu_listview);
+
         locationTv.setOnClickListener(this);
         view.findViewById(R.id.add_img).setOnClickListener(this);
         view.findViewById(R.id.often_layout).setOnClickListener(this);
@@ -111,84 +138,33 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
         oftenView = view.findViewById(R.id.often_layout);
         oftenView.setSelected(true);
         addScenesImg.setOnClickListener(this);
-        menuListview.setOnItemClickListener(this);
-        deviceGridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        menuListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                final Device device = deviceAdapter.getDataList().get(i);
-                Intent intent = new Intent();
-                Bundle bundle = new Bundle();
-                bundle.putString("deviceId", device.getId());
-                bundle.putString("deviceName", device.getName());
-                intent.putExtras(bundle);
-                int state = Integer.parseInt(device.getState());
-                switch (state) {
-                    case Constant.DEVICE_STATE_WAIT_AGREE:
-                        intent.setClass(getActivity(), UserApplyForActivity.class);
-                        intent.putExtra("uid", PreferenceUtils.getPrefString(getActivity(), PreferenceConstants.USER_ID, ""));
-                        intent.putExtra("deviceId", device.getId());
-                        intent.putExtra("msgType", device.getType_id());
-                        intent.putExtra("deviceName", device.getName());
-                        intent.putExtra("isAdmin", device.getIs_admin());
-                        startActivityForResult(intent, REQUEST_EDIT_DEVICE);
-                        break;
-                    case Constant.DEVICE_STATE_REFUSE:
-                        new RefuseDialog(getActivity())
-                                .builder()
-                                .setTitle("添加申请被拒绝")
-                                .setMessage(device.getName() +"添加申请被管理员拒绝。")
-                                .setReapplyButton(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mPresenter.reapplyDevice(device.getCode(),device.getName());
-                                    }
-                                })
-                                .setReleaseButton(new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mPresenter.releaseDevice(String.valueOf(userId), device.getId());
-                                    }
-                                }).show();
-                        break;
-                    case Constant.DEVICE_STATE_REVOKE:
-                        new CustomDialog(getActivity())
-                                .setTitle("设备被管理员解除")
-                                .setMessage("是否移除该设备")
-                                .setPositiveButton("确定", new View.OnClickListener() {
-                                    @Override
-                                    public void onClick(View v) {
-                                        mPresenter.releaseDevice(String.valueOf(userId), device.getId());
-                                    }
-                                }).show();
-                        break;
-                    case Constant.DEVICE_STATE_INSERT_SUCCESS:
-                        int type = Integer.parseInt(device.getType_id());
-                        switch (type) {
-                            case Constant.DEVICE_TYPE_CAR_ANALYZER:
-                                intent.setClass(getActivity(), FenceActivity.class);
-                                startActivity(intent);
-                                break;
-                            case Constant.DEVICE_TYPE_TELEPHONE:
-                                intent.setClass(getActivity(), LandlineActivity.class);
-                                startActivityForResult(intent,Activity.RESULT_FIRST_USER);
-                                break;
-                            case Constant.DEVICE_TYPE_CAR_MIRROR:
-                                intent.setClass(getActivity(), RearviewMirrorActivity.class);
-                                startActivityForResult(intent, Activity.RESULT_FIRST_USER);
-                                break;
-                            case Constant.DEVICE_TYPE_WATCH:
-                                intent.setClass(getActivity(), WatchActivity.class);
-                                startActivity(intent);
-                                break;
-                            default:
-                                break;
+            public void onItemClick(AdapterView<?> parent, View view, int index, long id) {
+                editImg.setVisibility(View.VISIBLE);
+                bindManageTv.setVisibility(View.GONE);
+                //设置状态
+                oftenView.setSelected(false);
+                menuAdapter.setSelectItem(index);
+                menuAdapter.notifyDataSetInvalidated();
+                deviceTitle.setText(mScenesList.get(index).getName());
+                mDeviceList.clear();
+                BindScenes bindScenes = mScenesList.get(index);
+                for (DeviceType deviceType : bindScenes.getDevice_types()) {
+                    if (deviceType.getDevices() != null && !deviceType.getDevices().isEmpty()) {
+                        for (Device device : deviceType.getDevices()) {
+                            device.setMain_img_url(deviceType.getIcon_url());
+                            device.setScene_id(bindScenes.getUser_scene_id());
+                            device.setType_id(deviceType.getId());
+                            mDeviceList.add(device);
                         }
-                        break;
-                    default:
-                        break;
+                    }
                 }
+                deviceAdapter.setDataList(mDeviceList);
             }
         });
+        deviceGridview.setOnItemClickListener(this);
+        resetListViewHeight(scrollView);
     }
 
     @Override
@@ -207,13 +183,64 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
         userId = PreferenceUtils.getPrefString(App.getInstance(), PreferenceConstants.USER_ID, "");
     }
 
+    /**
+     * 重新计算listview、gridview高度进行适配，并解决滑动冲突的问题
+     * @param scrollView
+     */
+    private void resetListViewHeight(ScrollView scrollView){
+        ViewGroup.LayoutParams params = menuListview.getLayoutParams();
+        params.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 50;
+        menuListview.setLayoutParams(params);
+        //解决滑动冲突
+        menuListview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(!Utils.isFirstItemVisible(menuListview)){
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        scrollView.requestDisallowInterceptTouchEvent(false);
+                    } else {
+                        scrollView.requestDisallowInterceptTouchEvent(true);
+                    }
+                }
+                return false;
+            }
+        });
+
+        ViewGroup.LayoutParams lp = deviceGridview.getLayoutParams();
+        lp.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 44;
+        deviceGridview.setLayoutParams(lp);
+        //解决滑动冲突
+        deviceGridview.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if(!Utils.isFirstItemVisible(deviceGridview)){
+                    if (event.getAction() == MotionEvent.ACTION_UP) {
+                        scrollView.requestDisallowInterceptTouchEvent(false);
+                    } else {
+                        scrollView.requestDisallowInterceptTouchEvent(true);
+                    }
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ScrollView> pullToRefreshBase) {
+        mPresenter.getDeviceList(userId);
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ScrollView> pullToRefreshBase) {
+    }
+
     @Override
     protected void onLazyLoad() {
         super.onLazyLoad();
         mPresenter.getDeviceList(userId);
     }
 
-    public void queryDeviceList(){
+    public void queryDeviceList() {
         mPresenter.getDeviceList(userId);
     }
 
@@ -279,27 +306,79 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
     }
 
     @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int index, long l) {
-        editImg.setVisibility(View.VISIBLE);
-        bindManageTv.setVisibility(View.GONE);
-        //设置状态
-        oftenView.setSelected(false);
-        menuAdapter.setSelectItem(index);
-        menuAdapter.notifyDataSetInvalidated();
-        deviceTitle.setText(mScenesList.get(index).getName());
-        mDeviceList.clear();
-        BindScenes bindScenes = mScenesList.get(index);
-        for (DeviceType deviceType : bindScenes.getDevice_types()) {
-            if (deviceType.getDevices() != null && !deviceType.getDevices().isEmpty()) {
-                for (Device device : deviceType.getDevices()) {
-                    device.setMain_img_url(deviceType.getIcon_url());
-                    device.setScene_id(bindScenes.getUser_scene_id());
-                    device.setType_id(deviceType.getId());
-                    mDeviceList.add(device);
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        final Device device = deviceAdapter.getDataList().get(i);
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putString("deviceId", device.getId());
+        bundle.putString("deviceName", device.getName());
+        intent.putExtras(bundle);
+        int state = Integer.parseInt(device.getState());
+        switch (state) {
+            case Constant.DEVICE_STATE_WAIT_AGREE:
+                intent.setClass(getActivity(), UserApplyForActivity.class);
+                intent.putExtra("uid", PreferenceUtils.getPrefString(getActivity(), PreferenceConstants.USER_ID, ""));
+                intent.putExtra("deviceId", device.getId());
+                intent.putExtra("msgType", device.getType_id());
+                intent.putExtra("deviceName", device.getName());
+                intent.putExtra("isAdmin", device.getIs_admin());
+                startActivityForResult(intent, REQUEST_EDIT_DEVICE);
+                break;
+            case Constant.DEVICE_STATE_REFUSE:
+                new RefuseDialog(getActivity())
+                        .builder()
+                        .setTitle("添加申请被拒绝")
+                        .setMessage(device.getName() + "添加申请被管理员拒绝。")
+                        .setReapplyButton(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mPresenter.reapplyDevice(device.getCode(), device.getName());
+                            }
+                        })
+                        .setReleaseButton(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mPresenter.releaseDevice(String.valueOf(userId), device.getId());
+                            }
+                        }).show();
+                break;
+            case Constant.DEVICE_STATE_REVOKE:
+                new CustomDialog(getActivity())
+                        .setTitle("设备被管理员解除")
+                        .setMessage("是否移除该设备")
+                        .setPositiveButton("确定", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                mPresenter.releaseDevice(String.valueOf(userId), device.getId());
+                            }
+                        }).show();
+                break;
+            case Constant.DEVICE_STATE_INSERT_SUCCESS:
+                int type = Integer.parseInt(device.getType_id());
+                switch (type) {
+                    case Constant.DEVICE_TYPE_CAR_ANALYZER:
+                        intent.setClass(getActivity(), FenceActivity.class);
+                        startActivity(intent);
+                        break;
+                    case Constant.DEVICE_TYPE_TELEPHONE:
+                        intent.setClass(getActivity(), LandlineActivity.class);
+                        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                        break;
+                    case Constant.DEVICE_TYPE_CAR_MIRROR:
+                        intent.setClass(getActivity(), RearviewMirrorActivity.class);
+                        startActivityForResult(intent, Activity.RESULT_FIRST_USER);
+                        break;
+                    case Constant.DEVICE_TYPE_WATCH:
+                        intent.setClass(getActivity(), WatchActivity.class);
+                        startActivity(intent);
+                        break;
+                    default:
+                        break;
                 }
-            }
+                break;
+            default:
+                break;
         }
-        deviceAdapter.setDataList(mDeviceList);
     }
 
     @Override
@@ -398,6 +477,7 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
 
     @Override
     public void getDeviceListSuccess(List<DeviceListResp> resp) {
+        pullToRefreshScrollView.onPullDownRefreshComplete();
         if (resp == null || resp.size() == 0) {
             bindManageTv.setVisibility(View.GONE);
             return;

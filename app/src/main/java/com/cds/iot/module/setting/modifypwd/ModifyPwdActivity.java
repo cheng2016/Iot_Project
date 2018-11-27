@@ -59,9 +59,9 @@ public class ModifyPwdActivity extends BaseActivity implements ModifyPwdContract
 
     @Override
     public void onClick(View view) {
-        String oldpassword = oldPasswordEdit.getText().toString();
-        String password = passwordEdit.getText().toString();
-        String password2 = passwordEdit2.getText().toString();
+        String oldpassword = oldPasswordEdit.getText().toString().trim();
+        String password = passwordEdit.getText().toString().trim();
+        String password2 = passwordEdit2.getText().toString().trim();
         switch (view.getId()) {
             case R.id.back_button:
                 finish();
@@ -75,7 +75,7 @@ public class ModifyPwdActivity extends BaseActivity implements ModifyPwdContract
                     ToastUtils.showShort(this, "请再次输入新密码");
                 }else if (!password.equals(password2)) {
                     ToastUtils.showShort(this, "二次新密码输入不一致");
-                } else if (!RegexUtils.isPwdSimple(password)) {
+                } else if (!RegexUtils.isPwdSimple(password) || password.indexOf(" ") != -1 || password.indexOf(" ") != -1) {
                     ToastUtils.showShort(this, "请输入6-20位数字和字母的组合密码");
                 } else {
                     mPresenter.modifyPwd(oldpassword,password);

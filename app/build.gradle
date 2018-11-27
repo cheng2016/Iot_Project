@@ -207,20 +207,20 @@ dependencies {
 //    compile(name: 'VideoPlayModule_V1.0.0', ext: 'aar')
 //    compile(name: 'VideoUi_V1.0.0', ext: 'aar')
 
+    //流布局
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+
     //    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
     //日历组件
     implementation(name: 'DatePicker_V1.0.0', ext: 'aar')
-
     //    compile project(':DatePicker')
 
     //刷新组件
-    implementation(name: 'PullToRefresh_V1.0.0', ext: 'aar')
-
+    implementation(name: 'PullToRefresh_V1.0.2', ext: 'aar')
 //        compile project(':PullRefresh')
 
-    //流布局
-    implementation 'com.hyman:flowlayout-lib:1.1.2'
     //通用的Android的Loading页面
-    implementation 'com.github.czy1121:loadinglayout:1.0.1'
+    implementation(name: 'Loadinglayout_V1.0.2', ext: 'aar')
+//    implementation 'com.github.czy1121:loadinglayout:1.0.1'
 }
 

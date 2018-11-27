@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cds.iot.R;
 import com.cds.iot.data.Constant;
 import com.cds.iot.data.entity.Device;
+import com.cds.iot.util.Utils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -37,6 +39,12 @@ public class DeviceAdapter extends BaseAdapter {
     public void setDataList(List<Device> mDataList) {
         this.mDataList = mDataList;
         notifyDataSetChanged();
+    }
+
+    public void setDataListAndCalHeight(List<Device> listItems, GridView listView) {
+        this.mDataList = listItems;
+        this.notifyDataSetChanged();
+        Utils.calGridViewWidthAndHeight(2, listView);
     }
 
     @Override

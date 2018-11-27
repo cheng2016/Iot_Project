@@ -41,6 +41,7 @@ import com.cds.iot.util.Logger;
 import com.cds.iot.util.NetUtils;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
+import com.cds.iot.util.RomUtils;
 import com.cds.iot.view.MyAlertDialog;
 import com.google.gson.Gson;
 
@@ -363,10 +364,22 @@ public class SocketService extends Service implements SocketContract {
         checkNofificationPermission(manager);
         String CHANNEL_ID = PreferenceUtils.getPrefString(this, PreferenceConstants.CHANNEL_ID, "");
         String CHANNEL_NAME = PreferenceUtils.getPrefString(this, PreferenceConstants.CHANNEL_NAME, "");
-        int importance = NotificationManager.IMPORTANCE_DEFAULT;
-
         boolean isVibrate = PreferenceUtils.getPrefBoolean(App.getInstance(), PreferenceConstants.VIBRATE_NOTIFY, true);
         boolean isVoice = PreferenceUtils.getPrefBoolean(App.getInstance(), PreferenceConstants.VOICE_NOTIFY, true);
+        int importance;
+        if (RomUtils.isMiui()){
+            if(isVoice && isVibrate){
+                importance = NotificationManager.IMPORTANCE_HIGH;
+            }else if(isVoice && !isVibrate){
+                importance = NotificationManager.IMPORTANCE_DEFAULT;
+            } else if(!isVoice && isVibrate){
+                importance = NotificationManager.IMPORTANCE_LOW;
+            } else {
+                importance = NotificationManager.IMPORTANCE_MIN;
+            }
+        }else {
+            importance = NotificationManager.IMPORTANCE_DEFAULT;
+        }
         //解决通知声音、震动无法关闭或开启的问题
         if (TextUtils.isEmpty(CHANNEL_ID)) {
             CHANNEL_ID = "kuda_channel" + new Random().nextInt(100000);
@@ -413,15 +426,15 @@ public class SocketService extends Service implements SocketContract {
                 .setSmallIcon(R.mipmap.ic_cds_launcher)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.ic_cds_launcher))
                 .setLights(Color.BLUE, 2000, 1000)
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_HIGH);
-
+                .setAutoCancel(true);
+        if (RomUtils.isMiui()){
+            builder.setPriority(NotificationCompat.PRIORITY_HIGH);
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             builder.setVisibility(Notification.VISIBILITY_PUBLIC);
             // 关联PendingIntent
             builder.setFullScreenIntent(intent, false);// 横幅
         }
-
         Notification notification = builder.build();
         manager.notify(2, notification);
     }

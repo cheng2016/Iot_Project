@@ -19,7 +19,7 @@ import com.cds.iot.base.BaseActivity;
 
 /**
  * 产品说明
- *
+ * <p>
  * 第三方公众web界面
  */
 public class WebActivity extends BaseActivity implements View.OnClickListener {
@@ -30,8 +30,6 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
     private WebView webView;
 
     private ProgressBar pbProgress;
-
-    private String url = "http://47.106.148.192:8080//appls/produst_list.html";
 
     @Override
     protected int getLayoutId() {
@@ -65,7 +63,7 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
                 return false;
             }
         });
-        webView.setWebChromeClient(new WebChromeClient(){
+        webView.setWebChromeClient(new WebChromeClient() {
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (newProgress == 100) {
@@ -99,12 +97,15 @@ public class WebActivity extends BaseActivity implements View.OnClickListener {
     protected void initData() {
         titleTv.setText("产品说明");
         if (getIntent().getExtras() != null) {
-            url = getIntent().getStringExtra("url");
+            String url = getIntent().getStringExtra("url");
             String title = getIntent().getStringExtra("title");
-            if (!TextUtils.isEmpty(title))
+            if (!TextUtils.isEmpty(title)) {
                 titleTv.setText(title);
+            }
+            if (!TextUtils.isEmpty(url)) {
+                webView.loadUrl(url);
+            }
         }
-        webView.loadUrl(url);
     }
 
     @Override

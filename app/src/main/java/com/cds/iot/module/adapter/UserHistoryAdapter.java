@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.cds.iot.R;
-import com.cds.iot.data.Constant;
 import com.cds.iot.data.entity.UserBindHistory;
 
 import java.util.ArrayList;

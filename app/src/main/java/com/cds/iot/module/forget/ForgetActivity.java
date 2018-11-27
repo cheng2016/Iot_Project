@@ -61,10 +61,10 @@ public class ForgetActivity extends BaseActivity implements ForgetContract.View,
 
     @Override
     public void onClick(View view) {
-        String phone = phoneEdit.getText().toString();
+        String phone = phoneEdit.getText().toString().trim();
         String password = passwordEdit.getText().toString();
         String password2 = passwordEdit2.getText().toString();
-        String code = codeEdit.getText().toString();
+        String code = codeEdit.getText().toString().trim();
         switch (view.getId()) {
             case R.id.back_button:
                 finish();
@@ -85,7 +85,7 @@ public class ForgetActivity extends BaseActivity implements ForgetContract.View,
                     ToastUtils.showShort(this, "密码不能为空");
                 } else if (!password.equals(password2)) {
                     ToastUtils.showShort(this, "二次密码不一致");
-                } else if (!RegexUtils.isPwdSimple(password)) {
+                } else if (!RegexUtils.isPwdSimple(password) || password.indexOf(" ") != -1 || password.indexOf(" ") != -1) {
                     ToastUtils.showShort(this, "请输入6-20位数字和字母的组合密码");
                 } else if (TextUtils.isEmpty(code)) {
                     ToastUtils.showShort(this, "验证码不能为空");

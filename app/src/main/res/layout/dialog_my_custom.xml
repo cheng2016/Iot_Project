@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/plan_shape"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="@dimen/widget_size_270"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/font_size_20"
+        android:layout_marginBottom="@dimen/font_size_20"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/widget_size_20"
+            android:layout_marginRight="@dimen/widget_size_20"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:layout_marginTop="@dimen/widget_size_8"
+                android:text="标题"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/text_title_narmal"
+                android:textStyle="bold"
+                android:visibility="visible" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/widget_size_10"
+                android:gravity="center_vertical"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="@dimen/widget_size_6"
+                android:text="这是一条 message"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/update_text_color"
+                android:textSize="@dimen/font_size_15"
+                android:visibility="visible" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/splite_line" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/login_button_h"
+        android:background="@drawable/plan_lr_shape">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/cancel"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_plan_left_selector"
+                android:text="@string/cancel"
+                android:textColor="@color/cancel_text_color"
+                android:textSize="@dimen/font_size_15" />
+
+            <View
+                android:layout_width="1px"
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:background="@color/item_line" />
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/confirm"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/button_plan_right_selector"
+                android:text="@string/confirm"
+                android:textColor="@color/confirm_text_color"
+                android:textSize="@dimen/font_size_15" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/complete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/button_plan_bottom_selector"
+            android:text="@string/complete"
+            android:textColor="@color/cancel_text_color"
+            android:textSize="@dimen/font_size_15"
+            android:visibility="gone" />
+    </FrameLayout>
+</LinearLayout>

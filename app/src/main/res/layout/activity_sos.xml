@@ -130,12 +130,12 @@
                         android:id="@+id/sosMsg"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/widget_size_110"
-                        android:layout_below="@+id/call_btn"
                         android:background="@drawable/edit_main_border"
                         android:gravity="left|top"
                         android:maxLength="70"
                         android:padding="@dimen/widget_size_8"
-                        android:text="请避免输入特殊符号和表情。示例：我叫周老太，家住**花园**栋**号，我有**病史，收到该短信可能是我突发病情，请尽快救助我。"
+                        android:hint="请避免输入特殊符号和表情。示例：我叫周老太，家住**花园**栋**号，我有**病史，收到该短信可能是我突发病情，请尽快救助我。"
+                        android:text=""
                         android:textColor="@color/text_title_narmal"
                         android:textSize="@dimen/font_size_13" />
 

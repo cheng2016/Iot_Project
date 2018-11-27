@@ -82,7 +82,7 @@ public class EditTextDialog extends Dialog {
 //        setCancelable(false);
         setCanceledOnTouchOutside(false);
         setContentView(dialogView);
-        InputFilter[] emojiFilters = {emojiFilter};
+        InputFilter[] emojiFilters = {new InputFilter.LengthFilter(10),emojiFilter};
         nameEdit.setFilters(emojiFilters);
     }
 

@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Adapter;
 import android.widget.GridView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -16,6 +18,22 @@ import java.util.Random;
  * @date 2018/10/9 19:27
  */
 public class Utils {
+
+    /**
+     * 判断列表第一个是否显示
+     * @param listView
+     * @return
+     */
+    public static boolean isFirstItemVisible(AbsListView listView) {
+        Adapter adapter = listView.getAdapter();
+        if (null != adapter && !adapter.isEmpty()) {
+            int mostTop = listView.getChildCount() > 0 ? listView.getChildAt(0).getTop() : 0;
+            return mostTop >= 0;
+        } else {
+            return true;
+        }
+    }
+
     /**
      * 设置listview高度
      * @param listView

@@ -6,10 +6,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.cds.iot.R;
 import com.cds.iot.data.entity.BindScenes;
+import com.cds.iot.util.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +33,12 @@ public class MenuAdapter extends BaseAdapter {
     public void setDataList(List<BindScenes> mDataList) {
         this.mDataList = mDataList;
         notifyDataSetChanged();
+    }
+
+    public void setDataListAndCalHeight(List<BindScenes> listItems, ListView listView) {
+        this.mDataList = listItems;
+        this.notifyDataSetChanged();
+        Utils.calListViewWidthAndHeight(listView);
     }
 
     @Override

@@ -20,7 +20,7 @@ public class CustomDialog extends Dialog {
 
     protected LayoutParams mLayoutParams;
 
-    private Button cancelBtn, confirmBtn , completeBtn;
+    private Button cancelBtn, confirmBtn, completeBtn;
 
     private TextView titleTv, contentTv;
 
@@ -55,7 +55,7 @@ public class CustomDialog extends Dialog {
         mLayoutParams.height = LayoutParams.WRAP_CONTENT;
         mLayoutParams.gravity = Gravity.CENTER;
 
-        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_custom, null);
+        View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.dialog_my_custom, null);
         titleTv = (TextView) dialogView.findViewById(R.id.title);
         contentTv = (TextView) dialogView.findViewById(R.id.content);
         confirmBtn = (Button) dialogView.findViewById(R.id.confirm);
@@ -108,15 +108,15 @@ public class CustomDialog extends Dialog {
         return this;
     }
 
-    private void changeViewState(){
-        if(showTitle){
+    private void changeViewState() {
+        if (showTitle) {
             titleTv.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             titleTv.setVisibility(View.GONE);
         }
         if (showMessage) {
             contentTv.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             contentTv.setVisibility(View.GONE);
         }
     }
@@ -135,6 +135,19 @@ public class CustomDialog extends Dialog {
     }
 
     public CustomDialog setPositiveButton(String str, final View.OnClickListener listener) {
+        confirmBtn.setText(str);
+        confirmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onClick(view);
+                dismiss();
+            }
+        });
+        return this;
+    }
+
+    public CustomDialog setPositiveButton(String str, int color, final View.OnClickListener listener) {
+        confirmBtn.setTextColor(color);
         confirmBtn.setText(str);
         confirmBtn.setOnClickListener(new View.OnClickListener() {
             @Override

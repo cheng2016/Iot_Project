@@ -13,6 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/widget_size_20"
+        android:layout_marginLeft="@dimen/widget_size_20"
+        android:layout_marginRight="@dimen/widget_size_20"
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
@@ -26,14 +28,14 @@
 
         <EditText
             android:id="@+id/scenes_name_edit"
-            android:layout_width="@dimen/widget_size_100"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@null"
-            android:drawablePadding="@dimen/widget_size_10"
             android:drawableRight="@mipmap/btn_modification_mine"
-            android:ems="10"
+            android:drawablePadding="@dimen/widget_size_10"
+            android:inputType="text"
+            android:maxLength="30"
             android:maxLines="1"
-            android:maxLength="18"
             android:singleLine="true"
             android:text="奶奶的卧室"
             android:textColor="@color/black"
@@ -41,7 +43,7 @@
     </LinearLayout>
 
     <View
-        android:layout_width="@dimen/widget_size_160"
+        android:layout_width="@dimen/widget_size_180"
         android:layout_height="@dimen/widget_min_size_1"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/widget_size_10"

@@ -12,7 +12,6 @@ import com.cds.iot.R;
 import com.cds.iot.data.entity.Device;
 import com.cds.iot.module.scenes.adddevice.AddScenesDeviceActivity;
 import com.cds.iot.view.CustomDialog;
-import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.Picasso;
 
 import org.greenrobot.eventbus.EventBus;
