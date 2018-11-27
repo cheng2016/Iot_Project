@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Html;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,7 +24,6 @@ import com.cds.iot.util.ToastUtils;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * Created by Administrator Chengzj
@@ -102,6 +100,13 @@ public class LandLineInfoActivity extends BaseActivity implements View.OnClickLi
             nickNameEdit.setText(deviceName);
             mPresenter.getDeviceInfo(deviceId);
         }
+        mLoadingView.showLoading();
+        mLoadingView.setRetryListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mPresenter.getDeviceInfo(deviceId);
+            }
+        });
     }
 
     @Override
@@ -133,12 +138,18 @@ public class LandLineInfoActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void getDeviceInfoSuccess(MirrorInfoResp resp) {
+        mLoadingView.showContent();
         this.mInfoResp = resp;
         nickNameEdit.setCursorVisible(false);// 内容清空后将编辑框1的光标隐藏，提升用户的体验度
         nickNameEdit.setText(resp.getDevice_name());
         String deviceName = "设备ID : " + resp.getDevice_code() + "&nbsp&nbsp&nbsp<font color='#30D6DC'>复制</font>";
         deviceIdEdit.setText(Html.fromHtml(deviceName));
         Picasso.with(this).load(resp.getDevice_qrcode()).into(zxingImg);
+    }
+
+    @Override
+    public void getDeviceInfoFailed() {
+        mLoadingView.showError();
     }
 
     @Override

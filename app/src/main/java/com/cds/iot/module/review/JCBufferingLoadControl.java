@@ -2,7 +2,6 @@ package com.cds.iot.module.review;
 
 import android.util.Log;
 
-import com.cds.iot.util.Logger;
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.Renderer;

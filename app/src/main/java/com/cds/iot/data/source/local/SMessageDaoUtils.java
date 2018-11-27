@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.cds.iot.data.entity.SMessage;
-import com.cds.iot.data.source.local.greendao.SMessageDao;
 
 import org.greenrobot.greendao.Property;
 import org.greenrobot.greendao.query.QueryBuilder;

@@ -63,8 +63,15 @@ public class LandLineInfoPresenter implements LandLineInfoContract.Presenter {
                         if ("200".equals(response.getInfo().getCode())) {
                             view.getDeviceInfoSuccess(response.getData());
                         } else {
+                            view.getDeviceInfoFailed();
                             ToastUtils.showShort(App.getInstance(), response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.getDeviceInfoFailed();
                     }
 
                     @Override

@@ -5,8 +5,6 @@ import org.joda.time.Days;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
-import org.joda.time.LocalDate.Property;
-
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 

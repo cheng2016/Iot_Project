@@ -5,14 +5,12 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.Utils;
 import com.cds.iot.base.BaseApplication;
-import com.cds.iot.util.CrashHandler;
 import com.cds.iot.util.DeviceUtils;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
 import com.cds.iot.util.ResourceUtils;
 import com.cds.iot.util.ToastUtils;
-//import com.squareup.leakcanary.LeakCanary;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.LruCache;
@@ -20,6 +18,8 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+
+//import com.squareup.leakcanary.LeakCanary;
 
 //import com.squareup.leakcanary.LeakCanary;
 

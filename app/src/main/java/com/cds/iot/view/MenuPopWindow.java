@@ -14,12 +14,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.cds.iot.R;
-import com.cds.iot.data.Constant;
 import com.cds.iot.data.entity.MessageType;
 import com.cds.iot.module.adapter.OptionAdapter;
 import com.cds.iot.util.Logger;
 
-import java.util.ArrayList;
 import java.util.List;
 
 

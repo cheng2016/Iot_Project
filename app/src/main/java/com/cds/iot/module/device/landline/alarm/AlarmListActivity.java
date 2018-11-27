@@ -212,6 +212,7 @@ public class AlarmListActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void getAlarmListFailed() {
         mLoadingView.showError();
+        refreshListView.onPullDownRefreshComplete();
     }
 
     @Override

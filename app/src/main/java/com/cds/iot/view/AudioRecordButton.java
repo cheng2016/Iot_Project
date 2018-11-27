@@ -13,11 +13,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.cds.iot.R;
+import com.cds.iot.util.DeviceUtils;
 import com.cds.iot.util.record.AuditRecorderConfiguration;
+import com.cds.iot.util.record.DialogManager;
 import com.cds.iot.util.record.ExtAudioRecorder;
 import com.cds.iot.util.record.FailRecorder;
-import com.cds.iot.util.record.DialogManager;
-import com.cds.iot.util.DeviceUtils;
 
 import java.io.File;
 import java.util.Random;

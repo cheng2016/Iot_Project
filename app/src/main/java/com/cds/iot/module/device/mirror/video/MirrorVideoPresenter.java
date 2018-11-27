@@ -1,6 +1,5 @@
 package com.cds.iot.module.device.mirror.video;
 
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.TextView;
@@ -8,13 +7,10 @@ import android.widget.TextView;
 import com.cds.iot.App;
 import com.cds.iot.data.BaseResp;
 import com.cds.iot.data.entity.VideoEntity;
-import com.cds.iot.data.source.remote.AObserver;
 import com.cds.iot.data.source.remote.BaseObserver;
-import com.cds.iot.data.source.remote.FileResponseBody;
 import com.cds.iot.data.source.remote.HttpFactory;
 import com.cds.iot.data.source.remote.ProgressListener;
 import com.cds.iot.data.source.remote.ProgressResponseBody;
-import com.cds.iot.data.source.remote.RetrofitCallback;
 import com.cds.iot.data.source.remote.WifiApi;
 import com.cds.iot.util.DeviceUtils;
 import com.cds.iot.util.Logger;
@@ -22,14 +18,12 @@ import com.cds.iot.util.OkHttpUtils;
 import com.cds.iot.util.ResourceUtils;
 import com.cds.iot.util.ToastUtils;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -37,9 +31,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;

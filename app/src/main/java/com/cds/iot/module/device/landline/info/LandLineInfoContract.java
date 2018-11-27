@@ -13,6 +13,8 @@ public interface LandLineInfoContract {
     interface View extends BaseView<Presenter> {
         void getDeviceInfoSuccess(MirrorInfoResp resp);
 
+        void getDeviceInfoFailed();
+
         void saveDeviceInfoSuccess();
     }
 

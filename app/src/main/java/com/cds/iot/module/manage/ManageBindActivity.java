@@ -22,7 +22,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import butterknife.Bind;
-import ezy.ui.layout.LoadingLayout;
 
 /**
  * @author Chengzj

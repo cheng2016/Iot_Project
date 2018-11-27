@@ -20,7 +20,6 @@ import com.cds.iot.module.adapter.pager.MainPagerAdapter;
 import com.cds.iot.module.device.DeviceFragment;
 import com.cds.iot.module.login.LoginActivity;
 import com.cds.iot.module.message.MessageFragment;
-import com.cds.iot.util.AppManager;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;

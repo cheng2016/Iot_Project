@@ -1,6 +1,5 @@
 package com.cds.iot.base;
 
-import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
@@ -10,11 +9,11 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.cds.iot.service.SocketService;
 import com.cds.iot.util.AppManager;
 import com.cds.iot.util.Logger;
+import com.cds.iot.view.ProgressDialog;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

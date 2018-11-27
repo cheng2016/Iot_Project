@@ -13,7 +13,6 @@ import com.cds.iot.util.ToastUtils;
 import com.google.gson.Gson;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

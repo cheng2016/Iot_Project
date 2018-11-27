@@ -14,10 +14,10 @@ import com.cds.iot.base.BaseFragment;
 import com.cds.iot.data.entity.UserInfo;
 import com.cds.iot.module.about.AboutActivity;
 import com.cds.iot.module.feedback.FeedBackActivity;
-import com.cds.iot.module.web.WebActivity;
 import com.cds.iot.module.review.ImagePagerActivity;
 import com.cds.iot.module.setting.SettingActivity;
 import com.cds.iot.module.user.detail.UserDetailActivity;
+import com.cds.iot.module.web.WebActivity;
 import com.cds.iot.module.wxpublic.WxPublicNumblerActivity;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
@@ -81,7 +81,7 @@ public class UserFragment extends BaseFragment implements UserContract.View, Vie
         Intent intent;
         switch (view.getId()) {
             case R.id.head_img:
-                if (mUserInfoResp != null) {
+                if (mUserInfoResp != null && !TextUtils.isEmpty(mUserInfoResp.getHead_img())) {
                     intent = new Intent(getActivity(), ImagePagerActivity.class);
                     // 图片url,为了演示这里使用常量，一般从数据库中或网络中获取
                     intent.putExtra(ImagePagerActivity.EXTRA_IMAGE_URLS, new String[]{mUserInfoResp.getHead_img()});

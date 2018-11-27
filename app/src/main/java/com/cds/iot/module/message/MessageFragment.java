@@ -19,7 +19,6 @@ import com.cds.iot.module.adapter.MessageAdapter;
 import com.cds.iot.module.message.admin.AdminApplyForActivity;
 import com.cds.iot.module.message.user.UserApplyForActivity;
 import com.cds.iot.module.review.ImagePagerActivity;
-import com.cds.iot.module.review.ExoPlayActivity;
 import com.cds.iot.module.review.YjPlayerActvity;
 import com.cds.iot.util.Logger;
 import com.cds.iot.view.MenuPopWindow;

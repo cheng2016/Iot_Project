@@ -1,17 +1,14 @@
 package com.cds.iot.module.message.user;
 
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Html;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
@@ -25,8 +22,6 @@ import com.cds.iot.view.MyAlertDialog;
 import com.squareup.picasso.Picasso;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
-import ezy.ui.layout.LoadingLayout;
 
 /**
  * @author Chengzj

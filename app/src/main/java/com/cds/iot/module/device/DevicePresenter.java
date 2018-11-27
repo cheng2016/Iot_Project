@@ -141,8 +141,15 @@ public class DevicePresenter implements DeviceContract.Presenter, UpdateLocation
                         if ("200".equals(baseResp.getInfo().getCode())) {
                             view.getDeviceListSuccess(baseResp.getData());
                         } else {
+                            view.getDeviceListFailed();
                             ToastUtils.showShort(App.getInstance(), baseResp.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.getDeviceListFailed();
                     }
 
                     @Override

@@ -20,6 +20,8 @@ public interface DeviceContract {
 
         void getDeviceListSuccess(List<DeviceListResp> resp);
 
+        void getDeviceListFailed();
+
         void releaseDeviceSuccess();
 
         void reapplyDeviceSuccess();

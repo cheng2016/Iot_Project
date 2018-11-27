@@ -1,8 +1,6 @@
 package com.cds.iot.module.login;
 
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.TransitionDrawable;
 import android.os.Build;
@@ -13,15 +11,10 @@ import android.support.v7.widget.AppCompatEditText;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
 import com.blankj.utilcode.util.RegexUtils;
@@ -35,7 +28,6 @@ import com.cds.iot.module.main.MainActivity;
 import com.cds.iot.module.register.RegisterActivity;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
-import com.cds.iot.util.ScreenUtils;
 import com.cds.iot.util.ToastUtils;
 import com.cds.iot.wxapi.WXEntryActivity;
 import com.tencent.mm.opensdk.modelmsg.SendAuth;
