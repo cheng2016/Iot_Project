@@ -254,7 +254,7 @@ public class LoadingLayout extends FrameLayout {
 
     private void show(int layoutId) {
         for (View view : mLayouts.values()) {
-            view.setVisibility(GONE);
+            view.setVisibility(INVISIBLE);
         }
         layout(layoutId).setVisibility(VISIBLE);
     }
