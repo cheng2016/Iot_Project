@@ -49,7 +49,7 @@
 
 [yjPlay](https://github.com/yangchaojiang/yjPlay)
 
-[AndServer轻量级Android内置http服务器](https://github.com/yanzhenjie/AndServer)
+[AndServer](https://github.com/yanzhenjie/AndServer)
 
 [FlowLayout](https://github.com/hongyangAndroid/FlowLayout)
 
