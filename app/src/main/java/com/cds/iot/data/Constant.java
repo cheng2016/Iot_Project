@@ -23,6 +23,8 @@ public interface Constant {
 
     int FENCE_TYPE_COMPANY = 2;
 
+    int FENCE_TYPE_OTHER = 3;
+
     // 拍照回传码
     int PHOTO_REQUEST_CAMERA = 100;
     // 相册选择回传吗

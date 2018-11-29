@@ -1,5 +1,6 @@
 package com.cds.iot.module.fence.edit;
 
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Editable;
+import android.text.Html;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
@@ -21,19 +23,27 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.Projection;
-import com.amap.api.maps.model.Circle;
+import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.TextOptions;
 import com.amap.api.services.core.AMapException;
+import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.GeocodeResult;
+import com.amap.api.services.geocoder.GeocodeSearch;
+import com.amap.api.services.geocoder.RegeocodeQuery;
+import com.amap.api.services.geocoder.RegeocodeResult;
 import com.amap.api.services.help.Inputtips;
 import com.amap.api.services.help.InputtipsQuery;
 import com.amap.api.services.help.Tip;
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
+import com.cds.iot.data.Constant;
 import com.cds.iot.data.entity.FenceInfo;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.ToastUtils;
@@ -42,6 +52,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import butterknife.Bind;
 
@@ -51,7 +62,7 @@ import butterknife.Bind;
  * <p>
  * 电子围栏编辑页面
  */
-public class FenceEditActivity extends BaseActivity implements FenceEditContract.View, View.OnClickListener, TextWatcher, Inputtips.InputtipsListener {
+public class FenceEditActivity extends BaseActivity implements FenceEditContract.View, View.OnClickListener, TextWatcher, Inputtips.InputtipsListener, GeocodeSearch.OnGeocodeSearchListener {
     @Bind(R.id.place_name)
     AppCompatEditText placeName;
     @Bind(R.id.place_range)
@@ -66,16 +77,20 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
     MapView mMapView = null;
     AMap aMap;
 
-
+    LocationSource.OnLocationChangedListener mOnLocationChangedListener;
     //声明AMapLocationClient类对象
     private AMapLocationClient mLocationClient = null;
-
     //声明AMapLocationClientOption对象
     private AMapLocationClientOption mLocationOption = null;
+    //第一次成功定位标识
+    private boolean isFirstLoc = true;
+
+    //地理编码
+    private GeocodeSearch geocoderSearch;
 
     LatLng mLatLng;
 
-    int mRadius = 10000;
+    int mRadius = 1000;
 
     float mPosX, mPosY;
     float mCurPosX, mCurPosY;
@@ -83,6 +98,12 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
     boolean isEditMark = false;
 
     FenceEditContract.Presenter mPresenter;
+
+    String deviceId;
+
+    FenceInfo mFenceInfo;
+
+    String[] mVals = new String[]{"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
 
     @Override
     protected int getLayoutId() {
@@ -94,6 +115,7 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
         findViewById(R.id.back_button).setVisibility(View.VISIBLE);
         findViewById(R.id.back_button).setOnClickListener(this);
         findViewById(R.id.right_button).setVisibility(View.VISIBLE);
+        findViewById(R.id.right_button).setOnClickListener(this);
         AppCompatTextView rightTv = (AppCompatTextView) findViewById(R.id.right_tv);
         rightTv.setVisibility(View.VISIBLE);
         rightTv.setTextColor(getResources().getColor(R.color.theme_color));
@@ -103,7 +125,63 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
         findViewById(R.id.localtionBtn).setOnClickListener(this);
         searchEditText = (AppCompatAutoCompleteTextView) findViewById(R.id.keyWord);
         searchEditText.addTextChangedListener(this);// 添加文本输入框监听事件
+        initMapView(savedInstanceState);
+    }
 
+    @Override
+    protected void initData() {
+        new FenceEditPresenter(this);
+        if (getIntent() != null && getIntent().getExtras() != null) {
+            deviceId = getIntent().getStringExtra("deviceId");
+            if (!TextUtils.isEmpty(deviceId)) {
+                mFenceInfo = new FenceInfo();
+                mFenceInfo.setDevice_id(deviceId);
+                mFenceInfo.setType(Constant.FENCE_TYPE_OTHER);
+                mFenceInfo.setRepeat_date("0000000");
+                mLatLng = new LatLng(39.90845800214396, 116.4065925234351);
+                initDrawMark(mLatLng);
+                placeName.setText("");
+                placeDetail.setText("");
+                placeRange.setText("");
+                placeName.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.icn_temporary_circular), null, null, null);
+            } else {
+                mFenceInfo = (FenceInfo) getIntent().getExtras().getSerializable("fenceInfo");
+                placeName.setText(mFenceInfo.getName());
+                placeDetail.setText(mFenceInfo.getAddress());
+                placeRange.setText("直径" + mFenceInfo.getRadius() + "米");
+                if (mFenceInfo.getType() == Constant.FENCE_TYPE_HOME) {
+                    placeName.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.icn_home_circular), null, null, null);
+                }else if (mFenceInfo.getType() == Constant.FENCE_TYPE_COMPANY){
+                    placeName.setCompoundDrawablesWithIntrinsicBounds(getResources().getDrawable(R.mipmap.icn_company_circular), null, null, null);
+                }
+                StringBuilder days = new StringBuilder();
+                for (int i = 0; i < 7; i++) {
+                    if ("1".equals(mFenceInfo.getRepeat_date().substring(i, i + 1))) {
+                        days.append(mVals[i]).append("\r");
+                    }
+                }
+                days.append(mFenceInfo.getBegin_time()).append("-").append(mFenceInfo.getEnd_time());
+                String time = "<font color='#999999'>监控时间 :</font>" + days.toString();
+                timeButton.setText(Html.fromHtml(time));
+                if (!TextUtils.isEmpty(mFenceInfo.getCenter_location())) {
+                    String[] strings = mFenceInfo.getCenter_location().split(",");
+                    mLatLng = new LatLng(Double.valueOf(strings[1]), Double.valueOf(strings[0]));
+                    initDrawMark(mLatLng);
+                }
+            }
+        }
+        //初始化定位
+        initLocation();
+    }
+
+    void initDrawMark(LatLng lalng) {
+        drawNormalMark(lalng, mRadius);
+        CameraUpdate cameraupdate = CameraUpdateFactory.newLatLng(mLatLng);
+        aMap.moveCamera(cameraupdate);
+        aMap.moveCamera(CameraUpdateFactory.zoomTo(aMap.getMaxZoomLevel() - 6));
+    }
+
+    protected void initMapView(Bundle savedInstanceState) {
         //获取地图控件引用
         mMapView = (MapView) findViewById(R.id.map);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
@@ -111,14 +189,26 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
         if (aMap == null) {
             aMap = mMapView.getMap();
         }
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setZoomControlsEnabled(false);//设置放大缩小图标是否显示
+        uiSettings.setMyLocationButtonEnabled(false);// 定位按钮是否显示
+        uiSettings.setCompassEnabled(false);//指南针是否显示
+        uiSettings.setScaleControlsEnabled(true);//控制比例尺控件是否显示
 
-        //参数依次是：视角调整区域的中心点坐标、希望调整到的缩放级别、俯仰角0°~45°（垂直与地图时为0）、偏航角 0~360° (正北方为0)
-//        CameraUpdate mCameraUpdate = CameraUpdateFactory.newCameraPosition(new CameraPosition(new LatLng(39.977290,116.337000),18,30,0));
-//        aMap.moveCamera(mCameraUpdate);
+        geocoderSearch = new GeocodeSearch(this);
+        geocoderSearch.setOnGeocodeSearchListener(this);
 
-        mLatLng = new LatLng(39.90845800214396, 116.4065925234351);
+        aMap.setLocationSource(new LocationSource() {
+            @Override
+            public void activate(OnLocationChangedListener onLocationChangedListener) {
+                mOnLocationChangedListener = onLocationChangedListener;
+            }
 
-        drawNormalMark(mLatLng, mRadius);
+            @Override
+            public void deactivate() {
+                mOnLocationChangedListener = null;
+            }
+        });
 
         aMap.setOnMapClickListener(new AMap.OnMapClickListener() {
             @Override
@@ -159,11 +249,11 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
                             if (mCurPosY - mPosY > 0
                                     && (Math.abs(mCurPosY - mPosY) > 25)) {
                                 //向下滑動
-                                drawEditMark(mLatLng, mRadius + scaleY * 4);
+                                drawEditMark(mLatLng, mRadius + scaleY * 3);
                             } else if (mCurPosY - mPosY < 0
                                     && (Math.abs(mCurPosY - mPosY) > 25)) {
                                 //向上滑动
-                                drawEditMark(mLatLng, mRadius - scaleY * 4);
+                                drawEditMark(mLatLng, mRadius - scaleY * 3);
                             }
                         } else {
                             mLatLng = getMapCenterPoint();
@@ -174,6 +264,12 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
                         isEditMark = false;
                         aMap.getUiSettings().setScrollGesturesEnabled(true);
                         drawNormalMark(mLatLng, mRadius);
+                        placeRange.setText("直径" + mRadius + "米");
+                        mFenceInfo.setRadius(String.valueOf(mRadius));
+                        LatLonPoint latLonPoint = new LatLonPoint(mLatLng.latitude, mLatLng.longitude);
+                        RegeocodeQuery query = new RegeocodeQuery(latLonPoint, 200,
+                                GeocodeSearch.AMAP);// 第一个参数表示一个Latlng，第二参数表示范围多少米，第三个参数表示是火系坐标系还是GPS原生坐标系
+                        geocoderSearch.getFromLocationAsyn(query);// 设置异步逆地理编码请求
                         break;
                 }
             }
@@ -185,10 +281,10 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
      */
     public void initLocation() {
         //初始化client
-        if(mLocationClient == null){
-            mLocationClient = new AMapLocationClient(this.getApplicationContext());
+        if (mLocationClient == null) {
+            mLocationClient = new AMapLocationClient(getApplicationContext());
         }
-        if(mLocationOption == null){
+        if (mLocationOption == null) {
             mLocationOption = getDefaultOption();
         }
         //设置定位参数
@@ -197,8 +293,14 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
         mLocationClient.setLocationListener(mLocationListener);
         //蓝点初始化
         MyLocationStyle myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
+        //自定义蓝点bitmap样式
+        myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromBitmap(BitmapFactory
+                .decodeResource(getResources(), R.drawable.gps_point)));
         myLocationStyle.interval(2000);//设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
-        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATE) ;//定位一次，且将视角移动到地图中心点。
+        myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_SHOW);//只定位一次
+        myLocationStyle.showMyLocation(true);//是否显示蓝点，只定位
+        myLocationStyle.radiusFillColor(0x00000000);//隐藏精度范围显示
+        myLocationStyle.strokeColor(0x00000000);//隐藏精度范围显示
         aMap.setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
         aMap.setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
     }
@@ -211,12 +313,16 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
                 StringBuilder sb = new StringBuilder();
                 //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
                 if (location.getErrorCode() == 0) {
-                    Logger.e(TAG, "onLocationChanged success，location ：" + new Gson().toJson(location));
-                    CameraUpdate cameraupdate = CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude()));
-                    aMap.moveCamera(cameraupdate);
+                    mOnLocationChangedListener.onLocationChanged(location);
 
-//                    MyLocationStyle myLocationStyle = new MyLocationStyle();
-//                    myLocationStyle.getMyLocationIcon();
+                    Logger.d(TAG, "onLocationChanged success，location ：" + new Gson().toJson(location));
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                    if (isFirstLoc) {
+                        isFirstLoc = false;
+                    } else {
+                        CameraUpdate cameraupdate = CameraUpdateFactory.newLatLng(latLng);
+                        aMap.moveCamera(cameraupdate);
+                    }
                 } else {
                     Logger.e(TAG, "onLocationChanged error，location ：" + new Gson().toJson(location));
                 }
@@ -276,7 +382,7 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
     void drawNormalMark(LatLng latLng, int radius) {
         aMap.clear();
         mMapView.invalidate();
-        Circle circle = aMap.addCircle(new CircleOptions().
+        aMap.addCircle(new CircleOptions().
                 center(mLatLng).
                 radius(mRadius).
                 fillColor(Color.argb(100, 48, 214, 220)).
@@ -317,19 +423,6 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
         return pt;
     }
 
-
-    @Override
-    protected void initData() {
-        new FenceEditPresenter(this);
-        if (getIntent() != null && getIntent().getExtras() != null) {
-            FenceInfo fenceInfo = (FenceInfo) getIntent().getExtras().getSerializable("fenceInfo");
-            placeName.setText(fenceInfo.getName());
-            placeDetail.setText(fenceInfo.getAddress());
-            placeRange.setText("直径" + fenceInfo.getRadius() + "米");
-        }
-
-    }
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -366,27 +459,48 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
                 finish();
                 break;
             case R.id.right_button:
-                ToastUtils.showShort(FenceEditActivity.this, "onclick");
+                if (mFenceInfo != null) {
+                    mFenceInfo.setName(placeName.getText().toString());
+                    mFenceInfo.setCenter_location(mLatLng.longitude + "," + mLatLng.latitude);
+                    mPresenter.saveFenceInfo(mFenceInfo);
+                }
                 break;
             case R.id.search:
 
                 break;
             case R.id.time_button:
                 new MonitorTimeDialog(FenceEditActivity.this)
-                        .setPositiveButton("确定", new View.OnClickListener() {
+                        .setTime(mFenceInfo.getBegin_time(), mFenceInfo.getEnd_time())
+                        .setSelectWeek(mFenceInfo.getRepeat_date())
+                        .setPositiveButton("确定", new MonitorTimeDialog.OnMonitorClickListener() {
                             @Override
-                            public void onClick(View view) {
+                            public void onOnMonitorClick(Set<Integer> selectPosSet, String start, String end) {
+                                String week = mFenceInfo.getRepeat_date();
+                                for (int i = 0; i < 7; i++) {
+                                    StringBuilder sb = new StringBuilder(week);
+                                    sb.replace(i, i + 1, "0");
+                                    for (Integer j : selectPosSet) {
+                                        sb.replace(j, j + 1, "1");
+                                    }
+                                    week = sb.toString();
+                                }
+                                mFenceInfo.setRepeat_date(week);
+                                mFenceInfo.setBegin_time(start);
+                                mFenceInfo.setEnd_time(end);
 
+                                StringBuilder days = new StringBuilder();
+                                for (int i = 0; i < 7; i++) {
+                                    if ("1".equals(mFenceInfo.getRepeat_date().substring(i, i + 1))) {
+                                        days.append(mVals[i]).append("\r");
+                                    }
+                                }
+                                days.append(start).append("-").append(end);
+                                String time = "<font color='#999999'>监控时间 :</font>" + days.toString();
+                                timeButton.setText(Html.fromHtml(time));
                             }
-                        }).setCancelButton("取消", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                    }
-                }).showDialog();
+                        }).showDialog();
                 break;
             case R.id.localtionBtn:
-                initLocation();
                 mLocationClient.startLocation();
                 break;
             default:
@@ -396,7 +510,6 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
     }
 
     @Override
@@ -412,7 +525,7 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
 
     @Override
     public void afterTextChanged(Editable editable) {
-
+        Logger.i(TAG, "afterTextChanged  editable：" + editable.toString());
     }
 
     @Override
@@ -435,5 +548,37 @@ public class FenceEditActivity extends BaseActivity implements FenceEditContract
     @Override
     public void setPresenter(FenceEditContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onRegeocodeSearched(RegeocodeResult result, int rCode) {
+        if (rCode == AMapException.CODE_AMAP_SUCCESS) {
+            if (result != null && result.getRegeocodeAddress() != null
+                    && result.getRegeocodeAddress().getFormatAddress() != null) {
+                String addressName = result.getRegeocodeAddress().getFormatAddress();
+                mFenceInfo.setAddress(addressName);
+                placeDetail.setText(addressName);
+            } else {
+                ToastUtils.showShort(FenceEditActivity.this, R.string.no_result);
+            }
+        } else {
+            ToastUtils.showShort(this, rCode);
+        }
+    }
+
+    @Override
+    public void onGeocodeSearched(GeocodeResult geocodeResult, int i) {
+    }
+
+    @Override
+    public void saveFenceInfoSuccess() {
+        if (TextUtils.isEmpty(mFenceInfo.getId())) {
+            ToastUtils.showShort(this, "添加电子围栏成功");
+        } else {
+            ToastUtils.showShort(this, "修改电子围栏成功");
+
+        }
+        setResult(RESULT_OK);
+        finish();
     }
 }

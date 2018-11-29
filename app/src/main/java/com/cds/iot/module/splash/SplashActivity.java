@@ -56,6 +56,32 @@ public class SplashActivity extends BaseActivity {
      */
     private boolean isNeedCheck = true;
 
+    @Override
+    protected int getLayoutId() {
+//        RxBarTool.hideStatusBar(this);//隐藏状态栏 并 全屏
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        return R.layout.activity_splash;
+    }
+
+    @Override
+    protected void initView(Bundle savedInstanceState) {
+//        RxToast.showToast(this, "正在检查版本更新...", 500);
+        /*handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                startActivity(new Intent().setClass(SplashActivity.this, LoginActivity.class));
+                finish();
+            }
+        },2000);*/
+    }
+
+    @Override
+    protected void initData() {
+//        ToastUtils.showShort(this, "正在检查版本更新");
+        String value = ResourceUtils.getProperties(this, "packagename");
+//        ToastUtils.showShort(this, "获取配置数据：packagename = " + value);
+    }
 
     @Override
     protected void onResume() {
@@ -212,36 +238,6 @@ public class SplashActivity extends BaseActivity {
                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         intent.setData(Uri.parse("package:" + getPackageName()));
         startActivity(intent);
-    }
-
-
-    @Override
-    protected int getLayoutId() {
-//        RxBarTool.hideStatusBar(this);//隐藏状态栏 并 全屏
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        return R.layout.activity_splash;
-    }
-
-    @Override
-    protected void initView(Bundle savedInstanceState) {
-//        RxToast.showToast(this, "正在检查版本更新...", 500);
-        /*handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                startActivity(new Intent().setClass(SplashActivity.this, LoginActivity.class));
-                finish();
-            }
-        },2000);*/
-    }
-
-    @Override
-    protected void initData() {
-//        ToastUtils.showShort(this, "正在检查版本更新");
-
-        String value = ResourceUtils.getProperties(this, "packagename");
-
-//        ToastUtils.showShort(this, "获取配置数据：packagename = " + value);
     }
 
     @Override

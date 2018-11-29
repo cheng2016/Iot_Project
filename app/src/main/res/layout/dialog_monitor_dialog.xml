@@ -10,7 +10,7 @@
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_size_50"
+        android:layout_height="@dimen/widget_size_48"
         android:background="@drawable/shape_monitor_title"
         android:gravity="center"
         android:includeFontPadding="false"
@@ -20,25 +20,22 @@
         android:textSize="@dimen/font_size_18"
         android:visibility="visible" />
 
-    <LinearLayout
+
+    <GridView
+        android:visibility="visible"
+        android:id="@+id/week"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/widget_size_16"
+        android:layout_marginLeft="@dimen/widget_size_30"
         android:layout_marginTop="@dimen/widget_size_16"
-        android:background="@color/white"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="visible">
-
-        <GridView
-            android:id="@+id/week"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:divider="@null"
-            android:listSelector="@android:color/transparent"
-            android:numColumns="4" />
-    </LinearLayout>
+        android:layout_marginRight="@dimen/widget_size_30"
+        android:layout_marginBottom="@dimen/widget_size_16"
+        android:background="@null"
+        android:divider="@null"
+        android:horizontalSpacing="@dimen/widget_size_32"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="4"
+        android:verticalSpacing="@dimen/widget_size_20" />
 
     <View
         android:layout_width="match_parent"
@@ -51,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/widget_size_21"
+        android:layout_marginTop="@dimen/widget_size_12"
         android:layout_marginRight="@dimen/widget_size_21"
-        android:layout_marginTop="@dimen/widget_size_16"
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatTextView
@@ -72,7 +69,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="2dp"
-            android:text="09 : 00"
+            android:text="09:00"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/theme_color"
             android:textSize="@dimen/font_size_16"
@@ -96,7 +93,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:padding="2dp"
-            android:text="12 : 00"
+            android:text="12:00"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textColor="@color/theme_color"
             android:textSize="@dimen/font_size_16"
@@ -109,8 +106,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/widget_size_21"
+        android:layout_marginTop="@dimen/widget_size_12"
         android:layout_marginRight="@dimen/widget_size_21"
-        android:layout_marginTop="@dimen/widget_size_16"
         android:gravity="center_vertical"
         android:padding="2dp"
         android:text="监控时长：9小时"
@@ -121,11 +118,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_size_40"
-        android:layout_marginBottom="@dimen/widget_size_24"
+        android:layout_height="@dimen/widget_size_38"
         android:layout_marginLeft="@dimen/widget_size_16"
+        android:layout_marginTop="@dimen/widget_size_16"
         android:layout_marginRight="@dimen/widget_size_16"
-        android:layout_marginTop="@dimen/widget_size_24"
+        android:layout_marginBottom="@dimen/widget_size_24"
         android:baselineAligned="false"
         android:orientation="horizontal">
 
@@ -149,9 +146,9 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/shape_monitor_button"
+            android:background="@drawable/shape_monitor_confirm_button"
             android:text="@string/confirm"
-            android:textColor="@color/confirm_text_color"
+            android:textColor="@color/white"
             android:textSize="@dimen/font_size_15" />
     </LinearLayout>
 </LinearLayout>

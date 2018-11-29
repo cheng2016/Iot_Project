@@ -14,6 +14,7 @@
         <com.amap.api.maps.MapView
             android:id="@+id/map"
             android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/widget_size_160"
             android:layout_height="match_parent"/>
 
         <FrameLayout
@@ -79,6 +80,8 @@
                 android:drawableRight="@mipmap/btn_stage_modification"
                 android:background="@color/transparent"
                 android:textSize="@dimen/font_size_15"
+                android:hint="请输入名称"
+                android:textColorHint="@color/text_enable_color"
                 android:textColor="@color/update_text_color"
                 android:text="家"/>
 
@@ -113,14 +116,17 @@
                 android:layout_height="@dimen/widget_size_42"
                 android:layout_below="@+id/place_detail"
                 android:background="@drawable/shape_map_button"
-                android:layout_marginTop="@dimen/widget_size_16"
+                android:layout_marginTop="@dimen/widget_size_12"
                 android:layout_marginLeft="@dimen/widget_size_16"
                 android:layout_marginRight="@dimen/widget_size_16"
                 android:layout_marginBottom="@dimen/widget_size_16"
+                android:paddingRight="@dimen/widget_size_8"
+                android:paddingLeft="@dimen/widget_size_8"
                 android:textSize="@dimen/font_size_15"
                 android:includeFontPadding="false"
+                android:ellipsize="end"
                 android:gravity="center"
-                android:lineSpacingExtra="@dimen/widget_size_8"
+                android:maxLines="1"
                 android:textColor="@color/theme_color"
                 android:text="监控时间"/>
 

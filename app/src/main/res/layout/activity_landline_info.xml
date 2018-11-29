@@ -30,16 +30,18 @@
 
             <EditText
                 android:id="@+id/name_edit"
-                android:layout_width="@dimen/widget_size_100"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/widget_size_8"
+                android:layout_marginLeft="@dimen/widget_size_9"
                 android:background="@null"
                 android:drawableRight="@mipmap/btn_editname"
-                android:drawablePadding="@dimen/widget_size_2"
+                android:drawablePadding="@dimen/widget_size_3"
                 android:inputType="textPersonName"
-                android:maxLength="20"
+                android:maxLength="15"
                 android:maxLines="1"
                 android:text=""
+                android:hint="请输入座机名"
+                android:textColorHint="@color/input_stroke"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_size_16" />
         </LinearLayout>

@@ -41,8 +41,8 @@
                 android:text=""
                 android:singleLine="true"
                 android:maxLines="1"
-                android:maxLength="20"
-                android:ems="10"
+                android:maxLength="15"
+                android:ems="15"
                 android:textColor="#404040" />
         </LinearLayout>
 

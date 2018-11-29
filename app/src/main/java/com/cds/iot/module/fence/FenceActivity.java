@@ -3,6 +3,7 @@ package com.cds.iot.module.fence;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -13,6 +14,9 @@ import com.cds.iot.base.BaseActivity;
 import com.cds.iot.data.entity.FenceInfo;
 import com.cds.iot.module.adapter.FenceAdapter;
 import com.cds.iot.module.fence.edit.FenceEditActivity;
+import com.cds.iot.util.ToastUtils;
+import com.cheng.refresh.library.PullToRefreshBase;
+import com.cheng.refresh.library.PullToRefreshListView;
 
 import java.util.List;
 
@@ -24,15 +28,17 @@ import butterknife.Bind;
  * <p>
  * 电子围栏界面
  */
-public class FenceActivity extends BaseActivity implements FenceContract.View, View.OnClickListener, AdapterView.OnItemClickListener, FenceAdapter.OnCheckBoxClickListener {
-    @Bind(R.id.listview)
-    ListView listview;
+public class FenceActivity extends BaseActivity implements FenceContract.View, View.OnClickListener, AdapterView.OnItemClickListener, FenceAdapter.OnCheckBoxClickListener, PullToRefreshBase.OnRefreshListener<ListView> {
+    @Bind(R.id.refresh_listView)
+    PullToRefreshListView refreshListView;
+
+    ListView mListView;
 
     FenceAdapter adapter;
 
     FenceContract.Presenter mPresenter;
 
-    private String deviceId;
+    String deviceId;
 
     @Override
     protected int getLayoutId() {
@@ -49,7 +55,13 @@ public class FenceActivity extends BaseActivity implements FenceContract.View, V
         AppCompatImageView rightImg = (AppCompatImageView) findViewById(R.id.right_img);
         rightImg.setVisibility(View.VISIBLE);
         rightImg.setImageResource(R.mipmap.btn_addfence);
-        listview.setOnItemClickListener(this);
+
+        refreshListView.setPullLoadEnabled(false);//上拉加载是否可用
+        refreshListView.setScrollLoadEnabled(false);//判断滑动到底部加载是否可用
+        refreshListView.setPullRefreshEnabled(true);//设置是否能下拉
+        refreshListView.setOnRefreshListener(this);
+        mListView = refreshListView.getRefreshableView();
+        mListView.setOnItemClickListener(this);
     }
 
     @Override
@@ -57,12 +69,22 @@ public class FenceActivity extends BaseActivity implements FenceContract.View, V
         new FencePresenter(this);
         adapter = new FenceAdapter(this);
         adapter.setListener(this);
-        listview.setAdapter(adapter);
-
+        mListView.setAdapter(adapter);
         if (getIntent() != null && getIntent().getExtras() != null) {
             deviceId = getIntent().getStringExtra("deviceId");
-            mPresenter.getFenceInfo(deviceId);
+            mPresenter.getFenceList(deviceId);
         }
+    }
+
+    @Override
+    public void onPullDownToRefresh(PullToRefreshBase<ListView> pullToRefreshBase) {
+        if(!TextUtils.isEmpty(deviceId)){
+            mPresenter.getFenceList(deviceId);
+        }
+    }
+
+    @Override
+    public void onPullUpToRefresh(PullToRefreshBase<ListView> pullToRefreshBase) {
     }
 
     @Override
@@ -84,27 +106,13 @@ public class FenceActivity extends BaseActivity implements FenceContract.View, V
                 break;
             case R.id.right_button:
                 Intent intent = new Intent();
+                intent.putExtra("deviceId",deviceId);
                 intent.setClass(FenceActivity.this, FenceEditActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, RESULT_FIRST_USER);
                 break;
             default:
                 break;
         }
-    }
-
-    @Override
-    public void getFenceInfoSuccess(List<FenceInfo> resp) {
-        adapter.setDataList(resp);
-    }
-
-    @Override
-    public void updateFenceInfoSuccess() {
-
-    }
-
-    @Override
-    public void getFenceInfoFail() {
-
     }
 
     @Override
@@ -119,14 +127,6 @@ public class FenceActivity extends BaseActivity implements FenceContract.View, V
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            mPresenter.getFenceInfo(deviceId);
-        }
-    }
-
-    @Override
     public void onOptionClick(int index, boolean isCheck) {
         FenceInfo info = adapter.getDataList().get(index);
         info.setDevice_id(deviceId);
@@ -136,5 +136,40 @@ public class FenceActivity extends BaseActivity implements FenceContract.View, V
             info.setEnable("1");
         }
         mPresenter.updateFenceInfo(info);
+    }
+
+    @Override
+    public void onDeleteClick(int index) {
+        mPresenter.deleteFenceInfo(adapter.getDataList().get(index).getId());
+    }
+
+    @Override
+    public void getFenceListSuccess(List<FenceInfo> resp) {
+        refreshListView.onPullDownRefreshComplete();
+        adapter.setDataList(resp);
+    }
+
+
+    @Override
+    public void getFenceListFail() {
+    }
+
+    @Override
+    public void updateFenceInfoSuccess() {
+        ToastUtils.showShort(this,"修改电子围栏成功");
+    }
+
+    @Override
+    public void deleteFenceInfoSuccess() {
+        ToastUtils.showShort(this,"删除电子围栏成功");
+        mPresenter.getFenceList(deviceId);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            mPresenter.getFenceList(deviceId);
+        }
     }
 }

@@ -34,7 +34,14 @@ public class FenceInfo implements Serializable{
     private String address;
     private String radius;
     private String enable;
-    private int type;
+    private Integer type;
+
+    public FenceInfo() {
+    }
+
+    public FenceInfo(String id) {
+        this.id = id;
+    }
 
     public String getId() {
         return id;
@@ -116,11 +123,11 @@ public class FenceInfo implements Serializable{
         this.enable = enable;
     }
 
-    public int getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 }

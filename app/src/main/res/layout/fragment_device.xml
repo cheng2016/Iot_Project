@@ -31,8 +31,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/widget_size_13"
-            android:textColor="@color/disable_text"
             android:text="28/32℃"
+            android:textColor="@color/disable_text"
             android:textSize="@dimen/widget_size_16" />
 
         <android.support.v7.widget.AppCompatImageView
@@ -40,8 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/widget_size_13"
             android:layout_marginTop="@dimen/widget_size_13"
+            android:layout_marginRight="@dimen/widget_size_13"
             app:srcCompat="@mipmap/btn_adddevice" />
 
         <TextView
@@ -50,10 +50,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/location_tv"
             android:layout_centerHorizontal="true"
-            android:textColor="@color/disable_text"
             android:layout_marginLeft="@dimen/widget_size_13"
             android:layout_marginTop="@dimen/widget_size_13"
             android:text="室内空气：优 周边水质：不可直接饮用 环境湿度：潮湿"
+            android:textColor="@color/disable_text"
             android:textSize="@dimen/font_size_12" />
     </RelativeLayout>
 
@@ -95,8 +95,8 @@
                 android:id="@+id/menu_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/widget_size_56"
                 android:layout_marginTop="@dimen/widget_size_56"
+                android:layout_marginBottom="@dimen/widget_size_56"
                 android:divider="@null"
                 android:listSelector="@null"
                 android:scrollbars="none"
@@ -113,19 +113,25 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/widget_min_size_1"
-                    android:layout_marginLeft="@dimen/widget_size_5"
                     android:layout_alignParentTop="true"
+                    android:layout_marginLeft="@dimen/widget_size_5"
                     android:layout_marginRight="@dimen/widget_size_5"
                     android:background="@color/splite_line" />
 
                 <android.support.v7.widget.AppCompatImageView
                     android:id="@+id/add_scenes_img"
                     android:layout_width="wrap_content"
-                    android:layout_centerInParent="true"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:layout_gravity="center_horizontal"
                     android:src="@mipmap/btn_left_set" />
 
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/widget_min_size_1"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/splite_line" />
             </RelativeLayout>
         </RelativeLayout>
 
@@ -161,9 +167,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:visibility="invisible"
                     android:layout_marginRight="@dimen/widget_size_20"
-                    android:src="@mipmap/btn_editorstage" />
+                    android:src="@mipmap/btn_editorstage"
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/bind_manage"
@@ -171,12 +177,12 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/widget_size_20"
+                    android:drawableRight="@mipmap/icn_goto_small"
+                    android:drawablePadding="@dimen/widget_size_5"
                     android:text="绑定管理"
                     android:textColor="@color/disable_text"
-                    android:visibility="visible"
-                    android:layout_marginRight="@dimen/widget_size_20"
-                    android:drawablePadding="@dimen/widget_size_5"
-                    android:drawableRight="@mipmap/icn_goto_small"/>
+                    android:visibility="visible" />
 
             </RelativeLayout>
 
@@ -198,8 +204,8 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_gravity="center"
-                    android:drawablePadding="@dimen/widget_size_20"
                     android:drawableTop="@mipmap/image_nobinding"
+                    android:drawablePadding="@dimen/widget_size_20"
                     android:gravity="center"
                     android:text="当前未绑定任何设备"
                     android:textAppearance="?android:attr/textAppearanceMedium"

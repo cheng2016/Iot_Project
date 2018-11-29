@@ -106,7 +106,7 @@ public class RegisterActivity extends BaseActivity implements RegisterContact.Vi
             case R.id.service_tv:
                 Intent intent = new Intent();
                 intent.putExtra("url", ResourceUtils.getProperties(this, "serviceUrl"));
-                intent.putExtra("title", "用户协议");
+                intent.putExtra("title", "服务协议");
                 intent.setClass(this, WebActivity.class);
                 startActivity(intent);
                 break;

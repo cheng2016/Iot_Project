@@ -3,7 +3,6 @@ package com.cds.iot.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.Animatable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.Gravity;
@@ -11,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -76,17 +74,5 @@ public class ProgressDialog extends Dialog {
         showTitle = true;
         messageTv.setText(message);
         return this;
-    }
-
-    @Override
-    public void show() {
-        super.show();
-//        ((Animatable)mProgressBar.getDrawable()).start();
-    }
-
-    @Override
-    public void dismiss() {
-        super.dismiss();
-//        ((Animatable)mProgressBar.getDrawable()).stop();
     }
 }

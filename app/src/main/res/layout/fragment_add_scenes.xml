@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:background="@null"
             android:inputType="textPersonName"
-            android:maxLength="20"
+            android:maxLength="15"
             android:maxLines="1"
             android:text=""
             android:hint="请输入场景名"

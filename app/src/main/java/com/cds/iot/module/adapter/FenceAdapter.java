@@ -32,6 +32,8 @@ public class FenceAdapter extends BaseAdapter {
     private Context context;
     private List<FenceInfo> mDataList = new ArrayList<>();
 
+    String[] mVals = new String[]{"周一", "周二", "周三", "周四", "周五", "周六", "周日"};
+
     public FenceAdapter(Context context) {
         this.context = context;
     }
@@ -78,18 +80,20 @@ public class FenceAdapter extends BaseAdapter {
 
         if (!mDataList.isEmpty()) {
             FenceInfo bean = mDataList.get(index);
-            if (bean.getType() == Constant.FENCE_TYPE_HOME) {
-                holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_purple));
-                holder.leftIcon.setImageResource(R.mipmap.icn_home);
-                holder.delete.setVisibility(View.GONE);
-            } else if (bean.getType() == Constant.FENCE_TYPE_COMPANY) {
-                holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_pink));
-                holder.leftIcon.setImageResource(R.mipmap.icn_company);
-                holder.delete.setVisibility(View.GONE);
-            } else {
-                holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_blue));
-                holder.leftIcon.setImageResource(R.mipmap.icn_temporary_circular);
-                holder.delete.setVisibility(View.VISIBLE);
+            if(bean.getType() != null){
+                if (bean.getType() == Constant.FENCE_TYPE_HOME) {
+                    holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_purple));
+                    holder.leftIcon.setImageResource(R.mipmap.icn_home);
+                    holder.delete.setVisibility(View.GONE);
+                } else if (bean.getType() == Constant.FENCE_TYPE_COMPANY) {
+                    holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_pink));
+                    holder.leftIcon.setImageResource(R.mipmap.icn_company);
+                    holder.delete.setVisibility(View.GONE);
+                } else {
+                    holder.leftLayout.setBackground(context.getResources().getDrawable(R.drawable.shape_right_blue));
+                    holder.leftIcon.setImageResource(R.mipmap.icn_temporary_circular);
+                    holder.delete.setVisibility(View.VISIBLE);
+                }
             }
             holder.fenceTitle.setText(bean.getName() + "（直径：" + bean.getRadius() + "米）");
             holder.address.setText(bean.getAddress());
@@ -103,39 +107,27 @@ public class FenceAdapter extends BaseAdapter {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean isCheck) {
                     if (listener != null) {
-                        listener.onOptionClick(index,isCheck);
+                        listener.onOptionClick(index, isCheck);
+                    }
+                }
+            });
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        listener.onDeleteClick(index);
                     }
                 }
             });
 
-            /*
-
-            String date = bean.getRepeat_date();
-
-            int[] chars = new int[7];
-            for (int j = 0; j < 7; j++) {
-                chars[j] = date.charAt(j);
-            }
-
-            int max = 1; // 最大连续的数字个数
-
-            List<Integer> c = new LinkedList<Integer>(); // 连续的子数组
-
-            for (int k = 0; k < chars.length - 1; ++k) {
-                if (chars[k] == chars[k + 1]) {
-//                    max = max > count ? max : count;
-                    c.add(chars[k + 1]);
-                } else {
-                    if (c.size() > 1) {
-                        System.out.println(c);
-                    }
-                    c.clear();
-                    c.add(chars[k + 1]);
+            StringBuilder days = new StringBuilder();
+            for (int i = 0; i < 7; i++) {
+                if ("1".equals(bean.getRepeat_date().substring(i, i + 1))) {
+                    days.append(mVals[i]).append("\r");
                 }
             }
-*/
-            holder.watchTime.setText("监控时段：");
-
+            days.append(bean.getBegin_time()).append("-").append(bean.getEnd_time());
+            holder.watchTime.setText("监控时段：" + days.toString());
             holder.address.setText(bean.getAddress());
         }
 
@@ -170,7 +162,9 @@ public class FenceAdapter extends BaseAdapter {
     }
 
     public interface OnCheckBoxClickListener {
-        void onOptionClick(int index ,boolean isCheck);
+        void onOptionClick(int index, boolean isCheck);
+
+        void onDeleteClick(int index);
     }
 
 

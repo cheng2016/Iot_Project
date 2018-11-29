@@ -80,7 +80,7 @@
             android:background="@drawable/shape_edit"
             android:hint="电话："
             android:inputType="number"
-            android:maxLength="18"
+            android:maxLength="15"
             android:maxLines="1"
             android:padding="@dimen/widget_size_8"
             android:singleLine="true"

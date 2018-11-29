@@ -135,7 +135,7 @@
             android:layout_marginLeft="@dimen/widget_size_3"
             android:enabled="true"
             android:gravity="center"
-            android:text="用户协议"
+            android:text="服务协议"
             android:textColor="@color/theme_color"
             android:textSize="@dimen/font_size_14" />
     </LinearLayout>

@@ -2,8 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_pressed="true">
         <shape>
-            <stroke android:width="@dimen/widget_min_size_1" android:color="@color/theme_color" />
-            <solid android:color="@color/button_plan_color_" />
+            <solid android:color="@color/enable_color" />
             <corners
                 android:bottomLeftRadius="@dimen/widget_size_12"
                 android:bottomRightRadius="@dimen/widget_size_12"
@@ -11,11 +10,16 @@
                 android:topRightRadius="@dimen/widget_size_12" />
         </shape>
     </item>
-
-    <item android:state_pressed="false">
+    <item android:state_enabled="false">
         <shape>
-            <stroke android:width="@dimen/widget_min_size_1" android:color="@color/theme_color" />
-            <solid android:color="@color/white" />
+            <!-- <solid android:color="#298D8B" /> -->
+            <solid android:color="@color/enable_color" />
+            <corners android:radius="5dp" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <solid android:color="@color/theme_color" />
             <corners
                 android:bottomLeftRadius="@dimen/widget_size_12"
                 android:bottomRightRadius="@dimen/widget_size_12"

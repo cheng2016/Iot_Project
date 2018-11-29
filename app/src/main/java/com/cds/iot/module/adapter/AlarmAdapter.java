@@ -82,21 +82,13 @@ public class AlarmAdapter extends BaseAdapter {
         holder.timeTv.setText(bean.getDate());
         holder.dayTv.setText(bean.getWeek());
 
-        List<Integer> integerSet = new ArrayList<>();
         StringBuilder sb = new StringBuilder(bean.getWeek());
+        StringBuilder days = new StringBuilder();
         for (int i = 0; i < 7; i++) {
             if ("1".equals(sb.substring(i, i + 1))) {
-                integerSet.add(i);
+                days.append(mVals[i]).append("\r");
             }
         }
-        //排序
-        Integer[] integers = new Integer[integerSet.size()];
-        integers = bubbleSort(integerSet.toArray(integers));
-        StringBuilder days = new StringBuilder();
-        for (Integer i: integers){
-            days.append(mVals[i]).append("\r");
-        }
-
         holder.dayTv.setText(days.toString());
 
         if (bean.getState() == 0) {
@@ -111,7 +103,7 @@ public class AlarmAdapter extends BaseAdapter {
         } else {
             holder.voiceImg.setVisibility(View.VISIBLE);
             holder.lengthTv.setVisibility(View.VISIBLE);
-            holder.lengthTv.setText(bean.getRecord_duration());
+            holder.lengthTv.setText(bean.getRecord_duration()+"″");
         }
 
         holder.switchBtn.setOnClickListener(new View.OnClickListener() {

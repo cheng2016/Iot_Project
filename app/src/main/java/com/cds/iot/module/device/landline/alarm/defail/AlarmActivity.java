@@ -316,7 +316,7 @@ public class AlarmActivity extends BaseActivity implements View.OnClickListener,
             ToastUtils.showShort(this, "标题不能为空");
             return;
         }
-        DateTime dt = new DateTime(2018, 8, 8, hour, min);
+        DateTime dt = new DateTime().withHourOfDay(hour).withMinuteOfHour(min);
         String time = DATE_FORMAT_MARK.format(dt.toDate());
         Logger.i(TAG, "time：" + time);
         SaveAlarmReq req = new SaveAlarmReq();

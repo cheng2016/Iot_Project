@@ -7,26 +7,18 @@
 
     <include layout="@layout/action_bar" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        android:paddingTop="150dp">
-
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/img_bg"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/logo_kuda" />
-    </LinearLayout>
-
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/img_bg"
+        android:layout_width="@dimen/widget_size_80"
+        android:layout_height="@dimen/widget_size_80"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/widget_size_150"
+        android:src="@mipmap/logo_kuda" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/widget_size_5"
+        android:layout_marginTop="@dimen/widget_size_8"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -35,15 +27,15 @@
             android:id="@+id/version_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawablePadding="@dimen/widget_size_5"
             android:gravity="center"
-            android:text="V3.0.0"
+            android:text="版本：V3.0.0"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textColor="@color/text_enable_color" />
+            android:textColor="@color/text_enable_color"
+            android:textSize="@dimen/font_size_14" />
 
         <View
-            android:layout_width="@dimen/widget_size_120"
-            android:layout_height="@dimen/widget_min_size_2"
+            android:layout_width="@dimen/widget_size_172"
+            android:layout_height="@dimen/widget_min_size_1"
             android:layout_marginTop="@dimen/widget_size_10"
             android:background="@color/item_line" />
 
@@ -54,8 +46,20 @@
             android:gravity="center"
             android:text="@string/about_name"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/text_enable_color" />
+            android:textColor="@color/text_enable_color"
+            android:textSize="@dimen/font_size_16" />
 
+
+        <TextView
+            android:id="@+id/service_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/widget_size_8"
+            android:gravity="center"
+            android:text="服务协议"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/theme_color"
+            android:textSize="@dimen/font_size_14" />
 
     </LinearLayout>
 </LinearLayout>

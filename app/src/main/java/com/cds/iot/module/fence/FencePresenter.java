@@ -45,7 +45,7 @@ public class FencePresenter implements FenceContract.Presenter {
     }
 
     @Override
-    public void getFenceInfo(String deviceId) {
+    public void getFenceList(String deviceId) {
         FenceInfoReq req = new FenceInfoReq(deviceId);
         mHttpApi.getFenceInfo(new Gson().toJson(req))
                 .subscribeOn(Schedulers.newThread())
@@ -59,9 +59,9 @@ public class FencePresenter implements FenceContract.Presenter {
                     @Override
                     public void onNext(BaseResp<List<FenceInfo>> baseResp) {
                         if ("200".equals(baseResp.getInfo().getCode())) {
-                            view.getFenceInfoSuccess(baseResp.getData());
+                            view.getFenceListSuccess(baseResp.getData());
                         } else {
-                            view.getFenceInfoFail();
+                            view.getFenceListFail();
                             ToastUtils.showShort(App.getInstance(), baseResp.getInfo().getInfo());
                         }
                     }
@@ -90,6 +90,35 @@ public class FencePresenter implements FenceContract.Presenter {
                     public void onNext(BaseResp baseResp) {
                         if ("200".equals(baseResp.getInfo().getCode())) {
                             view.updateFenceInfoSuccess();
+                        } else {
+                            ToastUtils.showShort(App.getInstance(), baseResp.getInfo().getInfo());
+                        }
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public void deleteFenceInfo(String id) {
+        FenceInfo req = new FenceInfo(id);
+        mHttpApi.deleteFenceInfo(new Gson().toJson(req))
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new BaseObserver<BaseResp>() {
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        mCompositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onNext(BaseResp baseResp) {
+                        if ("200".equals(baseResp.getInfo().getCode())) {
+                            view.deleteFenceInfoSuccess();
                         } else {
                             ToastUtils.showShort(App.getInstance(), baseResp.getInfo().getInfo());
                         }

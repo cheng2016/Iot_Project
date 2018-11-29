@@ -12,16 +12,20 @@ import java.util.List;
  */
 public interface FenceContract {
     interface View extends BaseView<Presenter> {
-        void getFenceInfoSuccess(List<FenceInfo> resp);
+        void getFenceListSuccess(List<FenceInfo> resp);
+
+        void getFenceListFail();
 
         void updateFenceInfoSuccess();
 
-        void getFenceInfoFail();
+        void deleteFenceInfoSuccess();
     }
 
     interface Presenter extends BasePresenter {
-        void getFenceInfo(String deviceId);
+        void getFenceList(String deviceId);
 
         void updateFenceInfo(FenceInfo info);
+
+        void deleteFenceInfo(String id);
     }
 }

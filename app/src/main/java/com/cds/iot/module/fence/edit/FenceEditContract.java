@@ -1,5 +1,6 @@
 package com.cds.iot.module.fence.edit;
 
+import com.cds.iot.data.entity.FenceInfo;
 import com.cds.iot.module.BasePresenter;
 import com.cds.iot.module.BaseView;
 
@@ -9,10 +10,10 @@ import com.cds.iot.module.BaseView;
  */
 public interface FenceEditContract {
     interface View extends BaseView<Presenter> {
-
+        void saveFenceInfoSuccess();
     }
 
     interface Presenter extends BasePresenter {
-
+        void saveFenceInfo(FenceInfo req);
     }
 }

@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.blankj.utilcode.util.Utils;
 import com.cds.iot.base.BaseApplication;
+import com.cds.iot.util.CrashHandler;
 import com.cds.iot.util.DeviceUtils;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.PreferenceConstants;
@@ -50,7 +51,7 @@ public class App extends BaseApplication {
         mInstance = this;
         initAppTool();
         if (ResourceUtils.getProperties(this, "os_is_debug").equals("1")) {
-//            CrashHandler.getInstance().init(this);
+            CrashHandler.getInstance().init(this);
         }
 //        if (LeakCanary.isInAnalyzerProcess(this)) {
 //            return;

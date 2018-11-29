@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:descendantFocusability="blocksDescendants">
+    android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/widget_size_12"
-        android:layout_marginRight="@dimen/widget_size_12"
         android:layout_marginTop="@dimen/widget_size_6"
+        android:layout_marginRight="@dimen/widget_size_12"
         android:layout_marginBottom="@dimen/widget_size_6"
         android:background="@drawable/plan_shape"
+        android:descendantFocusability="blocksDescendants"
         android:orientation="vertical">
 
         <LinearLayout
@@ -60,8 +60,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/fence_title"
                     android:layout_marginLeft="@dimen/widget_size_16"
-                    android:layout_marginRight="@dimen/widget_size_16"
                     android:layout_marginTop="@dimen/widget_size_13"
+                    android:layout_marginRight="@dimen/widget_size_16"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="@dimen/widget_size_8"
                     android:text="深圳市西乡步行街桃园新村"
@@ -74,9 +74,10 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/address"
                     android:layout_marginLeft="@dimen/widget_size_16"
-                    android:layout_marginRight="@dimen/widget_size_16"
                     android:layout_marginTop="@dimen/widget_size_8"
+                    android:layout_marginRight="@dimen/widget_size_16"
                     android:gravity="center_vertical"
+                    android:lineSpacingExtra="@dimen/widget_size_5"
                     android:maxLines="2"
                     android:text="监控时间段：周一至周三 09 : 09 - 10:10"
                     android:textAppearance="?android:attr/textAppearanceMedium"
@@ -88,10 +89,10 @@
                     android:id="@+id/delete"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
-                    android:layout_marginBottom="14dp"
+                    android:layout_alignParentBottom="true"
                     android:layout_marginRight="@dimen/widget_size_14"
+                    android:layout_marginBottom="14dp"
                     android:drawableLeft="@mipmap/btn_delete_fence"
                     android:drawablePadding="@dimen/widget_size_8"
                     android:text="删除"
@@ -120,10 +121,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/widget_size_6"
                     android:layout_marginTop="@dimen/widget_size_6"
+                    android:layout_marginRight="@dimen/widget_size_6"
                     android:button="@drawable/checkbox__onoff_bg_selector"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:focusable="false" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>

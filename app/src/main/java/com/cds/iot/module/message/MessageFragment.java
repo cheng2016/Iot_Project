@@ -174,22 +174,21 @@ public class MessageFragment extends BaseFragment implements MessageContract.Vie
     public void queryMessageSuccess(List<SMessage> list) {
         if (!isLoadMore) {
             mDataList.clear();
-        }
-        if (list.isEmpty()) {
-            emptyLayout.setVisibility(View.VISIBLE);
-            refreshListView.setVisibility(View.GONE);
-        } else {
-            refreshListView.setVisibility(View.VISIBLE);
-            emptyLayout.setVisibility(View.GONE);
-
-            if (list.size() == REQUEST_NUM) {
-                hasMoreData = true;
+            if (list.isEmpty()) {
+                emptyLayout.setVisibility(View.VISIBLE);
+                refreshListView.setVisibility(View.GONE);
             } else {
-                hasMoreData = false;
+                emptyLayout.setVisibility(View.GONE);
+                refreshListView.setVisibility(View.VISIBLE);
             }
-            mDataList.addAll(list);
-            adapter.setDataList(mDataList);
         }
+        if (list.size() == REQUEST_NUM) {
+            hasMoreData = true;
+        } else {
+            hasMoreData = false;
+        }
+        mDataList.addAll(list);
+        adapter.setDataList(mDataList);
         refreshListView.onPullDownRefreshComplete();
         refreshListView.onPullUpRefreshComplete();
         refreshListView.setHasMoreData(hasMoreData);

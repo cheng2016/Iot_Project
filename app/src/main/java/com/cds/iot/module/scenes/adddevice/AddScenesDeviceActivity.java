@@ -122,7 +122,12 @@ public class AddScenesDeviceActivity extends BaseActivity implements View.OnClic
             if (qr.startsWith("http")) {
                 mPresenter.deviceCode(qr);
             } else {
-                deviceIdEdit.setText(qr);
+                String[] split = qr.split("_");
+                if (split.length > 0) {
+                    deviceIdEdit.setText(split[1]);
+                } else {
+                    deviceIdEdit.setText(qr);
+                }
             }
         }
     }
