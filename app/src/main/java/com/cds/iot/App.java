@@ -12,6 +12,7 @@ import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
 import com.cds.iot.util.ResourceUtils;
 import com.cds.iot.util.ToastUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.picasso.LruCache;
@@ -53,10 +54,10 @@ public class App extends BaseApplication {
         if (ResourceUtils.getProperties(this, "os_is_debug").equals("1")) {
             CrashHandler.getInstance().init(this);
         }
-//        if (LeakCanary.isInAnalyzerProcess(this)) {
-//            return;
-//        }
-//        LeakCanary.install(this);
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 
     void initAppTool() {
@@ -119,5 +120,4 @@ public class App extends BaseApplication {
         }
         return imageCacheDir;
     }
-
 }

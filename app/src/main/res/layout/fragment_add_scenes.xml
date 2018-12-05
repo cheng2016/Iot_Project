@@ -82,7 +82,7 @@
                 android:layout_height="@dimen/widget_size_30"
                 android:drawableLeft="@mipmap/icn_stage_save"
                 android:gravity="center"
-                android:text="添加" />
+                android:text="保存" />
         </RelativeLayout>
     </RelativeLayout>
 </LinearLayout>

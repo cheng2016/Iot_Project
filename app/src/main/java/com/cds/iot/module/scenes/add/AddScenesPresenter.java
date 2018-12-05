@@ -87,8 +87,15 @@ public class AddScenesPresenter implements AddScenesContract.Presenter {
                         if("200".equals(response.getInfo().getCode())){
                             view.addSceneInfoSuccess();
                         }else{
+                            view.addSceneInfoFailed();
                             ToastUtils.showShort(App.getInstance(),response.getInfo().getInfo());
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        super.onError(e);
+                        view.addSceneInfoFailed();
                     }
 
                     @Override

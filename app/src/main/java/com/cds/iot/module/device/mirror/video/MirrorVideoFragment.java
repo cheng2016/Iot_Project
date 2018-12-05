@@ -5,8 +5,11 @@ import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatImageView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 
 /**
  * Created by Administrator Chengzj
@@ -35,14 +39,21 @@ import butterknife.Bind;
  * @date 2018/10/31 18:42
  */
 public class MirrorVideoFragment extends BaseFragment implements MirrorVideoContract.View, PullToRefreshBase.OnRefreshListener<GridView>, View.OnClickListener, VideoAdapter.OnDownloadClickListener {
-    @Bind(R.id.empty_layout)
-    RelativeLayout emptyLayout;
+    @Bind(R.id.error_layout)
+    RelativeLayout errorLayout;
     @Bind(R.id.description_img)
     AppCompatImageView descriptionImg;
     @Bind(R.id.refresh_btn)
     AppCompatButton refreshBtn;
     @Bind(R.id.refresh_listView)
     PullToRefreshGridView refreshListView;
+
+    @Bind(R.id.empty_layout)
+    LinearLayout emptyLayout;
+    @Bind(R.id.empty_img)
+    AppCompatImageView emptyImg;
+    @Bind(R.id.empty_tv)
+    TextView emptyTv;
 
     private GridView mGridView;
 
@@ -92,6 +103,14 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
     protected void initData() {
         new MirrorVideoPresenter(this);
         type = getArguments().getInt("type");
+        if (type == 2) {
+            emptyImg.setImageResource(R.mipmap.icn_empty_picture);
+            emptyTv.setText("当前没有图片");
+        } else {
+            emptyImg.setImageResource(R.mipmap.icn_empty_video);
+            emptyTv.setText("当前没有视频");
+        }
+        errorLayout.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -104,13 +123,14 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
     public void onDestroyView() {
         super.onDestroyView();
         mPresenter.unsubscribe();
+        ButterKnife.unbind(this);
     }
 
     private void getData() {
         if (type == 2) {
-            mPresenter.getImage(offset,REQUEST_NUM);
+            mPresenter.getImage(offset, REQUEST_NUM);
         } else {
-            mPresenter.getVideo(type,offset,REQUEST_NUM);
+            mPresenter.getVideo(type, offset, REQUEST_NUM);
         }
     }
 
@@ -131,37 +151,36 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
     @Override
     public void getVideoSuccess(List<VideoEntity> list) {
         hideProgressDilog();
+        errorLayout.setVisibility(View.GONE);
+        refreshListView.setVisibility(View.VISIBLE);
         if (!isLoadMore) {
             mDataList.clear();
-        }
-        if (list.isEmpty()) {
-            emptyLayout.setVisibility(View.VISIBLE);
-            refreshListView.setVisibility(View.GONE);
-        } else {
-            refreshListView.setVisibility(View.VISIBLE);
-            emptyLayout.setVisibility(View.GONE);
-
-            if (list.size() == REQUEST_NUM) {
-                hasMoreData = true;
+            if (list.isEmpty()) {
+                emptyLayout.setVisibility(View.VISIBLE);
+                refreshListView.setScrollLoadEnabled(false);
             } else {
-                hasMoreData = false;
+                emptyLayout.setVisibility(View.GONE);
+                refreshListView.setScrollLoadEnabled(true);
             }
-            mDataList.addAll(list);
-            adapter.setDataList(mDataList);
         }
+        if (list.size() == REQUEST_NUM) {
+            hasMoreData = true;
+        } else {
+            hasMoreData = false;
+        }
+        mDataList.addAll(list);
+        adapter.setDataList(mDataList);
         refreshListView.onPullDownRefreshComplete();
         refreshListView.onPullUpRefreshComplete();
         refreshListView.setHasMoreData(hasMoreData);
-
-        emptyLayout.setVisibility(View.GONE);
-        refreshListView.setVisibility(View.VISIBLE);
         ((Animatable) descriptionImg.getDrawable()).stop();
     }
 
     @Override
     public void getVideoFailed() {
         hideProgressDilog();
-        emptyLayout.setVisibility(View.VISIBLE);
+        errorLayout.setVisibility(View.VISIBLE);
+        emptyLayout.setVisibility(View.GONE);
         refreshListView.setVisibility(View.GONE);
         ((Animatable) descriptionImg.getDrawable()).start();
     }
@@ -174,9 +193,9 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
 
     @Override
     public void downloadSuccess(int index, TextView textView, String path) {
-        ToastUtils.showShort(getActivity(), "文件已保存到：" + path);
+        ToastUtils.showShort(App.getInstance(), "文件已保存到：" + path);
         adapter.getDataList().get(index).setProgress(100);
-        if(path.endsWith(".mp4")){
+        if (path.endsWith(".mp4")) {
             adapter.getDataList().get(index).setVideoPath(path);
         }
         adapter.notifyDataSetChanged();
@@ -223,7 +242,7 @@ public class MirrorVideoFragment extends BaseFragment implements MirrorVideoCont
     @Override
     public void onPlayClick(String name, String videoPath) {
         Intent intent = new Intent();
-        if(videoPath.startsWith("http")){
+        if (videoPath.startsWith("http")) {
             intent.setClass(getActivity(), YjPlayerActvity.class);
         } else {
             intent.setClass(getActivity(), ExoPlayActivity.class);

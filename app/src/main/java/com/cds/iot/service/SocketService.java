@@ -553,6 +553,8 @@ public class SocketService extends Service implements SocketContract {
     }
 
     public void showExitDialog() {
+        //断开tcp连接
+        shutdownNetty();
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
@@ -565,7 +567,6 @@ public class SocketService extends Service implements SocketContract {
                                 //清空登录信息
                                 PreferenceUtils.setPrefString(App.getInstance(), PreferenceConstants.USER_PASSWORD, "");
                                 PreferenceUtils.setPrefString(App.getInstance(), PreferenceConstants.USER_ID, "");
-                                shutdownNetty();
                                 Intent i = new Intent().setClass(AppManager.getInstance().getTopActivity(), LoginActivity.class);
                                 startActivity(i);
                                 AppManager.getInstance().finishAllActivity();

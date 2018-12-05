@@ -498,13 +498,13 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
 
     @Override
     public void releaseDeviceSuccess() {
-        ToastUtils.showShort(getActivity(), "设备移除成功!");
+        ToastUtils.showShort(App.getInstance(), "设备移除成功!");
         mPresenter.getDeviceList(userId);
     }
 
     @Override
     public void reapplyDeviceSuccess() {
-        ToastUtils.showShort(getActivity(), "添加设备申请提交成功!");
+        ToastUtils.showShort(App.getInstance(), "添加设备申请提交成功!");
         mPresenter.getDeviceList(userId);
     }
 

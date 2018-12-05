@@ -149,16 +149,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
             case R.id.email_sign_in_button:
                 String acount = accountView.getText().toString().trim();
                 String password = passwordView.getText().toString().trim();
-                if (TextUtils.isEmpty(acount)
-                        || TextUtils.isEmpty(password)) {
-                    ToastUtils.showShort(this, "账户和密码不能为空！");
-                } else {
-                    if (!RegexUtils.isMobileExact(acount)) {
-                        ToastUtils.showShort(this, "请输入正确的账号！");
-                    } else {
-                        login(acount, password);
-                    }
-                }
+                login(acount, password);
                 break;
             case R.id.logo_img:
                 login("18202745852", "123");

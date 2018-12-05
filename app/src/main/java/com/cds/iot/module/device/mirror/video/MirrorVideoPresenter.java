@@ -67,7 +67,7 @@ public class MirrorVideoPresenter implements MirrorVideoContract.Presenter {
     @Override
     public void getVideo(int type, int offset, int limit) {
         mWifiApi.getVideoInfo(type, DeviceUtils.getDeviceIMEI(App.getInstance()), offset, limit)
-                .subscribeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResp<List<VideoEntity>>>() {
                     @Override

@@ -17,7 +17,7 @@
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/widget_size_16"
         android:gravity="left|top"
-        android:hint="深圳酷达通讯有限公司是一家智能家居公司。"
+        android:hint="请把您的意见或想法写在这里（最短20个汉字，最长不超过200个汉字）"
         android:maxLength="70"
         android:padding="@dimen/widget_size_6" />
 

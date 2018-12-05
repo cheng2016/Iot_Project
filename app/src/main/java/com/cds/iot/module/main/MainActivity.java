@@ -199,7 +199,7 @@ public class MainActivity extends BaseActivity {
             super.onBackPressed();
             return;
         } else {
-            ToastUtils.showShort(this, "再次点击返回键退出");
+            ToastUtils.showShort(App.getInstance(), "再次点击返回键退出");
         }
         mBackPressed = System.currentTimeMillis();
     }

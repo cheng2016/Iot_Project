@@ -28,6 +28,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
+import com.cds.iot.App;
 import com.cds.iot.R;
 import com.cds.iot.base.BaseFragment;
 import com.cds.iot.data.entity.CarPosition;
@@ -363,30 +364,31 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
                             .decodeResource(getResources(), R.mipmap.icn_car_map)))
                     .draggable(true)
                     .setFlat(true);//设置marker平贴地图效果
-            aMap.addMarker(markerOption);
+            Marker marker = aMap.addMarker(markerOption);
+            marker.showInfoWindow();
         } else {
-            ToastUtils.showShort(getActivity(), "未获取到车辆位置");
+            ToastUtils.showShort(App.getInstance(), "未获取到车辆位置");
         }
     }
 
     @Override
     public void getRemotePhotographSuccess() {
-        ToastUtils.showShort(getActivity(), "远程拍照指令发送成功！");
+        ToastUtils.showShort(App.getInstance(), "远程拍照指令发送成功！");
     }
 
     @Override
     public void getRemotePhotographFail() {
-        ToastUtils.showShort(getActivity(), "远程拍照指令发送成功！");
+        ToastUtils.showShort(App.getInstance(), "远程拍照指令发送成功！");
     }
 
     @Override
     public void getRemoteVideotapeSuccess() {
-        ToastUtils.showShort(getActivity(), "远程摄像指令发送成功！");
+        ToastUtils.showShort(App.getInstance(), "远程摄像指令发送成功！");
     }
 
     @Override
     public void getRemoteVideotapeFail() {
-        ToastUtils.showShort(getActivity(), "远程摄像指令发送失败，请重试");
+        ToastUtils.showShort(App.getInstance(), "远程摄像指令发送失败，请重试");
     }
 
     @Override
@@ -449,7 +451,7 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
                                     @Override
                                     public void onClick(int which) {
                                         if (aMapLocation == null) {
-                                            ToastUtils.showShort(getActivity(), "未获取到当前位置经纬度，请重新定位！");
+                                            ToastUtils.showShort(App.getInstance(), "未获取到当前位置经纬度，请重新定位！");
                                             return;
                                         }
                                         Logger.i(TAG, "openGaoDeNavi：" + new Gson().toJson(aMapLocation));

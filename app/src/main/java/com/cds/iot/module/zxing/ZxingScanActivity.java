@@ -3,6 +3,7 @@ package com.cds.iot.module.zxing;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -10,6 +11,7 @@ import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -140,36 +142,41 @@ public class ZxingScanActivity extends BaseActivity implements QRCodeView.Delega
         super.onActivityResult(requestCode, resultCode, data);
         mZXingView.startSpotAndShowRect(); // 显示扫描框，并且延迟0.5秒后开始识别
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY) {
-            Uri uri = data.getData();
-            String picturePath = ImageUtils.getImageAbsolutePath(this, uri);
-            mZXingView.decodeQRCode(picturePath);
+            Cursor cursor = getContentResolver().query(data.getData(), new String[]{MediaStore.Images.Media.DATA}, null, null, null);
+            //游标移到第一位，即从第一位开始读取
+            if (cursor != null) {
+                cursor.moveToFirst();
+                String picturePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+                cursor.close();
+                mZXingView.decodeQRCode(picturePath);
+            }
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.back_button:
-                finish();
-                break;
-            case R.id.right_tv:
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY);
-                break;
-            case R.id.light_button:
-                if (isOpen) {
-                    isOpen = false;
-                    mZXingView.closeFlashlight(); // 关闭闪光灯
-                    lightTv.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.mipmap.scan_torch_off), null, null);
-                    lightTv.setText("轻触照亮");
-                } else {
-                    isOpen = true;
-                    mZXingView.openFlashlight(); // 打开闪光灯
-                    lightTv.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.mipmap.btn_torch_on), null, null);
-                    lightTv.setText("轻触关闭");
-                }
-                break;
+        @Override
+        public void onClick (View view){
+            switch (view.getId()) {
+                case R.id.back_button:
+                    finish();
+                    break;
+                case R.id.right_tv:
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY);
+                    break;
+                case R.id.light_button:
+                    if (isOpen) {
+                        isOpen = false;
+                        mZXingView.closeFlashlight(); // 关闭闪光灯
+                        lightTv.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.mipmap.scan_torch_off), null, null);
+                        lightTv.setText("轻触照亮");
+                    } else {
+                        isOpen = true;
+                        mZXingView.openFlashlight(); // 打开闪光灯
+                        lightTv.setCompoundDrawablesWithIntrinsicBounds(null, getResources().getDrawable(R.mipmap.btn_torch_on), null, null);
+                        lightTv.setText("轻触关闭");
+                    }
+                    break;
+            }
         }
     }
-}

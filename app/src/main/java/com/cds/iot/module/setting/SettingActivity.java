@@ -20,7 +20,6 @@ import com.cds.iot.util.PreferenceUtils;
 import com.cds.iot.view.CustomDialog;
 
 public class SettingActivity extends BaseActivity implements View.OnClickListener {
-
     TextView versionNameTv;
     TextView fileSizeTv;
 
@@ -66,9 +65,6 @@ public class SettingActivity extends BaseActivity implements View.OnClickListene
                                 //清空登录信息
                                 PreferenceUtils.setPrefString(App.getInstance(), PreferenceConstants.USER_PASSWORD, "");
                                 PreferenceUtils.setPrefString(App.getInstance(), PreferenceConstants.USER_ID,"");
-                                if (mSocketService != null) {
-                                    mSocketService.shutdownNetty();
-                                }
                                 Intent i = new Intent().setClass(SettingActivity.this, LoginActivity.class);
                                 startActivity(i);
                                 AppManager.getInstance().finishAllActivity();

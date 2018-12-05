@@ -84,7 +84,7 @@
                 android:layout_marginRight="@dimen/widget_size_12"
                 android:layout_marginTop="@dimen/widget_size_8"
                 android:layout_toRightOf="@+id/device_img"
-                android:maxLines="2"
+                android:maxLines="3"
                 android:gravity="left"
                 android:ellipsize="end"
                 android:lineSpacingExtra="@dimen/widget_size_6"

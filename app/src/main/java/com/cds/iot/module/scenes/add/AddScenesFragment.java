@@ -93,7 +93,7 @@ public class AddScenesFragment extends BaseFragment implements View.OnClickListe
         switch (view.getId()) {
             case R.id.insert_layout:
                 if (TextUtils.isEmpty(scenesNameEdit.getText().toString())) {
-                    ToastUtils.showShort(getActivity(), "场景名不能为空");
+                    ToastUtils.showShort(App.getInstance(), "场景名不能为空");
                 } else {
                     SceneReq req = new SceneReq();
                     req.setScene_id(mScenes.getId());
@@ -123,7 +123,7 @@ public class AddScenesFragment extends BaseFragment implements View.OnClickListe
 
     @Override
     public void addSceneInfoSuccess() {
-        ToastUtils.showShort(getActivity(), "场景添加成功！");
+        ToastUtils.showShort(App.getInstance(), "场景添加成功！");
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
     }

@@ -43,12 +43,6 @@ public class MainFragment extends BaseFragment implements MainContract.View {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         mMainPresenter.subscribe();

@@ -87,12 +87,7 @@ public class AddDeviceActivity extends BaseActivity implements View.OnClickListe
             if (qr.startsWith("http")) {
                 mPresenter.deviceCode(qr);
             } else {
-                String[] split = qr.split("_");
-                if (split.length > 0) {
-                    deviceIdEdit.setText(split[1]);
-                } else {
-                    deviceIdEdit.setText(qr);
-                }
+                deviceIdEdit.setText(qr);
             }
         }
     }
