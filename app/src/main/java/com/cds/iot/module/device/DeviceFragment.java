@@ -206,7 +206,7 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
         });
 
         ViewGroup.LayoutParams lp = deviceGridview.getLayoutParams();
-        lp.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 44;
+        lp.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 48;
         deviceGridview.setLayoutParams(lp);
         //解决滑动冲突
         deviceGridview.setOnTouchListener(new View.OnTouchListener() {

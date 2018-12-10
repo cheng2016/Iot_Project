@@ -65,11 +65,6 @@ public class UserFragment extends BaseFragment implements UserContract.View, Vie
     @Override
     protected void initData() {
         new UserPresenter(this);
-    }
-
-    @Override
-    protected void onLazyLoad() {
-        super.onLazyLoad();
         String userId = PreferenceUtils.getPrefString(App.getInstance(), PreferenceConstants.USER_ID,"");
         if(!TextUtils.isEmpty(userId)){
             mPresenter.getUserInfo(Integer.parseInt(userId));

@@ -17,7 +17,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import com.blankj.utilcode.util.KeyboardUtils;
-import com.blankj.utilcode.util.RegexUtils;
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
 import com.cds.iot.data.Constant;

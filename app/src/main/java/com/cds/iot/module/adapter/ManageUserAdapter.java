@@ -107,7 +107,9 @@ public class ManageUserAdapter extends BaseAdapter {
         if (mDataList.get(index) != null) {
             DeviceUser bean = mDataList.get(index);
             holder.userName.setText(bean.getName());
-            if (!TextUtils.isEmpty(bean.getImg_url())) {
+            if (TextUtils.isEmpty(bean.getImg_url())) {
+                holder.userImg.setImageResource(R.mipmap.btn_male_big);
+            }else {
                 Picasso.with(context).load(bean.getImg_url()).placeholder(R.mipmap.btn_male_big).transform(new PicassoCircleTransform()).into(holder.userImg);
             }
         }

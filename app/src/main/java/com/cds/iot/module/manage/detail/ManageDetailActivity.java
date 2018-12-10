@@ -257,5 +257,6 @@ public class ManageDetailActivity extends BaseActivity implements View.OnClickLi
     public void transferDeviceSuccess() {
         ToastUtils.showShort(this, "转移管理员权限成功");
         mPresenter.getManageInfo(userId, deviceId);
+        setResult(RESULT_OK);
     }
 }

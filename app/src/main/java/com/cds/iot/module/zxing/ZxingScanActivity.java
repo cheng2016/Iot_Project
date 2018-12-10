@@ -8,7 +8,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.provider.MediaStore;
@@ -19,7 +18,6 @@ import android.widget.TextView;
 
 import com.cds.iot.R;
 import com.cds.iot.base.BaseActivity;
-import com.cds.iot.util.ImageUtils;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.ToastUtils;
 
