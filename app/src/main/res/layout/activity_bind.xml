@@ -16,7 +16,10 @@
         android:layout_marginLeft="@dimen/widget_size_20"
         android:layout_marginRight="@dimen/widget_size_20"
         android:layout_marginTop="@dimen/widget_size_30"
-        android:ems="10"
+        android:ems="13"
+        android:maxLength="13"
+        android:maxLines="1"
+        android:digits="0123456789"
         android:hint="请输入手机号" />
 
     <RelativeLayout

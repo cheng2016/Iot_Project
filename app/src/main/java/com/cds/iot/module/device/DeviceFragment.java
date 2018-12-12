@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
@@ -39,6 +40,7 @@ import com.cds.iot.module.manage.ManageBindActivity;
 import com.cds.iot.module.message.user.UserApplyForActivity;
 import com.cds.iot.module.scenes.ScenesEditActivity;
 import com.cds.iot.module.scenes.add.AddScenesActivity;
+import com.cds.iot.util.DimenUtils;
 import com.cds.iot.util.Logger;
 import com.cds.iot.util.PreferenceConstants;
 import com.cds.iot.util.PreferenceUtils;
@@ -118,6 +120,7 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
         ScrollView scrollView = pullToRefreshScrollView.getRefreshableView();
         LinearLayout view = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.fragment_device, scrollView, false);
         scrollView.addView(view);
+        scrollView.setFillViewport(true);
         emptyview = (View) view.findViewById(R.id.emptyview);
         addScenesImg = (ImageView) view.findViewById(R.id.add_scenes_img);
         locationTv = (TextView) view.findViewById(R.id.location_tv);
@@ -187,9 +190,6 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
      * @param scrollView
      */
     private void resetListViewHeight(ScrollView scrollView){
-        ViewGroup.LayoutParams params = menuListview.getLayoutParams();
-        params.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 50;
-        menuListview.setLayoutParams(params);
         //解决滑动冲突
         menuListview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -204,10 +204,6 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
                 return false;
             }
         });
-
-        ViewGroup.LayoutParams lp = deviceGridview.getLayoutParams();
-        lp.height = ScreenUtils.getScreenHeight(getActivity()) / 100 * 48;
-        deviceGridview.setLayoutParams(lp);
         //解决滑动冲突
         deviceGridview.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -223,6 +219,7 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
             }
         });
     }
+    private float scrollDownY,scrollMoveY;
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<ScrollView> pullToRefreshBase) {

@@ -66,6 +66,7 @@
             android:layout_width="@dimen/widget_size_55"
             android:layout_height="match_parent"
             android:background="@color/white"
+            android:layout_marginBottom="@dimen/widget_size_14"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -101,7 +102,6 @@
                 android:listSelector="@null"
                 android:scrollbars="none"
                 android:visibility="visible">
-
             </ListView>
 
             <RelativeLayout
@@ -138,6 +138,7 @@
         <View
             android:layout_width="@dimen/widget_min_size_1"
             android:layout_height="match_parent"
+            android:layout_marginBottom="@dimen/widget_size_14"
             android:background="@color/splite_line" />
 
         <LinearLayout

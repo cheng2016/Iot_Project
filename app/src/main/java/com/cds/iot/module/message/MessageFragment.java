@@ -176,10 +176,10 @@ public class MessageFragment extends BaseFragment implements MessageContract.Vie
             mDataList.clear();
             if (list.isEmpty()) {
                 emptyLayout.setVisibility(View.VISIBLE);
-                refreshListView.setVisibility(View.GONE);
+                refreshListView.setScrollLoadEnabled(false);
             } else {
                 emptyLayout.setVisibility(View.GONE);
-                refreshListView.setVisibility(View.VISIBLE);
+                refreshListView.setScrollLoadEnabled(true);
             }
         }
         if (list.size() == REQUEST_NUM) {

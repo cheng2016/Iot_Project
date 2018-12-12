@@ -8,29 +8,34 @@
 
     <include layout="@layout/action_bar" />
 
-    <com.cheng.refresh.library.PullToRefreshListView
-        android:id="@+id/refresh_listView"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null"
-        android:listSelector="@android:color/transparent"
-        android:paddingTop="@dimen/widget_size_10" />
+        android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/empty_layout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/transparent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:drawableTop="@mipmap/image_nomessage"
-            android:drawablePadding="@dimen/widget_size_16"
-            android:gravity="center_horizontal"
-            android:text="当前暂无任何设备消息"
-            android:textColor="#999999" />
-    </RelativeLayout>
+        <com.cheng.refresh.library.PullToRefreshListView
+            android:id="@+id/refresh_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:listSelector="@android:color/transparent"
+            android:paddingTop="@dimen/widget_size_10" />
 
+        <RelativeLayout
+            android:id="@+id/empty_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:drawableTop="@mipmap/image_nomessage"
+                android:drawablePadding="@dimen/widget_size_16"
+                android:gravity="center_horizontal"
+                android:text="当前暂无任何设备消息"
+                android:textColor="#999999" />
+        </RelativeLayout>
+    </FrameLayout>
 </LinearLayout>

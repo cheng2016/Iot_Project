@@ -141,7 +141,6 @@ public class AddDevicePresenter implements AddDeviceContract.Presenter {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new BaseObserver<BaseResp<DeviceCode>>() {
-
                     @Override
                     public void onSubscribe(Disposable d) {
                         mCompositeDisposable.add(d);
@@ -150,7 +149,9 @@ public class AddDevicePresenter implements AddDeviceContract.Presenter {
                     @Override
                     public void onNext(BaseResp<DeviceCode> resp) {
                         if ("200".equals(resp.getInfo().getCode())) {
-                            view.deviceCodeSuccess(resp.getData());
+                            if (resp.getData() != null && resp.getData().getDevice_code() != null) {
+                                view.deviceCodeSuccess(resp.getData());
+                            }
                         } else {
                             ToastUtils.showShort(App.getInstance(), resp.getInfo().getInfo());
                         }

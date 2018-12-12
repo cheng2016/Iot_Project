@@ -33,16 +33,16 @@ import com.tencent.mm.opensdk.modelmsg.SendAuth;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
-import butterknife.Bind;
+
 
 public class LoginActivity extends BaseActivity implements LoginContract.View, View.OnClickListener {
-    @Bind(R.id.account)
+
     AppCompatEditText accountView;
-    @Bind(R.id.password)
+
     AppCompatEditText passwordView;
-    @Bind(R.id.show_password_checkbox)
+
     CheckBox showPasswordCheckbox;
-    @Bind(R.id.bg_img)
+
     ImageView bgImg;
 
     LoginPresenter mPresenter;
@@ -54,6 +54,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        accountView = (AppCompatEditText) findViewById(R.id.account);
+        passwordView = (AppCompatEditText) findViewById(R.id.password);
+        showPasswordCheckbox = (CheckBox) findViewById(R.id.show_password_checkbox);
+        bgImg = (ImageView) findViewById(R.id.bg_img);
         findViewById(R.id.email_sign_in_button).setOnClickListener(this);
         findViewById(R.id.register_btn).setOnClickListener(this);
         findViewById(R.id.modify_password_button).setOnClickListener(this);
@@ -114,12 +118,14 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            int duration = msg.arg1;
-            TransitionDrawable transitionDrawable = new TransitionDrawable(new Drawable[]{drawables[change % ids.length],
-                    drawables[(change + 1) % ids.length]});
-            change++;//改变标识位置
-            bgImg.setImageDrawable(transitionDrawable);
-            transitionDrawable.startTransition(duration);
+            if(mThreadFlag){
+                int duration = msg.arg1;
+                TransitionDrawable transitionDrawable = new TransitionDrawable(new Drawable[]{drawables[change % ids.length],
+                        drawables[(change + 1) % ids.length]});
+                change++;//改变标识位置
+                bgImg.setImageDrawable(transitionDrawable);
+                transitionDrawable.startTransition(duration);
+            }
         }
     };
 
@@ -142,6 +148,8 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
         }
     }
 
+    int count = 0;
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -151,7 +159,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View, V
                 login(acount, password);
                 break;
             case R.id.logo_img:
-                login("18202745852", "123");
+                count++;
+                if (count > 3) {
+                    login("18202745852", "123");
+                }
                 break;
             case R.id.register_btn:
                 Intent intent = new Intent();

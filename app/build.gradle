@@ -216,11 +216,12 @@ dependencies {
     //    compile project(':DatePicker')
 
     //刷新组件
-    implementation(name: 'PullToRefresh_V1.0.2', ext: 'aar')
+    implementation 'com.github.cheng2016:PullToRefresh:V1.0.8'
+//    implementation(name: 'PullToRefresh_V1.0.2', ext: 'aar')
 //        compile project(':PullRefresh')
 
     //通用的Android的Loading页面
-    implementation(name: 'Loadinglayout_V1.0.2', ext: 'aar')
+//    implementation(name: 'Loadinglayout_V1.0.2', ext: 'aar')
 //    implementation 'com.github.czy1121:loadinglayout:1.0.1'
 }
 
