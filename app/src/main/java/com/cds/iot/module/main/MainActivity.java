@@ -115,7 +115,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void run() {
                 if (mSocketService != null) {
-                    mSocketService.initPushService();
+                    mSocketService.startPushService();
                 }
             }
         }, 300);

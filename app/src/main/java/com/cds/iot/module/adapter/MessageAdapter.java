@@ -95,6 +95,8 @@ public class MessageAdapter extends BaseAdapter {
                         || type == Constant.MESSAGE_TYPE_ADMIN_REPLACE
                         || type == Constant.MESSAGE_TYPE_ADMIN_REPLACE_NOTIFY_USER) {
                     holder.moreTv.setVisibility(View.GONE);
+                }else {
+                    holder.moreTv.setVisibility(View.VISIBLE);
                 }
                 break;
             case Constant.MESSAGE_TYPE_DEVICE_IMAGE:

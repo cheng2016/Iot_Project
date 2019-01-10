@@ -72,28 +72,32 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/device_id_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/widget_size_8"
                     android:layout_marginTop="@dimen/widget_size_25"
                     android:layout_toRightOf="@+id/device_img"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:lineSpacingExtra="@dimen/widget_size_6"
                     android:maxLines="1"
+                    android:ellipsize="end"
+                    android:layout_marginRight="@dimen/widget_size_8"
                     android:text="设备ID："
                     android:textColor="@color/disable_text"
                     android:textSize="@dimen/font_size_16" />
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/device_name_tv"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/device_id_tv"
                     android:layout_marginLeft="@dimen/widget_size_8"
                     android:layout_marginTop="@dimen/widget_size_10"
+                    android:layout_marginRight="@dimen/widget_size_8"
                     android:layout_toRightOf="@+id/device_img"
-                    android:gravity="center"
+                    android:gravity="left"
                     android:maxLines="1"
+                    android:ellipsize="end"
                     android:text="设备昵称："
                     android:textColor="@color/disable_text"
                     android:textSize="@dimen/font_size_16" />

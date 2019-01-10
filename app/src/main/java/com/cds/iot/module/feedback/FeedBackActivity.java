@@ -13,7 +13,9 @@ import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,6 +35,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import butterknife.Bind;
+
 public class FeedBackActivity extends BaseActivity implements View.OnClickListener, FeedBackContract.View {
     // 拍照回传码
     public final static int PHOTO_REQUEST_CAMERA = 100;
@@ -41,9 +45,14 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
     //裁剪程序请求吗
     public static final int PHOTO_REQUEST_CROP_PHOTO = 300;
 
+    private static final int MESSAGE_MAX_LENGTH = 200;
+
     private ImageView feedbackImg, delImg;
 
-    private EditText sosMsgEdit;
+    @Bind(R.id.sosMsg)
+    EditText sosMsgEdit;
+    @Bind(R.id.edit_status)
+    TextView editStatus;
 
     private String mFilePath = "";
 
@@ -69,11 +78,26 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.back_button).setVisibility(View.VISIBLE);
         findViewById(R.id.back_button).setOnClickListener(this);
         findViewById(R.id.commit_btn).setOnClickListener(this);
-        sosMsgEdit = (EditText) findViewById(R.id.sosMsg);
         feedbackImg = (ImageView) findViewById(R.id.feedback_img);
         delImg = (ImageView) findViewById(R.id.del_img);
         delImg.setOnClickListener(this);
         feedbackImg.setOnClickListener(this);
+        sosMsgEdit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String content = sosMsgEdit.getText().toString();
+                editStatus.setText(content.length() + "/"
+                        + MESSAGE_MAX_LENGTH);
+            }
+        });
     }
 
     @Override
@@ -124,7 +148,9 @@ public class FeedBackActivity extends BaseActivity implements View.OnClickListen
                 String content = sosMsgEdit.getText().toString();
                 if (TextUtils.isEmpty(content)) {
                     ToastUtils.showShort(App.getInstance(), "请先填写反馈内容");
-                } else {
+                } else if(content.length() <20){
+                    ToastUtils.showShort(App.getInstance(), "请填写不低于20个字的内容描述");
+                }else {
                     showProgressDilog();
                     mPresenter.feedback(content, mFilePath);
                 }

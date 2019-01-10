@@ -43,27 +43,31 @@
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/device_id"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/widget_size_8"
                 android:layout_marginTop="@dimen/widget_size_8"
+                android:layout_marginRight="@dimen/widget_size_8"
                 android:layout_toRightOf="@+id/head"
-                android:gravity="center"
+                android:gravity="left"
                 android:lineSpacingExtra="@dimen/widget_size_6"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:text="设备ID：545485464654"
                 android:textColor="@color/disable_text" />
 
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/device_name"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/device_id"
                 android:layout_marginLeft="@dimen/widget_size_8"
                 android:layout_marginTop="@dimen/widget_size_10"
+                android:layout_marginRight="@dimen/widget_size_8"
                 android:layout_toRightOf="@+id/head"
-                android:gravity="center"
+                android:gravity="left"
                 android:maxLines="1"
+                android:ellipsize="end"
                 android:text="设备昵称：别克后视镜"
                 android:textColor="@color/disable_text" />
         </RelativeLayout>

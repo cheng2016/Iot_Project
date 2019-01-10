@@ -131,15 +131,23 @@ public class SocketService extends Service implements SocketContract {
         unregisterActionReceiver();
     }
 
+    //是否关闭
+    private boolean isClose = false;
+
+    @Override
+    public void startPushService() {
+        isClose = false;
+        initPushService();
+        Logger.w(TAG, "startPushService");
+    }
+
     private EventLoopGroup eventLoopGroup;
 
     private ChannelFuture mChannelFuture;
     //是否连接
     private boolean isConnect = false;
-    //是否关闭
-    private boolean isClose = false;
 
-    public synchronized void initPushService() {
+    private synchronized void initPushService() {
         userId = PreferenceUtils.getPrefString(App.getInstance(), PreferenceConstants.USER_ID, "");
         token = PreferenceUtils.getPrefString(App.getInstance(), PreferenceConstants.ACCESS_TOKEN, "");
         Logger.w(TAG, "initPushService, Thread: " + Thread.currentThread().getName() + " userId：" + userId);

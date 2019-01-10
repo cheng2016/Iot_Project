@@ -219,7 +219,6 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
             }
         });
     }
-    private float scrollDownY,scrollMoveY;
 
     @Override
     public void onPullDownToRefresh(PullToRefreshBase<ScrollView> pullToRefreshBase) {
@@ -476,6 +475,7 @@ public class DeviceFragment extends BaseFragment implements DeviceContract.View,
         pullToRefreshScrollView.onPullDownRefreshComplete();
         if (resp == null || resp.size() == 0) {
             bindManageTv.setVisibility(View.GONE);
+            emptyview.setVisibility(View.VISIBLE);
             return;
         }
         allDeviceList.clear();

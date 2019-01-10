@@ -7,19 +7,31 @@
     android:orientation="vertical">
 
     <include layout="@layout/action_bar" />
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/widget_size_200">
 
     <EditText
         android:id="@+id/sosMsg"
         style="@style/inputStyle"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/widget_size_200"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_margin="@dimen/widget_size_16"
         android:gravity="left|top"
         android:hint="请把您的意见或想法写在这里（最短20个汉字，最长不超过200个汉字）"
-        android:maxLength="70"
+        android:maxLength="200"
         android:padding="@dimen/widget_size_6" />
+        <TextView
+            android:id="@+id/edit_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/widget_size_26"
+            android:layout_marginBottom="@dimen/widget_size_26"
+            android:text="0/200" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="@dimen/widget_size_90"

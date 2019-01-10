@@ -455,7 +455,11 @@ public class RearviewMirrorFragment extends BaseFragment implements RearviewMirr
                                             return;
                                         }
                                         Logger.i(TAG, "openGaoDeNavi：" + new Gson().toJson(aMapLocation));
-                                        MapUtils.openGaoDeNavi(getActivity(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), aMapLocation.getAddress(), marker.getPosition().latitude, marker.getPosition().longitude, marker.getTitle());
+                                        if (MapUtils.isAvilible(getActivity(), MapUtils.PN_GAODE_MAP)) {
+                                            MapUtils.openGaoDeNavi(getActivity(), aMapLocation.getLatitude(), aMapLocation.getLongitude(), aMapLocation.getAddress(), marker.getPosition().latitude, marker.getPosition().longitude, marker.getTitle());
+                                        } else {
+                                            ToastUtils.showShort(App.getInstance(), "请先安装高德地图");
+                                        }
                                     }
                                 }).show();
             }

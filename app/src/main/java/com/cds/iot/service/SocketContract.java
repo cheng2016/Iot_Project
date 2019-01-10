@@ -9,9 +9,7 @@ import io.netty.bootstrap.Bootstrap;
  * @date 2018/9/29 10:18
  */
 public interface SocketContract {
-    void initPushService();
-
-    void connect(Bootstrap bootstrap);
+    void startPushService();
 
     void checkNofificationPermission(NotificationManager manager);
 
