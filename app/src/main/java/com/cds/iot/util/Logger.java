@@ -1,7 +1,11 @@
 package com.cds.iot.util;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.os.Process;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.cds.iot.App;
@@ -38,7 +42,7 @@ public class Logger {
 
     private static final String LINE_SEP = System.getProperty("line.separator");
 
-    private static final String LOG_FORMAT = "%s  %d/%s  %c/%s  %s：";
+    private static final String LOG_FORMAT = "%s  %d/%d/%s  %c/%s  %s：";
 
     private static final ExecutorService EXECUTOR_SERVICE = Executors.newSingleThreadExecutor();
 
@@ -50,14 +54,16 @@ public class Logger {
 
     private static String pkgName;
 
+    private static int pkgCode;
+
     private static int myPid;
 
     private static String defaultDir;
 
-
     static {
         pkgName = App.getInstance().getPackageName();
         myPid = Process.myPid();
+        pkgCode = AppUtils.getVersionCode(App.getInstance());
         if (isSDCardOK()) {
             defaultDir = Environment.getExternalStorageDirectory() + "/wecare/v4/logger/";
         } else {
@@ -165,7 +171,7 @@ public class Logger {
         String timeStamp = LOG_TIME_FORMAT.format(new Date(System.currentTimeMillis()));
         String date = timeStamp.substring(0, 10);
         String fullPath = defaultDir + date + ".txt";
-        StringBuilder sb = new StringBuilder(String.format(LOG_FORMAT, timeStamp, myPid, pkgName, T[level - V], defaultTag, tag));
+        StringBuilder sb = new StringBuilder(String.format(LOG_FORMAT, timeStamp, myPid, pkgCode, pkgName, T[level - V], defaultTag, tag));
         sb.append(msg);
         sb.append(LINE_SEP);
         //打印到文件日志中
@@ -184,7 +190,7 @@ public class Logger {
         String timeStamp = LOG_TIME_FORMAT.format(new Date(System.currentTimeMillis()));
         String date = timeStamp.substring(0, 10);
         String fullPath = defaultDir + date + ".txt";
-        StringBuilder sb = new StringBuilder(String.format(LOG_FORMAT, timeStamp, myPid, pkgName, T[level - V], defaultTag, tag));
+        StringBuilder sb = new StringBuilder(String.format(LOG_FORMAT, timeStamp, myPid, pkgCode, pkgName, T[level - V], defaultTag, tag));
         sb.append(msg);
         sb.append(LINE_SEP);
         sb.append(saveCrashInfo(throwable));
@@ -209,6 +215,10 @@ public class Logger {
     }
 
     private static void input2File(final String input, final String fullPath) {
+        if (lacksPermissions(App.getInstance(), Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            Log.e(TAG, "很抱歉，没有读写权限，无法写入SD卡中");
+            return;
+        }
         if (!createOrExistsFile(fullPath)) {
             Log.e("Logger", "create " + fullPath + " failed!");
             return;
@@ -234,6 +244,29 @@ public class Logger {
                 }
             }
         });
+    }
+
+
+    /**
+     * 判断权限集合
+     * permissions 权限数组
+     * return true-表示没有权限  false-表示权限已开启
+     */
+    public static boolean lacksPermissions(Context mContexts, String... args) {
+        for (String permission : args) {
+            if (lacksPermission(mContexts, permission)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 判断是否缺少权限
+     */
+    private static boolean lacksPermission(Context context, String permission) {
+        return ContextCompat.checkSelfPermission(context, permission) ==
+                PackageManager.PERMISSION_DENIED;
     }
 
     private static boolean createOrExistsFile(String fullPath) {
@@ -264,7 +297,7 @@ public class Logger {
 
     public static void main(String[] args) {
         String timeStamp = LOG_TIME_FORMAT.format(new Date());
-        System.out.println("date: " + timeStamp.substring(0,10));
+        System.out.println("date: " + timeStamp.substring(0, 10));
         char[] T = new char[]{'V', 'D', 'I', 'W', 'E', 'A'};
         String tag = "tag";
         String msg = "this is a message!";
