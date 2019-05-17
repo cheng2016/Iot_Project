@@ -104,7 +104,7 @@ public class App extends BaseApplication {
         builder.executor(executorService);
         //配置是否打印picasso log日志
         builder.loggingEnabled(false);//picasso log日志
-        builder.defaultBitmapConfig(Bitmap.Config.RGB_565);
+        builder.defaultBitmapConfig(Bitmap.Config.RGB_565);//降低图片加载分辨率解决列表滑动图片反复加载闪烁的问题
 
         Picasso.setSingletonInstance(builder.build());
     }
