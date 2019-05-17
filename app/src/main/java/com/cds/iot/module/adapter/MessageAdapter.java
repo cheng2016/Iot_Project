@@ -112,6 +112,10 @@ public class MessageAdapter extends BaseAdapter {
                 mirrorHolder.contentTv.setText(bean.getTitle());
                 Picasso.with(context).load(bean.getDeviceImg()).into(mirrorHolder.deviceImg);
                 Picasso.with(context).load(bean.getPhotoUrl()).transform(new PicassoRoundTransform()).into(mirrorHolder.photoImg);
+
+                //加载图片防止闪烁增加占位图片
+//                Picasso.with(context).load(bean.getPhotoUrl()).placeholder(mirrorHolder.photoImg.getDrawable()).transform(new PicassoRoundTransform()).into(mirrorHolder.photoImg);
+
                 mirrorHolder.timeTv.setText(DateUtils.timeStampDate(bean.getTailtime()));
                 mirrorHolder.playImg.setVisibility(type == Constant.MESSAGE_TYPE_DEVICE_IMAGE ? View.GONE : View.VISIBLE);
 

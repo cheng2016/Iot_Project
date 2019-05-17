@@ -1,5 +1,6 @@
 package com.cds.iot;
 
+import android.graphics.Bitmap;
 import android.os.Environment;
 import android.text.TextUtils;
 
@@ -20,10 +21,11 @@ import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 //import com.squareup.leakcanary.LeakCanary;
 
-//import com.squareup.leakcanary.LeakCanary;
 
 /**
  * Created by chengzj on 2017/6/17.
@@ -84,17 +86,27 @@ public class App extends BaseApplication {
             file.mkdirs();
         }
         PreferenceUtils.setPrefString(this,PreferenceConstants.APP_IMAGE_CACHE_DIR,imageCacheDir);
-        //设置图片内存缓存大小为运行时内存的八分之一
-        long l = Runtime.getRuntime().maxMemory();
+
+        // 配置全局的Picasso instance
+        Picasso.Builder builder = new Picasso.Builder(this);
+        //配置下载器
         OkHttpClient client = new OkHttpClient();
-        client.setCache(new Cache(file, l / 8));
-        Picasso picasso = new Picasso.Builder(this)
-                .memoryCache(new LruCache((int) (l / 8)))
-                .downloader(new OkHttpDownloader(client))
-//                .defaultBitmapConfig(Bitmap.Config.RGB_565)
-                .loggingEnabled(false)//picasso log日志
-                .build();
-        Picasso.setSingletonInstance(picasso);
+        //设置图片内存缓存大小为运行时内存的八分之一
+//        long l = Runtime.getRuntime().maxMemory();
+//        client.setCache(new Cache(file, l / 5));
+        builder.downloader(new OkHttpDownloader(client));
+
+        //配置缓存
+        LruCache cache = new LruCache(100*1024*1024);// 设置缓存大小
+        builder.memoryCache(cache);
+        //配置线程池
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        builder.executor(executorService);
+        //配置是否打印picasso log日志
+        builder.loggingEnabled(false);//picasso log日志
+        builder.defaultBitmapConfig(Bitmap.Config.RGB_565);
+
+        Picasso.setSingletonInstance(builder.build());
     }
 
     public String getAppCacheDir() {

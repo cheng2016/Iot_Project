@@ -503,7 +503,7 @@ public class SocketService extends Service implements SocketContract {
                 @Override
                 public void run() {
                     new MyAlertDialog(AppManager.getInstance().getTopActivity())
-                            .setTitle("开启通知")
+                            .setTitle("开启通知?")
                             .setMessage("为了避免错过重要的提醒，建议您开启系统通知。")
                             .setPositiveButton("立即开启", new View.OnClickListener() {
                                 @Override
